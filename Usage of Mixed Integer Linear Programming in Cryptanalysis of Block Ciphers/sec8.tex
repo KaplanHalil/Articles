@@ -1,0 +1,8 @@
+\section{Conclusion}
+As a conclusion, our results demonstrate that ITUbee exhibits strong resistance to classical differential and linear cryptanalysis for more than three rounds, in alignment with the theoretical claims of the original authors. No effective differential or linear trails with sufficiently high probability or correlation could be found beyond this threshold, affirming the cipher’s robustness in this context.
+
+In the case of related-key differential cryptanalysis, our MILP-based analysis reveals a better security margin compared to what was originally proposed. While the designers asserted security against related-key differential attack after 10 rounds, our models shows that algorithm is secure against related-key differential cryptanalysis after 8 rounds. This observation provides valuable insight into the actual security margin of the cipher under related-key scenarios and highlights the importance of model-based cryptanalysis during the cipher evaluation process.
+
+The MILP models developed in this work serve as a reusable framework for analyzing other block ciphers with similar structures. Moreover, the results presented here emphasize the utility of MILP in confirming or challenging security claims and in revealing potential structural vulnerabilities that may not be immediately apparent through manual analysis alone.
+
+Overall, this study reinforces the value of MILP as a precise, automatable, and interpretable method for evaluating security of  cryptographic algorithms. All MILP models we developed can be found at \url{https://github.com/KaplanHalil/Milp/tree/main/ITUBEE} and discovered characteristics are included within the thesis  to support further research and reproducibility.

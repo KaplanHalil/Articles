@@ -1,0 +1,139 @@
+\section{LP and MILP}
+
+\subsection{Linear Programming}
+Linear Programming (LP) is a fundamental mathematical optimization technique that was first introduced in the 1940s by George Dantzig \cite{dantzig2002linear}, although its development continued into the 1950s. LP has become an essential tool across various fields, including economics, operations research, engineering, logistics, and the natural sciences. The primary goal of LP is to optimize (maximize or minimize) a linear objective function subject to a set of linear constraints.
+
+\subsubsection{Mathematical Formulation}
+The standard form of a linear programming problem can be expressed mathematically as follows:
+
+\text{Maximize (or Minimize)} 
+\begin{center}
+    $c_1x_1 + c_2x_2 + \dots + c_nx_n $
+\end{center}
+\text{Subject to:} 
+\begin{center}
+    $  a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n \leq b_1 $ \\
+    $ a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n \leq b_2 $ \\
+    $ \quad \vdots $ \\
+    $ a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n \leq b_m $ \\
+    $ x_{1}, x_{2}, \dots, x_n \geq 0 $
+\end{center}
+
+Here, $ x_1, x_2, \dots, x_n $ represent the decision variables, $ c_1, c_2, \dots, c_n $ are the coefficients of the objective function, $ a_{ij} $ are the coefficients of the constraints, and $ b_1, b_2, \dots, b_m $ are the bounds of the constraints. The decision variables are typically constrained to be non-negative, although this condition can be relaxed or modified depending on the problem context.
+
+The objective function is linear, meaning that the relationship between the decision variables and the function value is additive and proportional. The constraints are also linear, implying that each constraint defines a half-space in the decision variable space. The feasible region, which is the set of all points that satisfy the constraints, is a convex polytope. The optimal solution, if it exists, lies on a vertex of this polytope.
+
+
+\subsection{Mixed-Integer Linear Programming}
+Mixed-Integer Linear Programming (MILP) extends the framework of Linear Programming by incorporating integer constraints on some or all of the decision variables. 
+
+\subsubsection{Mathematical Formulation}
+The mathematical formulation of an MILP problem is similar to that of an LP problem, but with the addition of integer constraints on certain decision variables:
+
+
+\text{Maximize (or Minimize)} 
+\begin{center}
+    $c_1x_1 + c_2x_2 + \dots + c_nx_n $
+\end{center}
+\text{Subject to:} 
+\begin{center}
+    $  a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n \leq b_1 $ \\
+    $ a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n \leq b_2 $ \\
+    $ \quad \vdots $ \\
+    $ a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n \leq b_m $ \\
+    $ x_1, x_2, \dots, x_p \in \mathbb{Z} $ \\
+    $ x_{p+1}, x_{p+2}, \dots, x_n \geq 0 $
+\end{center}
+
+
+
+In this formulation, the first $ p $ decision variables $ x_1, x_2, \dots, x_p $ are constrained to take integer values, while the remaining $ n-p $ variables $ x_{p+1}, x_{p+2}, \dots, x_n $ are real-valued. 
+
+\subsubsection{Computational Complexity and Solution Methods}
+MILP problems are generally NP-hard, meaning that there is no known algorithm that can solve all instances of MILP problems in polynomial time. The presence of integer variables introduces combinatorial complexity, making MILP significantly more challenging than LP.
+
+Despite this complexity, several algorithms have been developed to solve MILP problems efficiently in practice. Some example of theese algorithms are
+Branch and Bound \cite{land1960branch}, Branch and Cut \cite{padberg1991branch}, Branch and Price \cite{barnhart1998branch}.
+These algorithms are implemented in various commercial and open-source MILP solvers, such as CPLEX \cite{studio2016ibm}, Gurobi \cite{gurobi2021gurobi}, and GLPK \cite{makhorin2008glpk}, which are widely used in industry and academia.
+
+\subsubsection{Toy Example of MILP Modeling}
+
+A company produces two types of products, \textbf{Product A} and \textbf{Product B}. The goal is to maximize profit while considering production capacity, resource availability, and a minimum production requirement. The constraints involve available labor hours, machine hours, and minimum production levels.
+
+\subsubsection{Variables}
+Let:
+\begin{itemize}
+    \item $x$ be the number of units produced of \textbf{Product A}.
+    \item $y$ be the number of units produced of \textbf{Product B}.
+\end{itemize}
+
+Both $x$ and $y$ are integer variables.
+
+\subsubsection{Objective Function}
+Maximize the total profit:
+$
+\text{Maximize} \quad Z = 40x + 30y
+$
+where:
+\begin{itemize}
+    \item 40 is the profit per unit of \textbf{Product A},
+    \item 30 is the profit per unit of \textbf{Product B}.
+\end{itemize}
+
+\subsubsection{Constraints}
+\begin{enumerate}
+    \item \textbf{Labor Constraint}: Each unit of \textbf{Product A} requires 2 hours of labor, and each unit of \textbf{Product B} requires 1 hour of labor. The total available labor hours are 100.
+    $
+    2x + y \leq 100
+    $
+    
+    \item \textbf{Machine Hours Constraint}: Each unit of \textbf{Product A} requires 1 hour of machine time, and each unit of \textbf{Product B} requires 3 hours of machine time. The total available machine hours are 90.
+    $
+    x + 3y \leq 90
+    $
+    
+    \item \textbf{Minimum Production Constraint}: At least 20 units of \textbf{Product A} must be produced to meet market demand.
+    $
+    x \geq 20
+    $
+    
+    \item \textbf{Non-Negativity Constraint}: The number of units produced cannot be negative.
+    $
+    x \geq 0, \quad y \geq 0
+    $
+\end{enumerate}
+
+\subsubsection{Formulation}
+The entire problem can be formulated as follows:
+
+\text{Maximize} 
+\begin{center}
+    $  Z = 40x + 30y $ 
+\end{center}
+\text{subject to:}
+\begin{center}
+    $ 2x + y \leq 100 $ \\
+    $ x + 3y \leq 90 $ \\
+    $ x \geq 20 $ \\
+    $ y \geq 0 \quad $
+\end{center}
+
+\subsubsection{Modelling and Result}
+
+We will use Sagemath and GLPK solver for modeling Toy example. After running code in Listing  \ref{lst:toyExample} . We found that Maximum profit 2160 can be achieved by producing  42 A product and 16 B product.
+\begin{lstlisting}[caption={Sagemath MILP modelling of toy example }, label={lst:toyExample}]
+
+p.<x,y> = MixedIntegerLinearProgram 
+(maximization=True, solver = "GLPK")
+
+p.set_objective(40*x[0]+ 30*y[0])
+
+p.add_constraint(2*x[0] + y[0] == 100)
+p.add_constraint(x[0] + 3*y[0] == 90)
+p.add_constraint(x[0] >= 20)
+p.add_constraint(y[0] >= 0)
+
+print(p.solve())
+print(p.get_values(x,y))
+
+\end{lstlisting}

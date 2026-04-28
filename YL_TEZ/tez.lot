@@ -1,0 +1,9 @@
+\contentsline {table}{\numberline {3.1}{\ignorespaces Cryptographic Attack Types}}{13}{}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Differential Distribution Table (DDT) of PRINCE algorithm}}{16}{}%
+\contentsline {table}{\numberline {3.3}{\ignorespaces Linear Approximation Table (LAT) of SKINNY cipher.}}{19}{}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Possible active byte patterns of the AES MDS matrix}}{31}{}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Input and Output Differences of $L$ function}}{32}{}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces H-representation of $L$ function}}{33}{}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces Round Constants of ITUbee algorithm}}{38}{}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Best 3 round differential characteristic of ITUbee algorithm}}{40}{}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Best 8 round related-key differential characteristic of ITUbee algorithm}}{43}{}%

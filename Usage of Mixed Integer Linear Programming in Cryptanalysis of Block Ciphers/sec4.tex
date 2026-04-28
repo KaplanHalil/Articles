@@ -1,0 +1,174 @@
+\begin{section}{Construction of MILP Modeling}
+
+\subsection{Branch Number} \label{sec:branch}
+Branch number is a critical parameter used to evaluate the diffusion properties of cipher's components. The concept of branch number originates from the study of linear codes and is particularly relevant when assessing the security and strength of cryptographic primitives.
+
+\subsubsection{Definition and Calculation}
+
+Formally, if we consider a transformation $\mathcal{T}$ applied to an $n$-element vector, the branch number is given by:
+$$
+B = \min_{\mathbf{x} \neq \mathbf{0}} \left\{ \text{wt}(\mathbf{x}) + \text{wt}(\mathcal{T}(\mathbf{x})) \right\},
+$$
+where $\text{wt}(\mathbf{x})$ denotes the Hamming weight of the vector $\mathbf{x}$, i.e., the number of non-zero elements in $\mathbf{x}$.
+
+The branch number is significant in cryptanalysis because it provides a lower bound on the diffusion introduced by a transformation. A higher branch number indicates better diffusion, which implies that any single bit/byte difference in the input will affect a larger portion of the output thereby increasing the complexity of differential and linear attacks.
+
+\subsubsection{Example: Branch Number of AES's MDS Matrix}
+
+
+For AES \cite{dworkin2001advanced}, the MDS matrix used in the MixColumns operation has a branch number $5$. This means that minimum number of total active byte of input and output of the MDS is 5. Table \ref{tab:aes-mds} shows possible active byte patterns of the AES MDS matrix.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Input Active Bytes} & \textbf{Output Active Bytes}           \\ \hline
+1                           & 4                                      \\ \hline
+2                           & 3 / 4                                   \\ \hline
+3                           & 2 / 3 / 4                               \\ \hline
+4                           & 1 / 2 / 3 / 4                           \\ \hline
+\end{tabular} \\
+\caption{Possible active byte patterns of the AES MDS matrix}
+\label{tab:aes-mds}
+\end{table}
+
+\subsubsection{Role of Branch Number in MILP Modeling}
+Branch number is encoded directly into the MILP model, ensuring that any feasible solution must respect the minimum branch number criteria.In this way, the MILP model we obtain will give us the correct characteristic for the algorithm.
+
+\subsection{H-representation}
+
+The H-representation, also known as the half-space representation, describes a polyhedron as the intersection of a finite number of half-spaces, each defined by a linear inequality of the form $ \mathbf{a}^T \mathbf{x} \leq b $, where $\mathbf{a} $ is a vector of coefficients, $ \mathbf{x} $ is the vector of variables, and $ b $ is a scalar. This representation is integral to the MILP modeling of block ciphers as it encapsulates the constraints from the cipher's operations, including the behavior of S-boxes, linear layers, and key additions.
+
+In the context of cryptanalysis, using the H-representation allows complex relationships between variables to be expressed linearly, enabling MILP solvers to explore the solution space efficiently. This approach is especially crucial when identifying optimal characteristics for differential or linear attacks.
+
+\subsubsection{Example of H-representation}
+
+Consider linear function L which takes 6 bit input, 6 bit output and computed as:
+\begin{center}
+    $L(a,b,c)=(a \oplus b , a \oplus c , b \oplus c ) \text{ where a,b,c are 2 bit values}  $
+\end{center}
+
+
+H-representation of this function can be found in 2 steps with using  Sagemath polyhedra library. \cite{sage}
+
+\begin{enumerate}
+    \item We scan the outputs for all possible inputs and give a value of 0 if the output value is 0 and 1 if it is different from zero. Possible input and output values of the $L$ function can be seen in Table \ref{tab:hreptab}.
+
+    \item These points are given as input to the sage polyhedra library and the inequalities given in table \ref{tab:h-repineq} are obtained.
+    
+\end{enumerate}
+
+In table \ref{tab:h-repineq} ,  $(1, 1, 1, -1, -1, -1) x + 1 \geq 0$ means that $ x_0 + x_1 + x_2 -x_3 - x_4 -x_5 +1 \geq 0 $ where $x_0$ , $x_1$ and $x_2$ are input differences, $x_3$ , $x_4$ and $x_5$ are output differences.  
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Input Differences} & \textbf{Output Differences} \\ \hline
+0 0 0 & 0 0 0 \\ \hline
+0 0 1 & 0 1 1 \\ \hline
+0 1 0 & 1 0 1 \\ \hline
+0 1 1 & 1 1 0 \\ \hline
+0 1 1 & 1 1 1 \\ \hline
+1 0 0 & 1 1 0 \\ \hline
+1 0 1 & 1 0 1 \\ \hline
+1 0 1 & 1 1 1 \\ \hline
+1 1 0 & 0 1 1 \\ \hline
+1 1 1 & 0 0 0 \\ \hline
+1 1 1 & 0 1 1 \\ \hline
+1 1 0 & 1 1 1 \\ \hline
+1 1 1 & 1 0 1 \\ \hline
+1 1 1 & 1 1 0 \\ \hline
+1 1 1 & 1 1 1 \\ \hline
+\end{tabular}
+\caption{Input and Output Differences of $L$ function}
+\label{tab:hreptab}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|l|}
+\hline
+\textbf{No.} & \textbf{Inequality} \\ \hline
+1  & $(0, 0, -1, 0, 0, 0) x + 1 \geq 0$ \\ \hline
+2  & $(0, -1, 0, 0, 0, 0) x + 1 \geq 0$ \\ \hline
+3  & $(-1, 0, 0, 0, 0, 0) x + 1 \geq 0$ \\ \hline
+4  & $(0, 0, 0, -1, 0, 0) x + 1 \geq 0$ \\ \hline
+5  & $(0, 0, 0, 0, -1, 0) x + 1 \geq 0$ \\ \hline
+6  & $(0, 0, 0, 0, 0, -1) x + 1 \geq 0$ \\ \hline
+7  & $(0, -1, 1, 0, 0, 1) x + 0 \geq 0$ \\ \hline
+8  & $(0, 0, 0, -1, 1, 1) x + 0 \geq 0$ \\ \hline
+9  & $(0, 1, -1, 0, 0, 1) x + 0 \geq 0$ \\ \hline
+10 & $(0, 0, 0, 1, -1, 1) x + 0 \geq 0$ \\ \hline
+11 & $(1, 0, -1, 0, 1, 0) x + 0 \geq 0$ \\ \hline
+12 & $(0, 0, 0, 1, 1, -1) x + 0 \geq 0$ \\ \hline
+13 & $(1, 0, 1, 0, -1, 0) x + 0 \geq 0$ \\ \hline
+14 & $(0, 1, 1, 0, 0, -1) x + 0 \geq 0$ \\ \hline
+15 & $(1, 1, 1, -1, -1, -1) x + 1 \geq 0$ \\ \hline
+16 & $(1, 1, 0, -1, 0, 0) x + 0 \geq 0$ \\ \hline
+17 & $(-1, 0, 1, 0, 1, 0) x + 0 \geq 0$ \\ \hline
+18 & $(-1, 1, 0, 1, 0, 0) x + 0 \geq 0$ \\ \hline
+19 & $(1, -1, -1, 1, 1, -1) x + 1 \geq 0$ \\ \hline
+20 & $(1, -1, 0, 1, 0, 0) x + 0 \geq 0$ \\ \hline
+21 & $(-1, 1, -1, 1, -1, 1) x + 1 \geq 0$ \\ \hline
+22 & $(-1, -1, 1, -1, 1, 1) x + 1 \geq 0$ \\ \hline
+\end{tabular}
+\caption{H-representation of $L$ function}
+\label{tab:h-repineq}
+\end{table}
+
+\subsection{Milp Modeling of XOR Operation }
+We will use modeling defined in \cite{mouha2012differential}. Lets $x_{in1}$ and $x_{in2}$ be input and $x_{out}$ be output difference of xor operation. Branch number is defined in Section \ref{sec:branch}. Branch number of xor operation is 2. We use a dummy variable $d$ to add the branch number to the equation system. The dummy variable is equal to 0 if $x_{in1}$, $x_{in2}$ and $x_{out}$ are equal to 0, otherwise it is equal to 1. Using this information, the xor operation can be expressed with the following equations.
+
+\begin{center}
+    $x_{in1} + x_{in2} + x_{out} \geq 2d $ \\
+    $d \geq x_{in1} $ \\
+    $d \geq x_{in2} $ \\
+    $d \geq x_{out} $ 
+\end{center}
+
+\subsection{Milp Modeling of Linear Transformation }
+We will also use modeling defined in \cite{mouha2012differential}. Lets $x_{in1}, x_{in2}, ... ,x_{inM}, $ be input differences and $x_{out1}, x_{out2}, ... ,x_{outM}, $ be output difference of linear transformation. We will use dummy variable $d$ like in XOR modelling and we have branch number $B$ of Linear transformation. Then we can define linear transformation with following equations. 
+
+\begin{center}
+    $x_{in1} + x_{in2} + x_{inM} + ... + x_{out1} + x_{out2} + ... + x_{outM}  \geq B*d $ \\
+    $d \geq x_{in1} $ \\
+    $d \geq x_{in2} $ \\
+    $...$\\
+    $d \geq x_{inM} $ \\
+    $d \geq x_{out1} $\\
+    $d \geq x_{out2} $ \\
+    $...$\\
+    $d \geq x_{outM} $
+\end{center}
+
+In block ciphers, any nonlinear structure can be considered as a linear transformation. For example, xor operation or matrix multiplication are linear transformations. When the branch number value is given as 2 in the equation above, the equations given for XOR operation are obtained.
+
+\subsection{Milp Modeling of S-box}
+
+Since the main purpose of this article is to show that the algorithm is secure by calculating the minimum number of active s-boxes, s-boxes are not modeled in the MILP models of cryptographic attacks. The reason for this is that if the input of the s-box is active, its output is also active, and similarly, passive input gives passive output. Therefore, the model of the s-box has no effect on the minimum number of active s-boxes. However, if the purpose of the modeling is not to find the minimum active s-box but to find the best characteristic, the s-box must be modeled. Therefore, the s-box model defined in \cite{sun2014automatic} is given below as a reference for the reader.
+
+Let S be a 4x4 bijective S-box whichs inputs are $x_{in1},x_{in2},x_{in3},x_{in4}$ and outputs are $x_{out1},x_{out2},x_{out3},x_{out4}$. $A$ is equal to 1 if and of the input bits are active. Otherwise A is 0. Then S can be defined by following equations.
+
+\begin{center}
+    $x_{in1} - A \leq 0$ \\
+    $x_{in2} - A \leq 0$ \\
+    $x_{in3} - A \leq 0$ \\
+    $x_{in4} - A \leq 0$ \\
+    $x_{in1} + x_{in2} + x_{in3} + x_{in4} - A \geq 0$ \\
+    $4*(x_{in1} + x_{in2} + x_{in3} + x_{in4}) - (x_{out1} + x_{out2} + x_{out3} + x_{out4}) \geq 0$ \\
+    $4*(x_{out1} + x_{out2} + x_{out3} + x_{out4}) - (x_{in1} + x_{in2} + x_{in3} + x_{in4}) \geq 0$ \\
+\end{center}
+
+\subsection{Milp Modeling of three-forked branch }
+
+We will use modeling defined in \cite{mouha2012differential}. This model will be used in linear cryptanalysis. Lets $y_{in}$ be input and $x_{out1}$ and $x_{out2}$ be output mask of three-forked branch. Modeling is similar to modeling xor operation. We use a dummy variable $d$ which is equal to 0 if $x_{in}$, $x_{out1}$ and $x_{out2}$ are equal to 0, otherwise it is equal to 1. Using these information, the three-forked branch can be expressed with the following equations.
+
+\begin{center}
+    $x_{in} + x_{out1} + x_{out2} \geq 2d $ \\
+    $d \geq y_{in} $ \\
+    $d \geq y_{out1} $ \\
+    $d \geq y_{out2} $ 
+\end{center}
+
+\end{section}

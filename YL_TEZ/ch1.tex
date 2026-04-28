@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{INTRODUCTION}\label{introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The study of block cipher cryptanalysis has long served as a fundamental aspect of cryptographic research, driven by the need to ensure the security of data across various platforms. Block ciphers are essential in securing communication in environments ranging from the Internet of Things (IoT) and RFID systems to Smart Cards and sensor networks. The security requirements for these platforms diverge significantly, often necessitating the use of lightweight cryptographic algorithms that can operate efficiently under constraints like limited area, energy, and code size. As a result, modern, standardized block ciphers like AES, triple-DES might not be appropriate for every application, highlighting the importance of designing and thoroughly analyzing alternative cryptographic algorithms.
+
+Differential, linear and related key cryptanalysis are between the most fundamental analysisi methods in cryptanalysis. These methods are essential for assessing  the security of block ciphers. However, complexity and time-consuming nature of these analyses pose significant challenges.
+
+The improvements in the area of cryptanalysis has led to the development of automated and semi-automated tools designed to  enhance the efficiency of cryptanalysis. Among these tools, Mixed-Integer Linear Programming (MILP) has emerged as a particularly powerful method for cryptanalysis. MILP offers a flexible and effective approach to modeling and analyzing the security of block ciphers, making it easier to evaluate their resistance to cryptographic attacks. 
+
+\section{Purpose of Thesis}\label{purposeofthesis}
+The aim of this thesis is to explain in detail how the MILP method is used in cryptanalysis and to apply the described methods on the ITUbee algorithm.
+\newline
+\section{Literature Review}\label{literaturereview}
+
+In recent years, Mixed-Integer Linear Programming (MILP) has gained significant attention as a formal and efficient technique for the cryptanalysis of various cryptographic algorithms, including block ciphers, stream ciphers, and cryptographic hash functions. The method provides a systematic way to model and evaluate security properties such as differential and linear characteristics.
+
+An early and influential application of MILP in cryptanalysis was presented by Mouha et al. \cite{mouha2012differential}, who proposed a method to compute lower bounds on the number of active S-boxes in word-oriented cipher structures. Their work demonstrated the feasibility of modeling linear and differential trails in symmetric-key algorithms like AES and Enocoro, laying a foundational approach for subsequent research in this area.
+
+Further advancements were made by Sun et al. \cite{sun2013automatic}, who constructed an MILP-based model specifically for bit-oriented block ciphers, with a detailed case study on the PRESENT-80 cipher. Their research addressed both single-key and related-key attack models, showcasing the adaptability of MILP in different cryptanalytic contexts. 
+
+In another significant contribution from Sun et al. \cite{sun2014automatic} usage of H-representations and logical constraints to accurately represent non-linear components like S-boxes. This enhancement enabled the analysis of several lightweight ciphers including SIMON, Serpent, LBlock, and DESL, improving the precision and depth of the differential analysis. They also introduced greedy algorithm to reduce number of inequalities in the H-representation.
+
+Sasaki and Todo \cite{sasaki2017new} gives new reduction algorithm for reducing inequalities more than greedy algorithm. Key feature of their algorithm is option fot choosing number of equations.
+
+To refine the analysis further, subsequent work by Sun et al. \cite{sun2014towards} involved integrating probabilistic data into S-box representations, allowing for the identification of optimal differential characteristics. This led to improved cryptanalytic results on multiple lightweight designs, including SIMON48 and PRESENT-128, among others.
+
+Following this, numerous studies expanded the MILP framework to encompass other forms of cryptanalysis. Techniques such as impossible differential \cite{liu2023novel}, differential meet-in-the-middle \cite{ahmadian2024improved}, integral cryptanalysis \cite{mirzaie2023integral}, truncated differential,\cite{ebrahimi2020new}  and cube-based attacks \cite{song2018cube} have been successfully modeled using MILP formulations. This broadened scope has made MILP a versatile tool for evaluating the resistance of cryptographic designs against a wide range of attacks.
+
+Despite its strengths, one of the key limitations of MILP-based analysis is the computational complexity involved. As the number of rounds or variables increases, the model's size and solving time can grow exponentially. Consequently, a major focus in the literature has been the optimization of MILP models. Techniques to reduce the number of constraints—such as optimized representations of XOR operations, compact formulations of substitution layers, new representations of matrix multiplication etc. have been proposed by researchers including İlter \cite{ilter2024milp}, Abdelkhalek \cite{abdelkhalek2017milp} and Boura \cite{boura2020efficient}.
+
+
+
+
+

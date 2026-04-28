@@ -1,0 +1,239 @@
+
+
+% ---------------------------------------------------------------- %
+%                     LATEX Thesis Template	                   %
+%                                                                  %
+%		         Version 1.5.1                             %
+% ---------------------------------------------------------------- %
+
+% ---------------------------------------------------------------- %
+% Prepared by ITU Informatics Institute	                           %
+%                                                                  %
+% Modified by Alican Mertan, Gülçin Baykal Can and Yusuf Özçevik   %
+%                                                                  %
+% Informatics Institute, ITU Ayazaga Campus                        %
+% Maslak-34469, İstanbul, Turkey                                   %
+% http://www.be.itu.edu.tr                                         %
+% ---------------------------------------------------------------- %
+
+% ---------------------------------------------------------------- %
+% documentclass arguments:             				   %
+% [onluarkali,tekyonlu],[turkce,ingilizce],[yukseklisans,doktora], %
+% [bez,karton],[bilisim,fenbilimleri,sosyalbilimler,avrasya,enerji,LisansustuEgitim] %
+% Sample use: \documentclass[onluarkali,ingilizce,yukseklisans,    %
+% karton,fenbilimleri]{itutez}					   %
+% Other sample use: \documentclass[tekyonlu,ingilizce,	           %
+% yukseklisans,bez,bilisim]{itutez}			           %
+% onluarkali: twoside                     			   %
+% tekyonlu: oneside						   %
+% turkce: turkish						   %
+% ingilizce: english						   %
+% yukseklisans: masters						   %
+% doktora: phd							   %
+% bez: hardcover version					   %
+% karton: paperback version					   %
+% bilisim: informatics						   %
+% fenbilimleri: science and technology				   %
+% sosyalbilimler: social sciences				   %
+% avrasya: eurasia						   %
+% enerji: energy						   %
+% LisansustuEgitim: Graduate School %
+% ---------------------------------------------------------------- %
+\documentclass[onluarkali,ingilizce,yukseklisans,bez,LisansustuEgitim]{itutez}
+% ---------------------------------------------------------------- %
+% Pay attention to letter case. The structure is case sensitive    %
+% {Name}{SURNAME} means first letter of name is capital and that   %
+% all letters of surname are capital.                              %
+% ---------------------------------------------------------------- %
+\usepackage{amsthm}
+\newtheorem{definition}{Definition}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows, positioning}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}  % For advanced mathematical typesetting
+\usepackage[ruled,vlined]{algorithm2e}  % For writing algorithms
+\usetikzlibrary{calc}
+\usetikzlibrary{crypto.symbols}
+\usetikzlibrary {positioning}
+\usetikzlibrary{shapes}
+\usetikzlibrary{xor}
+\usetikzlibrary{shapes.gates.logic.US, positioning}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  showstringspaces=false,
+  tabsize=4,
+  language=Python
+}
+
+% ---------------------------------------------------------------- %
+% No titles, only Name and SURNAME must be written.      	   %
+% ---------------------------------------------------------------- %
+\yazar{Halil İbrahim}{KAPLAN} 
+\ogrencino{707221004}
+
+% ---------------------------------------------------------------- %
+% If you do not use the structure, do not delete it. Just delete   %
+% the argument. \unvan{} means title.                              %
+% ---------------------------------------------------------------- %
+\unvan{}
+ 
+% ---------------------------------------------------------------- %
+% For below, the first argument for Turkish, the second is for     %
+% English.       						   %
+% ---------------------------------------------------------------- %
+
+% ---------------------------------------------------------------- %
+% Only the first letters of words must be capital.		   %
+% ---------------------------------------------------------------- %
+\anabilimdali{Bilişim Uygulamaları Anabilim Dal{\i}}{Department of Applied Informatics}
+\programi{Bilgi Güvenliği M\"uhendisli\u{g}i ve Kriptografi Program{\i}}{Cybersecurity Engineering and Cryptography Programme}
+
+% ---------------------------------------------------------------- %
+% For paperback version, the submission date to the faculty. For   %
+% hardcover (indigo/black) version, date of defense.		   %
+% ---------------------------------------------------------------- %
+
+\tarih{KASIM 2025}{NOVEMBER 2025}
+\tarihKucuk{Kasım 2025}{November 2025}
+
+
+% ---------------------------------------------------------------- %
+% Thesis advisor, title, thesis submission date, defense date      %
+% ---------------------------------------------------------------- %
+\tezyoneticisi{Prof. Dr. Enver ÖZDEMİR}{Istanbul Technical University}   
+
+\baslik{BLOK ŞİFRELEME ALGORİTMALARININ KRİPTO ANALİZİNDE KTPL}{YAKLAŞIMININ KULLANILMASI}{}
+
+\title{USAGE OF MIXED INTEGER LINEAR PROGRAMMING }{IN CRYPTANALYSIS OF BLOCK CIPHERS}{}
+
+% ---------------------------------------------------------------- %
+% The date of submission of the paperback to the department.	   %
+% ---------------------------------------------------------------- %
+
+\tezvermetarih{22 Eyl\"ul 2009}{11 Dec 2025} 
+
+\tezsavunmatarih{21 Aral\i k 2009}{28 Nov 2025}
+
+% ---------------------------------------------------------------- %
+% coadvisor and jury information. If you do not use all items,     %
+% leave the corresponding arguments blank such as                  %
+% \esdanismani{}{} 					           %
+% ---------------------------------------------------------------- %  
+
+
+\juriBir{Assoc. Prof. Dr. Ergün YARANERİ}{Istanbul Technical University}
+
+\juriIki{Assoc. Prof. Dr. Elif ÖZTAŞ}{Karamanoğlu Mehmetbey University}
+
+\juriUc{}{}
+
+\input defs.tex                                        
+
+% ---------------------------------------------------------------- %
+% For dedication page. Leave the argument blank if not used.	   %
+% ---------------------------------------------------------------- %
+\ithaf{To my wife Esma,}
+
+% ---------------------------------------------------------------- %
+% Form the below files						   %
+% ---------------------------------------------------------------- %
+\onsoz{\input onsoz.tex} 
+\kisaltmalistesi{\input kisaltmalar.tex}
+%\sembollistesi{\input semboller.tex}
+\ozet{\input ozet.tex}               
+\summary{\input summary.tex}
+
+
+\usepackage{tocloft}
+\renewcommand{\cftfigpagefont}{\bfseries}
+\renewcommand{\cfttabpagefont}{\bfseries}
+\renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}} % for parts
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for chapters
+
+\setlength{\cftfigindent}{0pt} % left aligned fig entries
+\renewcommand{\cftfigpresnum}{\bfseries Figure }
+\setlength{\cftfignumwidth}{5.5em}
+\renewcommand{\cftfigaftersnum}{ : }
+\renewcommand{\cftdotsep}{1}%
+
+\setlength{\cfttabindent}{0pt} % left aligned tab entries
+\renewcommand{\cfttabpresnum}{\bfseries Table }
+\setlength{\cfttabnumwidth}{5em}
+\renewcommand{\cfttabaftersnum}{ : }
+
+
+%\renewcommand{\cftaftertoctitle}{\vspace{1cm}}
+\renewcommand\cftaftertoctitle{\hfill\null\\\\\null\hfill\bf\underline{Page}}
+\renewcommand\cftafterloftitle{\hfill\null\\\\\\\null\hfill\bf\underline{Page}}
+\renewcommand\cftafterlottitle{\hfill\null\\\\\\\null\hfill\bf\underline{Page}}
+
+\renewcommand{\cftafterloftitleskip}{10pt} % for list of figures
+\renewcommand{\cftafterlottitleskip}{10pt} % for list tables
+\renewcommand{\cftaftertoctitleskip{10pt} % for table of contents
+
+\renewcommand*{\cftsecindent}{10pt}
+\renewcommand*{\cftsubsecindent}{20pt}
+\renewcommand*{\cftsubsubsecindent}{30pt}
+
+%AKC: ilk bos sayfayı kaldırmak için
+\usepackage{atbegshi}% http://ctan.org/pkg/atbegshi
+\AtBeginDocument{\AtBeginShipoutNext{\AtBeginShipoutDiscard}}
+
+\begin{document}
+
+% ---------------------------------------------------------------- %
+% Also form the below files. All corresponding inputs should point %
+% to a file.                                                       %
+% ---------------------------------------------------------------- %
+
+\input ch1.tex                                       
+\input ch2.tex                       
+\input ch3.tex                      
+\input ch4.tex
+\input ch5.tex
+\input ch6.tex
+
+
+% ---------------------------------------------------------------- %
+% Form tez.bib to contain your references in bibtex format         %
+% use \cite command for citing your references                     %
+% ---------------------------------------------------------------- %
+\bibliographystyle{itubib}        
+\bibliography{tez}
+% ---------------------------------------------------------------- %
+% Appendix files. eklerkapak is the appendix title page.           %
+% ---------------------------------------------------------------- %
+%\eklerkapak{}
+%\input eklerkapak.tex  
+
+% ---------------------------------------------------------------- %
+% \eklerbolum{x} forms and appendix of x chapters. 
+% ---------------------------------------------------------------- %
+%\eklerbolum{0}
+%\input ekler.tex
+
+% ---------------------------------------------------------------- %
+% The summary page                                                 %
+% ---------------------------------------------------------------- %
+\ozgecmis{\input ozgecmis.tex}
+\end{document}                      
+
+% ---------------------------------------------------------------- %
+% About this template: iletisim@be.itu.edu.tr                      %
+% ---------------------------------------------------------------- %

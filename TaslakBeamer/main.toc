@@ -1,8 +1,0 @@
-\beamer@sectionintoc {1}{LP and MILP}{3}{0}{1}
-\beamer@sectionintoc {2}{Differential Cryptanalysis}{11}{0}{2}
-\beamer@sectionintoc {3}{ITUbee Block Cipher}{21}{0}{3}
-\beamer@sectionintoc {4}{MILP representation of block ciphers}{27}{0}{4}
-\beamer@sectionintoc {5}{H-representation}{35}{0}{5}
-\beamer@sectionintoc {6}{Greedy and New Reduction Algorithm}{43}{0}{6}
-\beamer@sectionintoc {7}{Differential cryptanalysis model with MILP}{46}{0}{7}
-\beamer@sectionintoc {8}{References}{53}{0}{8}

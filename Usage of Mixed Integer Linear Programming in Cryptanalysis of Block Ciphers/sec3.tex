@@ -1,0 +1,156 @@
+
+
+\begin{section}{ITUbee Algorithm}
+    
+ITUbee \cite{karakocc2013itubee} is a lightweight software-oriented block cipher specifically designed for resource-constrained devices which include a microcontroller and have a limited battery power such as sensor nodes in wireless sensor networks.
+
+The cipher has Fiestel structure which consists of 20 rounds. İt has 80 bits block size and 80 bits key size. The round structure of the cipher is given in Figure \ref{fig:itubee}. Cipher also has a key whitening layer in the beginning and end of the 20 rounds. The encryption process of the cipher is given in Algorithm \ref{alg:ITUbee}. Round constants of the cipher is given in Table \ref{tab:ITUbee_rc} 
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\LARGE]
+\node [font=\LARGE] at (0.75,15.25) {};
+\node [font=\LARGE] at (2.5,16.75) {PL};
+\draw [short] (2.5,16.25) -- (2.5,15);
+\draw  (2.5,14.5) circle (0.5cm);
+\draw [short] (2,14.5) -- (3,14.5);
+\draw [short] (2.5,15) -- (2.5,14);
+\draw [->, >=Stealth] (2.5,12.5) -- (3.75,12.5);
+\draw  (3.75,13) rectangle  node {\LARGE F} (5,12);
+\draw [->, >=Stealth] (5,12.5) -- (6.25,12.5);
+\draw  (6.75,12.5) circle (0.5cm);
+\draw [short] (6.25,12.5) -- (7.25,12.5);
+\draw [short] (6.75,13) -- (6.75,12);
+\draw [->, >=Stealth] (7.25,12.5) -- (8.5,12.5);
+\draw  (9,12.5) circle (0.5cm);
+\draw [short] (8.5,12.5) -- (9.5,12.5);
+\draw [short] (9,13) -- (9,12);
+\draw [->, >=Stealth] (9.5,12.5) -- (11,12.5);
+\draw  (11,13) rectangle  node {\LARGE L} (12.25,12);
+\draw [->, >=Stealth] (12.25,12.5) -- (13.75,12.5);
+\draw  (13.75,13) rectangle  node {\LARGE F} (15,12);
+\draw [->, >=Stealth] (15,12.5) -- (17,12.5);
+\draw  (17.5,12.5) circle (0.5cm);
+\draw [short] (17,12.5) -- (18,12.5);
+\draw [short] (17.5,13) -- (17.5,12);
+\draw [short] (17.5,13) -- (17.5,13.25);
+\node [font=\LARGE] at (17.5,16.75) {PR};
+\draw [short] (17.5,16.25) -- (17.5,15);
+\draw  (17.5,14.5) circle (0.5cm);
+\draw [short] (17,14.5) -- (18,14.5);
+\draw [short] (17.5,15) -- (17.5,14);
+\draw [short] (17.5,14) -- (17.5,13.25);
+\draw [short] (2.5,14) -- (2.5,12.5);
+\draw [short] (2.5,12.5) -- (2.5,11.25);
+\draw [short] (17.5,12) -- (17.5,11.25);
+\draw [short] (17.5,11.25) -- (2.5,8.75);
+\draw [short] (2.5,11.25) -- (17.5,8.75);
+\draw [->, >=Stealth] (2.5,8.75) -- (2.5,8);
+\draw [->, >=Stealth] (17.5,8.75) -- (17.5,8);
+\node [font=\LARGE] at (1.5,14.5) {KL};
+\node [font=\LARGE] at (18.5,14.5) {KR};
+\node [font=\LARGE] at (6.75,13.5) {KR};
+\node [font=\LARGE] at (9,13.5) {Rc};
+\node [font=\LARGE] at (9,13.5) {};
+\end{circuitikz}
+}%
+\caption{ITUbee round structure}
+\label{fig:itubee}
+\end{figure}
+
+
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+    $X_1 \gets P_L \oplus K_L$ \;
+    $X_0 \gets P_R \oplus K_R$ \;
+    \For{$i = 1$ to $20$}{
+        \If{$i \in \{1, 3, \dots, 19\}$}{
+            $RK \gets K_R$\;
+        }
+        \Else{
+            $RK \gets K_L$\;
+        }
+        $X_{i+1} \gets X_{i-1} \oplus F(L(RK \oplus RC_i \oplus F(X_i)))$\;
+        \tcp{Round constant is added to the rightmost 16 bits}
+    }
+    $C_L \gets X_{20} \oplus K_R$\;
+    $C_R \gets X_{21} \oplus K_L$\;
+    \caption{Pseudo code for ITUbee encryption}
+    \label{alg:ITUbee}
+\end{algorithm}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Round} & \textbf{Round Constant (Hex)} & \textbf{Round} & \textbf{Round Constant (Hex)} \\
+        \hline
+        1  & 0x1428 & 11 & 0x0a1e \\
+        2  & 0x1327 & 12 & 0x091d \\
+        3  & 0x1226 & 13 & 0x081c \\
+        4  & 0x1125 & 14 & 0x071b \\
+        5  & 0x1024 & 15 & 0x061a \\
+        6  & 0x0f23 & 16 & 0x0519 \\
+        7  & 0x0e22 & 17 & 0x0418 \\
+        8  & 0x0d21 & 18 & 0x0317 \\
+        9  & 0x0c20 & 19 & 0x0216 \\
+        10 & 0x0b1f & 20 & 0x0115 \\
+        \hline
+    \end{tabular}
+    \caption{Round Constants of ITUbee algorithm}
+    \label{tab:ITUbee_rc}
+\end{table}
+
+\subsection{L Function}
+The L funtion which has branch number 4 is computed as,\\
+$L(a \parallel b \parallel c \parallel d \parallel e) = (e \oplus a \oplus b) \parallel (a \oplus b \oplus c) \parallel (b \oplus c \oplus d) \parallel (c \oplus d \oplus e) \parallel (d \oplus e \oplus a)$
+\\This function can also be represented as matrix multiplication using rotational matrix:
+
+\begin{center}
+    $
+    \begin{pmatrix}
+    1 & 1 & 0 & 0 & 1 \\
+    1 & 1 & 1 & 0 & 0 \\
+    0 & 1 & 1 & 1 & 0 \\
+    0 & 0 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 1 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+    a \\
+    b \\
+    c \\
+    d \\
+    e
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    e \oplus a \oplus b \\
+    a \oplus b \oplus c \\
+    b \oplus c \oplus d \\
+    c \oplus d \oplus e \\
+    d \oplus e \oplus a
+    \end{pmatrix}
+    $
+\end{center}
+
+
+\subsection{F Function}
+The F function is computed as,\\
+\begin{center}
+    $F (X) = S(L(S(X)))$
+\end{center}
+
+S is the S-box used in AES \cite{dworkin2001advanced}. S is the only non-linear structure in the ITUbee algorithm.  40 bit input of S is splitted into 8 bits then enters the s-box.
+\begin{center}
+    $S(a\parallel b \parallel c \parallel d \parallel e) = s[a] \parallel s[b] \parallel s[c] \parallel s[d] \parallel s[e]$ 
+\end{center}
+
+\subsection{Key Schedule}
+
+ITUbee has no key schedule. The algorithm splits the 80 bit key into two 40 bit parts $K_L$ and $K_R$ and uses the right part of the key in odd rounds and the left part of the keys in even rounds.
+
+
+
+\end{section}

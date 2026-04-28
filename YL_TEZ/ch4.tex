@@ -1,0 +1,375 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{LINEAR PROGRAMMING AND MILP MODELING OF BLOCK CIPHERS}\label{ch:milp}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Linear Programming}
+LP, or Linear Programming, is a foundational optimization technique in mathematics, first proposed by George Dantzig in the 1940s.\cite{dantzig2002linear}, although its development continued into the 1950s. LP has become an essential tool across various fields, including economics, operations research, engineering, logistics, and the natural sciences. The primary goal of LP is to optimize (maximize or minimize) a linear objective function subject to a set of linear constraints.
+
+\subsection{Mathematical Formulation}
+The standard form of a linear programming problem can be expressed mathematically as follows:
+
+\text{Maximize (or Minimize)} 
+\begin{center}
+    $c_1x_1 + c_2x_2 + \dots + c_nx_n $
+\end{center}
+\text{Subject to:} 
+\begin{center}
+    $  a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n \leq b_1 $ \\
+    $ a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n \leq b_2 $ \\
+    $ \quad \vdots $ \\
+    $ a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n \leq b_m $ \\
+    $ x_{1}, x_{2}, \dots, x_n \geq 0 $
+\end{center}
+
+Here, $ x_1, x_2, \dots, x_n $ represent the decision variables, $ c_1, c_2, \dots, c_n $ are the coefficients of the objective function, $ a_{ij} $ are the coefficients of the constraints, and $ b_1, b_2, \dots, b_m $ are the bounds of the constraints. The decision variables are typically constrained to be non-negative, although this condition can be relaxed or modified depending on the problem context.
+
+The objective function is linear, meaning that the relationship between the decision variables and the function value is additive and proportional. The constraints are also linear, implying that each constraint defines a half-space in the decision variable space.
+
+
+\section{Mixed-Integer Linear Programming}
+Mixed-Integer Linear Programming (MILP) extends the framework of Linear Programming by incorporating integer constraints on some or all of the decision variables. 
+
+\subsection{Mathematical Formulation}
+The mathematical formulation of an MILP problem is similar to that of an LP problem, but with the addition of integer constraints on certain decision variables:
+
+
+\text{Maximize (or Minimize)} 
+\begin{center}
+    $c_1x_1 + c_2x_2 + \dots + c_nx_n $
+\end{center}
+\text{Subject to:} 
+\begin{center}
+    $  a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n \leq b_1 $ \\
+    $ a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n \leq b_2 $ \\
+    $ \quad \vdots $ \\
+    $ a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n \leq b_m $ \\
+    $ x_1, x_2, \dots, x_p \in \mathbb{Z} $ \\
+    $ x_{p+1}, x_{p+2}, \dots, x_n \geq 0 $
+\end{center}
+
+
+
+In this formulation, the first $ p $ decision variables $ x_1, x_2, \dots, x_p $ are constrained to take integer values, while the remaining $ n-p $ variables $ x_{p+1}, x_{p+2}, \dots, x_n $ are real-valued. 
+
+\newpage
+\subsection{Computational Complexity and Solution Methods}
+MILP problems are generally NP-hard, meaning that no algorithm has been discovered that guarantees a polynomial-time solution for all MILP problems. The presence of integer variables introduces combinatorial complexity, making MILP significantly more challenging than LP.
+
+Despite this complexity, efficient solution methods for MILP problems have been developed through several algorithms. . Some example of theese algorithms are
+Branch and Bound \cite{land1960branch}, Branch and Cut \cite{padberg1991branch}, Branch and Price \cite{barnhart1998branch}.
+These algorithms are implemented in various commercial and open-source MILP solvers, such as CPLEX \cite{studio2016ibm}, Gurobi \cite{gurobi2021gurobi}, and GLPK \cite{makhorin2008glpk}, which are widely used in industry and academia.
+
+\subsection{Toy Example of MILP Modeling}
+
+A company produces two items, \textbf{Product X} and \textbf{Product Y}, and seeks to maximize profit while accounting production capacity, resource availability, and a minimum production requirement. The constraints involve available labor hours, machine hours, and minimum production levels.
+
+\subsubsection{Variables}
+Let:
+\begin{itemize}
+    \item Let $x$ denote the amount produced of \textbf{Product X}.
+    \item Let $y$ denote the amount produced of \textbf{Product Y}.
+\end{itemize}
+
+
+Both $x$ and $y$ are integer variables.
+
+\subsubsection{Objective Function}
+Maximize the total profit:
+$
+\text{Maximize} \quad Z = 40x + 30y
+$
+where:
+\begin{itemize}
+    \item 40 is the profit per unit of \textbf{Product X},
+    \item 30 is the profit per unit of \textbf{Product Y}.
+\end{itemize}
+
+\subsubsection{Constraints}
+\begin{enumerate}
+    \item \textbf{Labor Constraint}: Producing one unit of \textbf{Product X} consumes 2 hours of labor, while one unit of \textbf{Product Y} consumes 1 hour. The total labor available is 100 hours.
+
+    $
+    2x + y \leq 100
+    $
+    
+    \item \textbf{Machine Hours Constraint}: Producing one unit of \textbf{Product X} consumes 1 hour of machine time, whereas one unit of \textbf{Product Y} consumes 3 hours. The total machine hours available  are 90.
+
+    $
+    x + 3y \leq 90
+    $
+    
+    \item \textbf{Minimum Production Constraint}: At least 20 units of \textbf{Product X} must be produced to meet market demand.
+    $
+    x \geq 20
+    $
+    
+    \item \textbf{Non-Negativity Constraint}: The production quantities must be non-negative.
+    $
+    x \geq 0, \quad y \geq 0
+    $
+\end{enumerate}
+
+\subsubsection{Formulation}
+The complete problem formulation is given as follows:
+
+\text{Maximize} 
+\begin{center}
+    $  Z = 40x + 30y $ 
+\end{center}
+\text{subject to:}
+\begin{center}
+    $ 2x + y \leq 100 $ \\
+    $ x + 3y \leq 90 $ \\
+    $ x \geq 20 $ \\
+    $ y \geq 0 \quad $
+\end{center}
+
+\newpage
+\subsubsection{Modeling and Result}
+
+We will use Sagemath and GLPK solver for modeling Toy example. After running code in Listing  \ref{lst:toyExample} . We found that Maximum profit 2160 can be achieved by producing  42 A product and 16 B product.
+\begin{lstlisting}[caption={Sagemath MILP modelling of toy example }, label={lst:toyExample}]
+
+p.<x,y> = MixedIntegerLinearProgram 
+(maximization=True, solver = "GLPK")
+
+p.set_objective(40*x[0]+ 30*y[0])
+
+p.add_constraint(2*x[0] + y[0] <= 100)
+p.add_constraint(x[0] + 3*y[0] <= 90)
+p.add_constraint(x[0] >= 20)
+p.add_constraint(y[0] >= 0)
+
+print(p.solve())
+print(p.get_values(x,y))
+
+\end{lstlisting}
+ 
+\section{MILP Modeling of Block Ciphers}
+The use of Mixed-Integer Linear Programming (MILP) in cryptanalysis offers a powerful mathematical approach to understanding and evaluating the security of block ciphers. By translating the components and operations of a cipher into a series of linear constraints, MILP enables the formulation of an optimization problem. The primary goal of MILP modeling of block cipher is to either minimize or maximize an objective function that reflects the characteristics of interest—such as the number of active S-boxes or the probability of a differential or linear characteristic.
+
+Each component of the cipher, from S-box substitutions to permutations and algebraic operations like XOR and multiplication, is  modeled as a constraint within the MILP framework. This transformation of the cipher into a set of mathematical relationships allows for a precise analysis of its behavior under various cryptanalytic techniques. For instance, minimizing the number of active S-boxes through MILP can reveal efficient characteristics for differential cryptanalysis.
+
+Additionally, MILP models incorporate data from tools like Difference Distribution Tables (DDT) and Linear Approximation Tables (LAT), encoding this information into constraints that guide the optimization process. The models developed for differential and linear cryptanalysis, while sharing foundational similarities, diverge in the specifics of how certain operations are represented. 
+
+\subsection{Branch Number} \label{sec:branch}
+Branch number is a critical parameter used to evaluate the diffusion properties of cipher's components. The concept of branch number originates from the study of linear codes and is particularly relevant when assessing the security and strength of cryptographic primitives.
+
+\subsubsection{Definition and Calculation}
+
+Formally, if we consider a transformation $\mathcal{T}$ applied to an $n$-element vector, the branch number is given by:
+$$
+B = \min_{\mathbf{x} \neq \mathbf{0}} \left\{ \text{w}(\mathbf{x}) + \text{w}(\mathcal{T}(\mathbf{x})) \right\},
+$$
+where $\text{w}(\mathbf{x})$denotes the number of non-zero elements in $\mathbf{x}$.
+
+The branch number is significant in cryptanalysis because it provides a lower bound on the diffusion introduced by a transformation. A higher branch number indicates better diffusion, which implies that any single-bit difference in the input will affect a larger portion of the output thereby increasing the complexity of differential and linear attacks.
+
+\subsubsection{Example: Branch Number of AES's MDS Matrix}
+
+
+For AES \cite{dworkin2001advanced}, the MDS matrix used in the MixColumns step has a branch number of $5$. This means that minimum number of total active byte of input and output of the MDS is 5. Table \ref{tab:aes-mds} shows possible active byte patterns of the AES MDS matrix.
+
+\begin{table}[h]
+\centering
+\caption{Possible active byte patterns of the AES MDS matrix}
+\begin{tabular}{|c|c|}
+\hhline{|=|=|}
+\textbf{Input Active Bytes} & \textbf{Output Active Bytes}           \\ \hline
+1                           & 4                                      \\ \hline
+2                           & 3 / 4                                   \\ \hline
+3                           & 2 / 3 / 4                               \\ \hline
+4                           & 1 / 2 / 3 / 4                           \\ \hline
+\end{tabular}
+
+\label{tab:aes-mds}
+\end{table}
+
+\newpage
+\subsubsection{Role of Branch Number in MILP Modeling}
+
+In MILP modeling, the branch number is encoded directly into the MILP model, ensuring that any feasible solution must respect the minimum branch number criteria. 
+
+\subsection{H-representation}
+
+The H-representation, also known as the half-space representation, describes a polyhedron as the intersection of a finite number of half-spaces, each defined by a linear inequality of the form $ \mathbf{a}^T \mathbf{x} \leq b $, where $\mathbf{a} $ is a vector of coefficients, $ \mathbf{x} $ is the vector of variables, and $ b $ is a scalar. This representation is integral to the MILP modeling of block ciphers as it encapsulates the constraints from the cipher's operations.
+
+\subsubsection{Example of H-representation}
+
+Consider linear function L which takes 6 bit input, 6 bit output and computed as:
+\begin{center}
+    $L(a,b,c)=(a \oplus b , a \oplus c , b \oplus c ) \text{ where a,b,c are 2 bit values}  $
+\end{center}
+
+
+H-representation of this function can be found in 2 steps with using  Sagemath polyhedra library. \cite{sage}
+
+\begin{enumerate}
+    \item We scan the outputs for all possible inputs and give a value of 0 if the output value is 0 and 1 if it is different from zero. Possible input and output values of the $L$ function can be seen in Table \ref{tab:hreptab}.
+
+    \item These points are given as input to the sage polyhedra library and the inequalities given in table \ref{tab:h-repineq} are obtained.
+    
+\end{enumerate}
+
+In table \ref{tab:h-repineq} ,  $(1, 1, 1, -1, -1, -1) x + 1 \geq 0$ means that $ x_0 + x_1 + x_2 -x_3 - x_4 -x_5 +1 \geq 0 $ where $x_0$ , $x_1$ and $x_2$ are input differences, $x_3$ , $x_4$ and $x_5$ are output differences.  
+
+\begin{table}[h]
+\centering
+\caption{Input and Output Differences of $L$ function}
+\begin{tabular}{|c|c|}
+\hhline{|=|=|}
+\textbf{Input Differences} & \textbf{Output Differences} \\ \hline
+0 0 0 & 0 0 0 \\ \hline
+0 0 1 & 0 1 1 \\ \hline
+0 1 0 & 1 0 1 \\ \hline
+0 1 1 & 1 1 0 \\ \hline
+0 1 1 & 1 1 1 \\ \hline
+1 0 0 & 1 1 0 \\ \hline
+1 0 1 & 1 0 1 \\ \hline
+1 0 1 & 1 1 1 \\ \hline
+1 1 0 & 0 1 1 \\ \hline
+1 1 1 & 0 0 0 \\ \hline
+1 1 1 & 0 1 1 \\ \hline
+1 1 0 & 1 1 1 \\ \hline
+1 1 1 & 1 0 1 \\ \hline
+1 1 1 & 1 1 0 \\ \hline
+1 1 1 & 1 1 1 \\ \hline
+\end{tabular}
+
+\label{tab:hreptab}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{H-representation of $L$ function}
+\begin{tabular}{|c|l|}
+\hhline{|=|=|}
+\textbf{No.} & \textbf{Inequality} \\ \hline
+1  & $(0, 0, -1, 0, 0, 0) x + 1 \geq 0$ \\ \hline
+2  & $(0, -1, 0, 0, 0, 0) x + 1 \geq 0$ \\ \hline
+3  & $(-1, 0, 0, 0, 0, 0) x + 1 \geq 0$ \\ \hline
+4  & $(0, 0, 0, -1, 0, 0) x + 1 \geq 0$ \\ \hline
+5  & $(0, 0, 0, 0, -1, 0) x + 1 \geq 0$ \\ \hline
+6  & $(0, 0, 0, 0, 0, -1) x + 1 \geq 0$ \\ \hline
+7  & $(0, -1, 1, 0, 0, 1) x + 0 \geq 0$ \\ \hline
+8  & $(0, 0, 0, -1, 1, 1) x + 0 \geq 0$ \\ \hline
+9  & $(0, 1, -1, 0, 0, 1) x + 0 \geq 0$ \\ \hline
+10 & $(0, 0, 0, 1, -1, 1) x + 0 \geq 0$ \\ \hline
+11 & $(1, 0, -1, 0, 1, 0) x + 0 \geq 0$ \\ \hline
+12 & $(0, 0, 0, 1, 1, -1) x + 0 \geq 0$ \\ \hline
+13 & $(1, 0, 1, 0, -1, 0) x + 0 \geq 0$ \\ \hline
+14 & $(0, 1, 1, 0, 0, -1) x + 0 \geq 0$ \\ \hline
+15 & $(1, 1, 1, -1, -1, -1) x + 1 \geq 0$ \\ \hline
+16 & $(1, 1, 0, -1, 0, 0) x + 0 \geq 0$ \\ \hline
+17 & $(-1, 0, 1, 0, 1, 0) x + 0 \geq 0$ \\ \hline
+18 & $(-1, 1, 0, 1, 0, 0) x + 0 \geq 0$ \\ \hline
+19 & $(1, -1, -1, 1, 1, -1) x + 1 \geq 0$ \\ \hline
+20 & $(1, -1, 0, 1, 0, 0) x + 0 \geq 0$ \\ \hline
+21 & $(-1, 1, -1, 1, -1, 1) x + 1 \geq 0$ \\ \hline
+22 & $(-1, -1, 1, -1, 1, 1) x + 1 \geq 0$ \\ \hline
+\end{tabular}
+
+\label{tab:h-repineq}
+\end{table}
+
+\subsection{Greedy Algorithm}
+
+The biggest problem encountered when expressing components of block cipher algorithms using H-representation is that the number of equations is too high and the system has no solution in polynomial time due to these equations. \cite{sun2014automatic} and \cite{sun2014towards} proposed greedy algorithm for reducing number of equations. Pseudo-code for greedy algorithm is given in Algorithm \ref{alg:greedy}. The process begins by initializing $O$ as an empty list. The algorithm then enters a loop, which continues as long as there are impossible points in $X$. During each iteration, the algorithm selects an inequality from $H$ that maximizes the number of impossible patterns removed from $X$. This selection is key to the greedy approach, as it always picks the inequality that offers the most immediate benefit. Once an inequality is selected, it is added to $O$, and subsequently removed from $H$, ensuring it won’t be selected again. The impossible patterns eliminated by this inequality are then removed from $X$ as well, reducing the problem size.
+
+The loop terminates when all the impossible patterns in $X$ have been removed. At this point, the algorithm returns the list $O$, which contains the subset of inequalities from $H$ that effectively remove all the impossible patterns. This algorithm is greedy because it makes local optimal choices by selecting the inequality that provides the most immediate reduction in impossible points at each step, without revisiting previous decisions. While this may not always guarantee an optimal solution, it is efficient and works well for certain problem types.
+
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+    \caption{Pseudo-code for Greedy Algorithm }
+    \label{alg:greedy}
+    \KwIn{$N$(Inequalities), $I$(Impossible points)}
+    \KwOut{$M$ (reduced inequalities)}
+    Set $M$ to an empty list \\
+    \While{$I$ is not empty}{
+        Identify the inequality in $N$ that maximizes the elimination of impossible patterns from $I$. \\
+        Append inequality to $M$ \\
+        Remove inequality from $N$ \\
+        Remove the eliminated impossible patterns from $I$.
+    }
+    \Return $M$
+\end{algorithm}
+
+\subsection{New Reduction Algorithm}
+Sasaki and Todo designed a new algorithm \cite{sasaki2017new1} that can obtain fewer equations by improving the greedy algorithm. The advantage of this algorithm over the greedy algorithm is that the number of inequalities to be obtained after the algorithm can be determined. The pseudo-code of the algorithm is given in Algorithm \ref{alg:newreduction}.
+
+The importance of determining the number of equations to be obtained after elimination is that reducing the number of equations does not always give the best result. Therefore, when using these New Reduction Algorithm, various trials are made and the number of equations that give the best result is used.
+
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+    \caption{Pseudo-code for New Reduction Algorithm }
+    \label{alg:newreduction}
+    \KwIn{$N$(Inequalities), $R$(Impossible points)}
+    \KwOut{$M$ (reduced inequalities)}
+    Set $M$ to an empty list \\
+    \For{Each $R_i$ in $R$ }{Identify the inequalities within $N$ that remove the pattern from the solution space.}
+    Construct the MILP problem: 
+    \begin{itemize}
+        \item $Variables$ : $z$ ($z_i =1 $ means that inequality i is included in the system) 
+        \item $Objective$ : Minimize  $ \sum_{i=1}^{N} z_i $	
+        \item $Constrains$: Sum of $z_i$ is greater than or equal to 1 for each inequality 
+        \item $Additional-constrains$ : $ \sum_{i=1}^{N} z_i = N_t $ where $N_t$ is number of inequalities to be included
+    \end{itemize}
+    Solve the MILP problem and append obtained inequalities to the $M$ \\
+    \Return $M$
+\end{algorithm}
+
+\subsection{Milp Modeling of XOR Operation }
+We will use modeling defined in \cite{mouha2012differential}. Lets $x_{in1}$ and $x_{in2}$ be input and $x_{out}$ be output difference of xor operation. Branch number is defined in Section \ref{sec:branch}. Branch number of xor operation is 2. We use a dummy variable $d$ to add the branch number to the equation system. The dummy variable is equal to 0 if $x_{in1}$, $x_{in2}$ and $x_{out}$ are equal to 0, otherwise it is equal to 1. Using this information, The XOR function can be modeled by the following set of equations:
+
+\begin{center}
+    $x_{in1} + x_{in2} + x_{out} \geq 2d $ \\
+    $d \geq x_{in1} $ \\
+    $d \geq x_{in2} $ \\
+    $d \geq x_{out} $ 
+\end{center}
+
+\subsection{Milp Modeling of Linear Transformation }
+We will also use modeling defined in \cite{mouha2012differential}. Lets $x_{in1}, x_{in2}, ... ,x_{inM}, $ be input differences and $x_{out1}, x_{out2}, ... ,x_{outM}, $ be output difference of linear transformation. We will use dummy variable $d$ like in XOR modeling and we have branch number $B$ of Linear transformation. Then we can define linear transformation with following equations. 
+
+\begin{center}
+    $x_{in1} + x_{in2} + x_{inM} + ... + x_{out1} + x_{out2} + ... + x_{outM}  \geq B*d $ \\
+    $d \geq x_{in1} $ \\
+    $d \geq x_{in2} $ \\
+    $...$\\
+    $d \geq x_{inM} $ \\
+    $d \geq x_{out1} $\\
+    $d \geq x_{out2} $ \\
+    $...$\\
+    $d \geq x_{outM} $
+\end{center}
+
+In block ciphers, any nonlinear structure can be considered as a linear transformation. For example, xor operation or matrix multiplication are linear transformations. When the branch number value is given as 2 in the equation above, the equations given for XOR operation are obtained.
+
+\subsection{Milp Modeling of S-box}
+
+Since the main purpose of this article is to show that the algorithm is secure by calculating the minimum number of active s-boxes, s-boxes are not modeled in the MILP models of cryptographic attacks. The reason for this is that if the input of the s-box is active, its output is also active, and similarly, passive input gives passive output. Therefore, the model of the s-box has no effect on the minimum number of active s-boxes. However, if the purpose of the modeling is not to find the minimum active s-box but to find the best characteristic, the s-box must be modeled. Therefore, the s-box model defined in \cite{sun2014automatic} is given below as a reference for the reader.
+
+Let S be a 4x4 bijective S-box whichs inputs are $x_{in1},x_{in2},x_{in3},x_{in4}$ and outputs are $x_{out1},x_{out2},x_{out3},x_{out4}$. $A$ is equal to 1 if and of the input bits are active. Otherwise A is 0. Then S can be defined by following equations.
+
+\begin{center}
+    $x_{in1} - A \leq 0$ \\
+    $x_{in2} - A \leq 0$ \\
+    $x_{in3} - A \leq 0$ \\
+    $x_{in4} - A \leq 0$ \\
+    $x_{in1} + x_{in2} + x_{in3} + x_{in4} - A \geq 0$ \\
+    $4*(x_{in1} + x_{in2} + x_{in3} + x_{in4}) - (x_{out1} + x_{out2} + x_{out3} + x_{out4}) \geq 0$ \\
+    $4*(x_{out1} + x_{out2} + x_{out3} + x_{out4}) - (x_{in1} + x_{in2} + x_{in3} + x_{in4}) \geq 0$ \\
+\end{center}
+
+\subsection{Milp Modeling of three-forked branch }
+We will use modeling defined in \cite{mouha2012differential}. This model will be used in linear cryptanalysis. Lets $y_{in}$ be input and $x_{out1}$ and $x_{out2}$ be output mask of three-forked branch. Modeling is similar to modeling xor operation. We use a dummy variable $d$ which is equal to 0 if $x_{in}$, $x_{out1}$ and $x_{out2}$ are equal to 0, otherwise it is equal to 1. Using these information, the three-forked branch can be expressed with the following equations.
+
+\begin{center}
+    $x_{in} + x_{out1} + x_{out2} \geq 2d $ \\
+    $d \geq y_{in} $ \\
+    $d \geq y_{out1} $ \\
+    $d \geq y_{out2} $ 
+\end{center}
+
+
+

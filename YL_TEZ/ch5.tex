@@ -1,0 +1,446 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{MILP IN CRYPTANALYSIS }\label{ch:milpinCryptanaylsis}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This chapter describes ITUbee block cipher and MILP models which we developed for Differential, Linear and Related-Key Differential cryptanalysis. 
+
+\section{ITUbee Block Cipher}
+ITUbee \cite{karakocc2013itubee} is a block cipher optimized for software implementation on devices with limited resources, including microcontrollers with constrained energy supply, such as those used in wireless sensor networks
+
+The cipher has Fiestel structure which consists of 20 rounds. It has 80 bits block size and 80 bits key size. The round structure of the cipher is given in Figure \ref{fig:itubee}. Cipher also has a key whitening layer in the beginning and end of the 20 rounds. The encryption process of the cipher is given in Algorithm \ref{alg:ITUbee}. Round constants of the cipher is given in Table \ref{tab:ITUbee_rc}
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\LARGE]
+\node [font=\LARGE] at (0.75,15.25) {};
+\node [font=\LARGE] at (2.5,16.75) {PL};
+\draw [short] (2.5,16.25) -- (2.5,15);
+\draw  (2.5,14.5) circle (0.5cm);
+\draw [short] (2,14.5) -- (3,14.5);
+\draw [short] (2.5,15) -- (2.5,14);
+\draw [->, >=Stealth] (2.5,12.5) -- (3.75,12.5);
+\draw  (3.75,13) rectangle  node {\LARGE F} (5,12);
+\draw [->, >=Stealth] (5,12.5) -- (6.25,12.5);
+\draw  (6.75,12.5) circle (0.5cm);
+\draw [short] (6.25,12.5) -- (7.25,12.5);
+\draw [short] (6.75,13) -- (6.75,12);
+\draw [->, >=Stealth] (7.25,12.5) -- (8.5,12.5);
+\draw  (9,12.5) circle (0.5cm);
+\draw [short] (8.5,12.5) -- (9.5,12.5);
+\draw [short] (9,13) -- (9,12);
+\draw [->, >=Stealth] (9.5,12.5) -- (11,12.5);
+\draw  (11,13) rectangle  node {\LARGE L} (12.25,12);
+\draw [->, >=Stealth] (12.25,12.5) -- (13.75,12.5);
+\draw  (13.75,13) rectangle  node {\LARGE F} (15,12);
+\draw [->, >=Stealth] (15,12.5) -- (17,12.5);
+\draw  (17.5,12.5) circle (0.5cm);
+\draw [short] (17,12.5) -- (18,12.5);
+\draw [short] (17.5,13) -- (17.5,12);
+\draw [short] (17.5,13) -- (17.5,13.25);
+\node [font=\LARGE] at (17.5,16.75) {PR};
+\draw [short] (17.5,16.25) -- (17.5,15);
+\draw  (17.5,14.5) circle (0.5cm);
+\draw [short] (17,14.5) -- (18,14.5);
+\draw [short] (17.5,15) -- (17.5,14);
+\draw [short] (17.5,14) -- (17.5,13.25);
+\draw [short] (2.5,14) -- (2.5,12.5);
+\draw [short] (2.5,12.5) -- (2.5,11.25);
+\draw [short] (17.5,12) -- (17.5,11.25);
+\draw [short] (17.5,11.25) -- (2.5,8.75);
+\draw [short] (2.5,11.25) -- (17.5,8.75);
+\draw [->, >=Stealth] (2.5,8.75) -- (2.5,8);
+\draw [->, >=Stealth] (17.5,8.75) -- (17.5,8);
+\node [font=\LARGE] at (1.5,14.5) {KL};
+\node [font=\LARGE] at (18.5,14.5) {KR};
+\node [font=\LARGE] at (6.75,13.5) {KR-KL};
+\node [font=\LARGE] at (9,13.5) {Rc};
+\node [font=\LARGE] at (9,13.5) {};
+\end{circuitikz}
+}%
+
+\caption{ITUbee round structure}
+\label{fig:itubee}
+\end{figure}
+
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+    $X_1 \gets P_L \oplus K_L$ \;
+    $X_0 \gets P_R \oplus K_R$ \;
+    \For{$i = 1$ to $20$}{
+        \If{$i \in \{1, 3, \dots, 19\}$}{
+            $RK \gets K_R$\;
+        }
+        \Else{
+            $RK \gets K_L$\;
+        }
+        $X_{i+1} \gets X_{i-1} \oplus F(L(RK \oplus RC_i \oplus F(X_i)))$\;
+        \tcp{Round constant is added to the rightmost 16 bits}
+    }
+    $C_L \gets X_{20} \oplus K_R$\;
+    $C_R \gets X_{21} \oplus K_L$\;
+    \caption{Pseudo code for ITUbee encryption}
+    \label{alg:ITUbee}
+\end{algorithm}
+
+\begin{table}[H]
+    \centering
+    \caption{Round Constants of ITUbee algorithm}
+    \begin{tabular}{|c|c|c|c|}
+        \hhline{|=|=|=|=|}
+        \textbf{Round} & \textbf{Round Constant (Hex)} & \textbf{Round} & \textbf{Round Constant (Hex)} \\
+        \hline
+        1  & 0x1428 & 11 & 0x0a1e \\
+        2  & 0x1327 & 12 & 0x091d \\
+        3  & 0x1226 & 13 & 0x081c \\
+        4  & 0x1125 & 14 & 0x071b \\
+        5  & 0x1024 & 15 & 0x061a \\
+        6  & 0x0f23 & 16 & 0x0519 \\
+        7  & 0x0e22 & 17 & 0x0418 \\
+        8  & 0x0d21 & 18 & 0x0317 \\
+        9  & 0x0c20 & 19 & 0x0216 \\
+        10 & 0x0b1f & 20 & 0x0115 \\
+        \hline
+    \end{tabular}
+    
+    \label{tab:ITUbee_rc}
+\end{table}
+
+\subsection{L Function}
+The L funtion which has branch number 4 is computed as,\\
+$L(a \parallel b \parallel c \parallel d \parallel e) = (e \oplus a \oplus b) \parallel (a \oplus b \oplus c) \parallel (b \oplus c \oplus d) \parallel (c \oplus d \oplus e) \parallel (d \oplus e \oplus a)$
+\\This function can also be represented as matrix multiplication using rotational matrix:
+
+\begin{center}
+    $
+    \begin{pmatrix}
+    1 & 1 & 0 & 0 & 1 \\
+    1 & 1 & 1 & 0 & 0 \\
+    0 & 1 & 1 & 1 & 0 \\
+    0 & 0 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 1 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+    a \\
+    b \\
+    c \\
+    d \\
+    e
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    e \oplus a \oplus b \\
+    a \oplus b \oplus c \\
+    b \oplus c \oplus d \\
+    c \oplus d \oplus e \\
+    d \oplus e \oplus a
+    \end{pmatrix}
+    $
+\end{center}
+
+
+\subsection{F Function}
+The F function is computed as,\\
+\begin{center}
+    $F (X) = S(L(S(X)))$
+\end{center}
+
+S is the S-box used in AES \cite{dworkin2001advanced}. S is the only non-linear structure in the ITUbee algorithm.  40 bit input of S is splitted into 8 bits then enters the s-box.
+\begin{center}
+    $S(a\parallel b \parallel c \parallel d \parallel e) = s[a] \parallel s[b] \parallel s[c] \parallel s[d] \parallel s[e]$ 
+\end{center}
+
+\subsection{Key Schedule}
+
+ITUbee has no key schedule. The algorithm splits the 80 bit key into two 40 bit parts $K_L$ and $K_R$ and uses the right part of the key in odd rounds and the left part of the keys in even rounds.
+
+
+\section{Differential Cryptanalysis of ITUbee using MILP}
+
+ ITUbee algorithm has Fiestel structure so we divide input as a two variables $RO$ and $R1$. In model, we define them as a binary variables. After each operation in the cipher, if active byte can be passive or passive byte can be active we define new binary. In differential cryptanalysis, S-box does not change activity of the byte because S-box takes byte and if input byte is active, output byte is also active. It is same for inactive bytes. Therefore we don't define new variables after s-box operations. L operations are changes the active bytes so after them we define new variable. XOR operation changes active byte if it XOR two binary variables. In differential cryptanalysis we do not give active values to the keys therefore key xor's does not change the active byte. Skech of the 1 round modelling can be seen in the Figure \ref{fig: ITUbeeDif}. 
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\large]
+\node [font=\large] at (2.5,16) {R1};
+\draw (2.5,15.5) to[short] (2.5,14.5);
+\draw  (2.5,14) circle (0.5cm);
+\draw [short] (2.5,13.5) -- (2.5,11.5);
+\draw [->, >=Stealth] (2.5,11.5) -- (4,11.5);
+\draw  (4,12) rectangle  node {\large SLS} (5.25,11);
+\draw [->, >=Stealth] (5.25,11.5) -- (6.5,11.5);
+\draw [short] (2.5,14.5) -- (2.5,13.5);
+\draw [short] (2,14) -- (3,14);
+\draw  (7,11.5) circle (0.5cm);
+\draw [->, >=Stealth] (7.5,11.5) -- (8.75,11.5);
+\draw  (8.75,12) rectangle  node {\large L} (10,11);
+\draw [->, >=Stealth] (10,11.5) -- (11.5,11.5);
+\draw  (11.5,12) rectangle  node {\large SLS} (12.75,11);
+\draw [->, >=Stealth] (12.75,11.5) -- (14.5,11.5);
+\draw  (15,11.5) circle (0.5cm);
+\node [font=\large] at (15,16) {R0};
+\draw (15,15.5) to[short] (15,14.5);
+\draw  (15,14) circle (0.5cm);
+\node [font=\large] at (3,11.75) {};
+\draw [short] (15,13.5) -- (15,12);
+\draw [short] (6.5,11.5) -- (7.5,11.5);
+\draw [short] (7,12) -- (7,11);
+\draw [short] (14.5,11.5) -- (15.5,11.5);
+\draw [short] (15,12) -- (15,11);
+\draw [short] (14.5,14) -- (15.5,14);
+\draw [short] (15,14.5) -- (15,13.5);
+\draw [short] (15,11) -- (15,10.25);
+\draw [short] (2.5,11.5) -- (2.5,10.25);
+\draw [short] (2.5,10.25) -- (15,8.25);
+\draw [short] (15,10.25) -- (2.5,8.25);
+\node [font=\large] at (1.5,14) {KL};
+\node [font=\large] at (16,14) {KR};
+\node [font=\large] at (7,12.5) {KR};
+\node [font=\large] at (3.25,12) {R1};
+\node [font=\large] at (5.75,12) {R1a};
+\node [font=\large] at (8,12) {R1a};
+\node [font=\large] at (10.75,12) {R1b};
+\node [font=\large] at (13.75,12) {R1c};
+\node [font=\large] at (15.5,10.5) {R2};
+\node [font=\large] at (2.5,8) {R2};
+\node [font=\large] at (15,8) {R1};
+\end{circuitikz}
+}%
+\caption{ITUbee  MILP differential cryptanalysis sketch}
+\label{fig: ITUbeeDif}
+\end{figure}
+
+In MILP model we are trying to find best characteristic that makes minimum number of active s-box so we minimize binary values before and after s-box operation in the MILP model. ITUbee algorithm uses AES's \cite{dworkin2001advanced} s-box. AES s-box have best input-output difference $2^{-6}$. In our model we found that best characteristic in 3 round have minimum 16 active s-box. Therefore best probability for differential characteristic will be $(2^{-6})^{16}= 2^{-96}  $ which is not usable for differential attack. With this result we can say that 3 round of the algorithm is secure against the differential cryptanalysis. Our result is same for differential with \cite{karakocc2013itubee}. Best characteristic found with the model can be seen in Table \ref{fig: ITUbeeDif}
+
+\begin{table}[H]
+\caption{Best 3 round differential characteristic of ITUbee algorithm}
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hhline{|=|=|=|}
+        \textbf{Stage} & \textbf{Binary Index} & \textbf{Characteristic} \\
+        \hline
+        1. round  & R1 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input      & R0 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        1. round  & R1a & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 1.0, 4: 1.0\} \\
+        middle values   & R1b & \{0: 0.0, 1: 1.0, 2: 1.0, 3: 0.0, 4: 1.0\} \\
+                   & R1c & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        2. round& R2 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input      & R1 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        2. round & R2a & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 1.0, 4: 1.0\} \\
+        middle values  & R2b & \{0: 0.0, 1: 1.0, 2: 1.0, 3: 0.0, 4: 1.0\} \\
+                   & R2c & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        3. round  & R3 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R2 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        3. round  & R3a & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        middle values   & R3b & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                   & R3c & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        4. round & R4 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input    & R3 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+    \end{tabular}
+    
+    \label{tab:MILPcharDif}
+\end{table}
+
+\section{Linear Cryptanalysis of ITUbee using MILP}
+
+Linear cryptanalysis model is very similar to the differential model. Only difference is XOR and three-forked branch changes their role in the model. In linear model we add constraints for three-forked branch and pass the XOR operation. Since middle of the fiestel structure is symmetric and XOR and three-forked branch have same constraints, same model with differential cryptanalysis can be also used for linear cryptanalysis. Sketch of the one round MILP model of the linear cryptanalysis is given in Figure \ref{fig: ITUbeeLin}
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\large]
+\node [font=\large] at (2.5,16) {R1};
+\draw (2.5,15.5) to[short] (2.5,14.5);
+\draw  (2.5,14) circle (0.5cm);
+\draw [short] (2.5,13.5) -- (2.5,11.5);
+\draw [->, >=Stealth] (2.5,11.5) -- (4,11.5);
+\draw  (4,12) rectangle  node {\large SLS} (5.25,11);
+\draw [->, >=Stealth] (5.25,11.5) -- (6.5,11.5);
+\draw [short] (2.5,14.5) -- (2.5,13.5);
+\draw [short] (2,14) -- (3,14);
+\draw  (7,11.5) circle (0.5cm);
+\draw [->, >=Stealth] (7.5,11.5) -- (8.75,11.5);
+\draw  (8.75,12) rectangle  node {\large L} (10,11);
+\draw [->, >=Stealth] (10,11.5) -- (11.5,11.5);
+\draw  (11.5,12) rectangle  node {\large SLS} (12.75,11);
+\draw [->, >=Stealth] (12.75,11.5) -- (14.5,11.5);
+\draw  (15,11.5) circle (0.5cm);
+\node [font=\large] at (15,16) {R0};
+\draw (15,15.5) to[short] (15,14.5);
+\draw  (15,14) circle (0.5cm);
+\node [font=\large] at (3,11.75) {};
+\draw [short] (15,13.5) -- (15,12);
+\draw [short] (6.5,11.5) -- (7.5,11.5);
+\draw [short] (7,12) -- (7,11);
+\draw [short] (14.5,11.5) -- (15.5,11.5);
+\draw [short] (15,12) -- (15,11);
+\draw [short] (14.5,14) -- (15.5,14);
+\draw [short] (15,14.5) -- (15,13.5);
+\draw [short] (15,11) -- (15,10.25);
+\draw [short] (2.5,11.5) -- (2.5,10.25);
+\draw [short] (2.5,10.25) -- (15,8.25);
+\draw [short] (15,10.25) -- (2.5,8.25);
+\node [font=\large] at (1.5,14) {KL};
+\node [font=\large] at (16,14) {KR};
+\node [font=\large] at (7,12.5) {KR};
+\node [font=\large] at (3.25,12) {R1a};
+\node [font=\large] at (5.75,12) {R1b};
+\node [font=\large] at (8,12) {R1b};
+\node [font=\large] at (10.75,12) {R1c};
+\node [font=\large] at (13.75,12) {R0};
+\node [font=\large] at (2,11) {R2};
+\node [font=\large] at (2.5,8) {R0};
+\node [font=\large] at (15,8) {R2};
+\end{circuitikz}
+}%
+\caption{ITUbee MILP linear cryptanalysis sketch}
+\label{fig: ITUbeeLin}
+\end{figure}
+
+Best linear bias for ITUbee S-box input-output mask is $2^{-4}$. In our MILP model we found that minimum number of active s-box for 3 consecutive round is 16. We use piling up lemma in \cite{matsui1993linear} for calculating 3 round probability. 3 round probability is $2^{15}*(2^{-4})^{16}=2^{-49}$. Linear cryptanalysis is known-plaintext attack. Number of required plaintexts for the three round attack is $(2^{-49})^{-2}= 2 ^{96}$ which is more than all possible plaintexts for the cipher. As a conclusion, we can say that 3 round of the ITUbee algorithm is secure against linear cryptanalysis.    
+
+\section{Related Key Differential Cryptanalysis of ITUbee using MILP}
+
+For related key model, unlike the differential model, we must also take into account the keys. We also define binary variables for the keys and add constraints for activity of at least 1 key bytes.(Otherwise model will never give active bytes for key and it will be same as differential cryptanalysis) In this model we have more middle values than differential and linear model because we also need to chance the variable after the key xor in the middle.
+Sketch of the one round MILP model of the linear cryptanalysis is given in Figure \ref{fig:itubeeRelated}. 
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\large]
+
+\node [font=\large] at (2.5,16) {R1};
+\draw (2.5,15.5) to[short] (2.5,14.5);
+\draw  (2.5,14) circle (0.5cm);
+\draw [short] (2.5,13.5) -- (2.5,11.5);
+\draw [->, >=Stealth] (2.5,11.5) -- (4,11.5);
+\draw  (4,12) rectangle  node {\large SLS} (5.25,11);
+\draw [->, >=Stealth] (5.25,11.5) -- (6.5,11.5);
+\draw [short] (2.5,14.5) -- (2.5,13.5);
+\draw [short] (2,14) -- (3,14);
+\draw  (7,11.5) circle (0.5cm);
+\draw [->, >=Stealth] (7.5,11.5) -- (8.75,11.5);
+\draw  (8.75,12) rectangle  node {\large L} (10,11);
+\draw [->, >=Stealth] (10,11.5) -- (11.5,11.5);
+\draw  (11.5,12) rectangle  node {\large SLS} (12.75,11);
+\draw [->, >=Stealth] (12.75,11.5) -- (14.5,11.5);
+\draw  (15,11.5) circle (0.5cm);
+\node [font=\large] at (15,16) {R0};
+\draw (15,15.5) to[short] (15,14.5);
+\draw  (15,14) circle (0.5cm);
+\node [font=\large] at (3,11.75) {};
+\draw [short] (15,13.5) -- (15,12);
+\draw [short] (6.5,11.5) -- (7.5,11.5);
+\draw [short] (7,12) -- (7,11);
+\draw [short] (14.5,11.5) -- (15.5,11.5);
+\draw [short] (15,12) -- (15,11);
+\draw [short] (14.5,14) -- (15.5,14);
+\draw [short] (15,14.5) -- (15,13.5);
+\draw [short] (15,11) -- (15,10.25);
+\draw [short] (2.5,11.5) -- (2.5,10.25);
+\draw [short] (2.5,10.25) -- (15,8.25);
+\draw [short] (15,10.25) -- (2.5,8.25);
+\node [font=\large] at (1.5,14) {KL};
+\node [font=\large] at (16,14) {KR};
+\node [font=\large] at (7,12.5) {KR};
+\node [font=\large] at (3.25,12) {R3};
+\node [font=\large] at (5.75,12) {R3a};
+\node [font=\large] at (8,12) {R3b};
+\node [font=\large] at (10.75,12) {R3c};
+\node [font=\large] at (13.75,12) {R3d};
+\node [font=\large] at (15.5,10.5) {R4};
+\node [font=\large] at (2.5,8) {R4};
+\node [font=\large] at (15,8) {R3};
+\node [font=\large] at (2,12.5) {R3};
+\node [font=\large] at (15.5,12.5) {R2};
+\end{circuitikz}
+}%
+\caption{ITUbee MILP Related-Key Differential Cryptanalysis Sketch}
+\label{fig:itubeeRelated}
+\end{figure}
+
+We found that 8 round of the algorithm has minimum 16 active s-box. ITUbee algorithm uses AES's \cite{dworkin2001advanced} s-box. AES s-box have best input-output difference $2^{-6}$. Therefore best probability for differential characteristic will be $(2^{-6})^{16}= 2^{-96}  $ which is not usable for related key differential attack. Authors of the ITUbee algorithm claims in \cite{karakocc2013itubee} that algorithm is secure against related key differential cryptanalysis after 10 round. In our model we found that 8 round is enough for security against related key differential cryptanalysis.  Best 8 round characteristic found with the model can be seen in Table \ref{tab:RelatedKeyDif}
+
+
+\begin{table}[H]
+    \centering
+    \caption{Best 8 round related-key differential characteristic of ITUbee algorithm}
+    \begin{tabular}{|c|c|c|}
+        \hhline{|=|=|=|}
+        \textbf{Stage} & \textbf{Binary Index} & \textbf{Characteristic} \\
+        \hline
+        Key  & KL & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+                     & KR & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        1. round  & R1 & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        input     & R0 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        1. round  & R2 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        middle values & R3-3a-3b-3c-3d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\     
+        \hline
+        2. round  & R4 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input     & R3 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        2. round  & R4a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R4b-4c-4d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                      
+        \hline
+        3. round  & R5 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R4 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        3. round middle values     & R5a-5b-5c-5d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        4. round  & R6 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input     & R5 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        4. round  & R6a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R6b-6c-6d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                              \hline
+        5. round  & R7 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R6 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        5. round  & R7a & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        middle values & R7b-7c-7d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                      
+        \hline
+        6. round  & R8 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input     & R7 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        6. round  & R8a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R8b-8c-8d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                     
+        \hline
+        7. round  & R9 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R8 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        7. round middle values & R9a-9b-9c-9d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        8. round  & R10 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input      & R9  & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        8. round  & R10a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R10b-10c-10d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                      
+        \hline
+        9. round & R11 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R10 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+    \end{tabular}
+    
+    \label{tab:RelatedKeyDif}
+\end{table}
+
+
+
+
+
