@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.27)  28 APR 2026 14:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.28)  29 APR 2026 16:45
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -299,7 +299,6 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 Package color Info: Driver file: pdftex.def on input line 149.
  (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
 Package hyperref Info: Link coloring ON on input line 12.
- (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
@@ -327,21 +326,670 @@ Overfull \hbox (5.6742pt too wide) in paragraph at lines 16--17
 
 LaTeX Warning: Citation `karakoc2013itubee' on page 1 undefined on input line 20.
 
+
+LaTeX Warning: Citation `biham1990differential' on page 1 undefined on input line 22.
+
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
+
+LaTeX Warning: Citation `mouha2012constraint' on page 2 undefined on input line 24.
+
+
 Overfull \hbox (2.29675pt too wide) in paragraph at lines 26--27
 \T1/cmr/m/n/10.95 MILP solvers em-ploy dif-fer-ent al-go-rithms, heuris-tics, and op-ti-miza-tion strate-
  []
 
 
-LaTeX Warning: Citation `karakoc2013itubee' on page 2 undefined on input line 31.
+LaTeX Warning: Citation `karakocc2013itubee' on page 2 undefined on input line 32.
 
-[2] [3] [4] [5] [6] [7]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 196.
+
+LaTeX Warning: Reference `fig:itubee' on page 2 undefined on input line 34.
+
+
+LaTeX Warning: Reference `alg:ITUbee' on page 2 undefined on input line 34.
+
+
+LaTeX Warning: Reference `tab:ITUbee_rc' on page 2 undefined on input line 34.
+
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: LaTeX Error: Environment circuitikz undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 }
+      %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> \begin {circuitikz} \tikzstyle 
+                                          {every node}=[font=\LARGE ] \node ...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...e {every node}=[font=\LARGE ] \node 
+                                                  [font=\LARGE ] at (0.75,15...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...=\LARGE ] at (0.75,15.25) {}; \node 
+                                                  [font=\LARGE ] at (2.5,16....
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...\LARGE ] at (2.5,16.75) {PL}; \draw 
+                                                  [short] (2.5,16.25) -- (2....
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...ort] (2.5,16.25) -- (2.5,15); \draw 
+                                                  (2.5,14.5) circle (0.5cm);...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...aw (2.5,14.5) circle (0.5cm); \draw 
+                                                  [short] (2,14.5) -- (3,14....
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...[short] (2,14.5) -- (3,14.5); \draw 
+                                                  [short] (2.5,15) -- (2.5,1...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...[short] (2.5,15) -- (2.5,14); \draw 
+                                                  [->, >=Stealth] (2.5,12.5)...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...h] (2.5,12.5) -- (3.75,12.5); \draw 
+                                                  (3.75,13) rectangle node {...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...angle node {\LARGE F} (5,12); \draw 
+                                                  [->, >=Stealth] (5,12.5) -...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...lth] (5,12.5) -- (6.25,12.5); \draw 
+                                                  (6.75,12.5) circle (0.5cm)...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...w (6.75,12.5) circle (0.5cm); \draw 
+                                                  [short] (6.25,12.5) -- (7....
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...] (6.25,12.5) -- (7.25,12.5); \draw 
+                                                  [short] (6.75,13) -- (6.75...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...hort] (6.75,13) -- (6.75,12); \draw 
+                                                  [->, >=Stealth] (7.25,12.5...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...h] (7.25,12.5) -- (8.5,12.5); \draw 
+                                                  (9,12.5) circle (0.5cm); \...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...draw (9,12.5) circle (0.5cm); \draw 
+                                                  [short] (8.5,12.5) -- (9.5...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...rt] (8.5,12.5) -- (9.5,12.5); \draw 
+                                                  [short] (9,13) -- (9,12); ...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...raw [short] (9,13) -- (9,12); \draw 
+                                                  [->, >=Stealth] (9.5,12.5)...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...lth] (9.5,12.5) -- (11,12.5); \draw 
+                                                  (11,13) rectangle node {\L...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...e node {\LARGE L} (12.25,12); \draw 
+                                                  [->, >=Stealth] (12.25,12....
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...(12.25,12.5) -- (13.75,12.5); \draw 
+                                                  (13.75,13) rectangle node ...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...ngle node {\LARGE F} (15,12); \draw 
+                                                  [->, >=Stealth] (15,12.5) ...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...alth] (15,12.5) -- (17,12.5); \draw 
+                                                  (17.5,12.5) circle (0.5cm)...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...w (17.5,12.5) circle (0.5cm); \draw 
+                                                  [short] (17,12.5) -- (18,1...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...hort] (17,12.5) -- (18,12.5); \draw 
+                                                  [short] (17.5,13) -- (17.5...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...hort] (17.5,13) -- (17.5,12); \draw 
+                                                  [short] (17.5,13) -- (17.5...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...t] (17.5,13) -- (17.5,13.25); \node 
+                                                  [font=\LARGE ] at (17.5,16...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...LARGE ] at (17.5,16.75) {PR}; \draw 
+                                                  [short] (17.5,16.25) -- (1...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...t] (17.5,16.25) -- (17.5,15); \draw 
+                                                  (17.5,14.5) circle (0.5cm)...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...w (17.5,14.5) circle (0.5cm); \draw 
+                                                  [short] (17,14.5) -- (18,1...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...hort] (17,14.5) -- (18,14.5); \draw 
+                                                  [short] (17.5,15) -- (17.5...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...hort] (17.5,15) -- (17.5,14); \draw 
+                                                  [short] (17.5,14) -- (17.5...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...t] (17.5,14) -- (17.5,13.25); \draw 
+                                                  [short] (2.5,14) -- (2.5,1...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...hort] (2.5,14) -- (2.5,12.5); \draw 
+                                                  [short] (2.5,12.5) -- (2.5...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...t] (2.5,12.5) -- (2.5,11.25); \draw 
+                                                  [short] (17.5,12) -- (17.5...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...t] (17.5,12) -- (17.5,11.25); \draw 
+                                                  [short] (17.5,11.25) -- (2...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...] (17.5,11.25) -- (2.5,8.75); \draw 
+                                                  [short] (2.5,11.25) -- (17...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...] (2.5,11.25) -- (17.5,8.75); \draw 
+                                                  [->, >=Stealth] (2.5,8.75)...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...ealth] (2.5,8.75) -- (2.5,8); \draw 
+                                                  [->, >=Stealth] (17.5,8.75...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...lth] (17.5,8.75) -- (17.5,8); \node 
+                                                  [font=\LARGE ] at (1.5,14....
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...=\LARGE ] at (1.5,14.5) {KL}; \node 
+                                                  [font=\LARGE ] at (18.5,14...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...\LARGE ] at (18.5,14.5) {KR}; \node 
+                                                  [font=\LARGE ] at (6.75,13...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...\LARGE ] at (6.75,13.5) {KR}; \node 
+                                                  [font=\LARGE ] at (9,13.5)...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: Undefined control sequence.
+<argument> ...nt=\LARGE ] at (9,13.5) {Rc}; \node 
+                                                  [font=\LARGE ] at (9,13.5)...
+l.85 }
+      %
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:85: LaTeX Error: \begin{figure} on input line 36 ended by \end{circuitikz}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.85 }
+      %
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:91: LaTeX Error: Environment algorithm undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.91 \begin{algorithm}
+                      [H]
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:92: Undefined control sequence.
+l.92     \DontPrintSemicolon
+                            
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:95: Undefined control sequence.
+l.95     \For
+             {$i = 1$ to $20$}{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:96: Undefined control sequence.
+l.96         \If
+                {$i \in \{1, 3, \dots, 19\}$}{
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:99: Undefined control sequence.
+l.99         \Else
+                  {
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:103: Undefined control sequence.
+l.103         \tcp
+                  {Round constant is added to the rightmost 16 bits}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:107: LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.107     \caption
+                  {Pseudo code for ITUbee encryption}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:109: LaTeX Error: \begin{document} ended by \end{algorithm}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.109 \end{algorithm}
+                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+/home/halil/Desktop/GitHub/Articles/Comparison_of_solvers/main.tex:111: LaTeX Error: Unknown float option `H'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.111 \begin{table}[H]
+                      
+Option `H' ignored and `p' used.
+
+
+Overfull \hbox (13.29944pt too wide) in paragraph at lines 113--129
+ [][] 
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 167--168
+
+ []
+
+
+LaTeX Warning: Citation `dworkin2001advanced' on page 3 undefined on input line 172.
+
+
+LaTeX Warning: Citation `glpk2024' on page 3 undefined on input line 188.
+
+
+LaTeX Warning: Citation `highs2023' on page 3 undefined on input line 191.
+
+[3]
+
+LaTeX Warning: Citation `scip2023' on page 4 undefined on input line 194.
+
+
+LaTeX Warning: Citation `gurobi2024' on page 4 undefined on input line 197.
+
+
+LaTeX Warning: Citation `cplex2024' on page 4 undefined on input line 200.
+
+[4] [5] [6]
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 317.
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-) [8] (./main.aux)
+) [7] [8] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -350,22 +998,31 @@ L3 programming layer <2024-01-22>
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: D274A15A869BEC15D34A1726DBA4249E;2951.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  233E972000A83B48A958076A144BF1B1;3150.
  ) 
 Here is how much of TeX's memory you used:
- 10049 strings out of 476106
- 151167 string characters out of 5793933
- 1934975 words of memory out of 5000000
- 31871 multiletter control sequences out of 15000+600000
- 575777 words of font info for 82 fonts, out of 8000000 for 9000
- 59 hyphenation exceptions out of 8191
- 75i,9n,79p,1187b,568s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.600pk> </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/halil/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (8 pages, 177332 bytes).
+ 10029 strings out of 474222
+ 150966 string characters out of 5748733
+ 1941975 words of memory out of 5000000
+ 32104 multiletter control sequences out of 15000+600000
+ 573906 words of font info for 79 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 75i,9n,79p,1187b,564s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on main.pdf (8 pages, 305986 bytes).
 PDF statistics:
- 604 PDF objects out of 1000 (max. 8388607)
- 208 compressed objects within 3 object streams
- 53 named destinations out of 1000 (max. 500000)
- 137 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 185 PDF objects out of 1000 (max. 8388607)
+ 139 compressed objects within 2 object streams
+ 50 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

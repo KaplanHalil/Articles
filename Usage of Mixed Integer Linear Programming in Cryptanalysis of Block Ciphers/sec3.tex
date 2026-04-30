@@ -61,24 +61,24 @@ The cipher has Fiestel structure which consists of 20 rounds. İt has 80 bits bl
 \end{figure}
 
 
-\begin{algorithm}[H]
-    \DontPrintSemicolon
-    $X_1 \gets P_L \oplus K_L$ \;
-    $X_0 \gets P_R \oplus K_R$ \;
-    \For{$i = 1$ to $20$}{
-        \If{$i \in \{1, 3, \dots, 19\}$}{
-            $RK \gets K_R$\;
-        }
-        \Else{
-            $RK \gets K_L$\;
-        }
-        $X_{i+1} \gets X_{i-1} \oplus F(L(RK \oplus RC_i \oplus F(X_i)))$\;
-        \tcp{Round constant is added to the rightmost 16 bits}
-    }
-    $C_L \gets X_{20} \oplus K_R$\;
-    $C_R \gets X_{21} \oplus K_L$\;
+\begin{algorithm}
     \caption{Pseudo code for ITUbee encryption}
     \label{alg:ITUbee}
+    \begin{algorithmic}[1]
+        \STATE $X_1 \gets P_L \oplus K_L$
+        \STATE $X_0 \gets P_R \oplus K_R$
+        \FOR{$i = 1$ to $20$}
+            \IF{$i \in \{1, 3, \dots, 19\}$}
+                \STATE $RK \gets K_R$
+            \ELSE
+                \STATE $RK \gets K_L$
+            \ENDIF
+            \STATE $X_{i+1} \gets X_{i-1} \oplus F(L(RK \oplus RC_i \oplus F(X_i)))$
+            \STATE \text{Round constant is added to the rightmost 16 bits}
+        \ENDFOR
+        \STATE $C_L \gets X_{20} \oplus K_R$
+        \STATE $C_R \gets X_{21} \oplus K_L$
+    \end{algorithmic}
 \end{algorithm}
 
 \begin{table}[H]

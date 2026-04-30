@@ -1,24 +1,15 @@
 
 \documentclass[runningheads]{llncs}
 \usepackage[T1]{fontenc}
-\usepackage{amsthm}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{tikz}
 \usepackage{circuitikz}
-\usetikzlibrary{arrows, positioning}
+\usetikzlibrary{arrows, positioning, calc, shapes, shapes.gates.logic.US}
+\usepackage{booktabs}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage{amsmath}
-\usepackage{booktabs}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath}  % For advanced mathematical typesetting
-\usepackage[ruled,vlined]{algorithm2e}  % For writing algorithms
-\usetikzlibrary{calc}
-\usetikzlibrary{crypto.symbols}
-\usetikzlibrary {positioning}
-\usetikzlibrary{shapes}
-\usetikzlibrary{xor}
-\usetikzlibrary{shapes.gates.logic.US, positioning}
-
 \usepackage{listings}
 \usepackage{xcolor}
 \lstset{
@@ -34,8 +25,6 @@
   tabsize=4,
   language=Python
 }
-\usepackage[backend=bibtex]{biblatex}
-\addbibresource{main.bib}
 \usepackage{graphicx}
 
 \begin{document}
@@ -70,6 +59,7 @@
 \input{sec7}
 \input{sec8}
 
-\printbibliography
+\bibliographystyle{splncs04}
+\bibliography{main}
 
 \end{document}

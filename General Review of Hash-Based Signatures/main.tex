@@ -1,0 +1,66 @@
+\documentclass[runningheads]{llncs}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{main.bib}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{algpseudocode}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage{booktabs} 
+\usepackage{subcaption}
+\usetikzlibrary{trees,positioning,arrows.meta,calc}
+\usepackage{algorithm}
+
+
+
+
+\begin{document}
+
+\title{General Review of Hash-Based Signatures }
+
+\author{Halil İbrahim Kaplan\inst{1}\orcidID{0009-0006-0120-6512}}
+\authorrunning{Halil İbrahim Kaplan}
+
+\institute{
+Cryptanalysis Laboratory, TÜBİTAK BİLGEM, Kocaeli, Turkey\\
+\email{halil.kaplan@tubitak.gov.tr}
+}
+
+\maketitle
+
+\begin{abstract}
+The advent of quantum computing threatens the security assumptions underpinning classical public-key cryptographic algorithms such as RSA and ECC. As a response, the cryptographic community has focused on developing quantum-resistant alternatives, with hash-based signature schemes emerging as a compelling option due to their reliance on well-understood hash functions rather than number-theoretic hardness assumptions. This paper presents a comprehensive review of hash-based signature schemes, including Lamport, WOTS, XMSS, $XMSS^{MT}$, and SPHINCS+, examining their structural design, key generation, signing, and verification processes. Emphasis is placed on their classification as stateful and stateless schemes, as well as their practical integration using Merkle trees and address structures. Furthermore, the paper analyzes several notable cryptanalytic attacks—such as intermediate value guessing, Antonov’s attack, multi-target attacks, and fault injection strategies—that pose risks to these constructions. By discussing both their strengths and vulnerabilities, this work highlights the viability of hash-based signatures as secure and efficient candidates for post-quantum digital signatures.
+
+\keywords{Post-quantum cryptography \and Hash-based signatures \and XMSS \and SPHINCS+ \and Cryptanalysis}
+\end{abstract}
+
+\section{Introduction}
+
+Hash-based signature (HBS) schemes have been known since the late 1970s, with early contributions by Lamport and Merkle. However, for many years, they remained theoretical constructs without widespread practical use, primarily due to their large signature sizes and, in the case of stateful schemes, complex key management requirements. This perception has shifted significantly with the emergence of post-quantum cryptography (PQC), which aims to develop cryptographic primitives that are resistant to quantum attacks.
+
+The threat posed by quantum computers—particularly Shor's algorithm, which can break RSA and elliptic curve cryptography (ECC)—has led to renewed interest in HBS schemes. Unlike number-theoretic approaches, HBS algorithms rely solely on the security of cryptographic hash functions, which are believed to remain secure even in the presence of quantum adversaries.
+
+This growing interest has been formalized through standardization efforts. The Internet Engineering Task Force (IETF) published RFC 8391 for the eXtended Merkle Signature Scheme (XMSS) in 2018, followed by the Leighton-Micali Signature (LMS) scheme. In parallel, the National Institute of Standards and Technology (NIST) provided parameter recommendations and, in 2022, selected the stateless scheme SPHINCS+ as a finalist in its post-quantum cryptography standardization project. These developments were also supported by national agencies such as ANSSI (France) and BSI (Germany), which incorporated XMSS and LMS into their respective cryptographic guidelines.
+
+HBS schemes have since seen increasing deployment in embedded systems, firmware signing, and secure boot mechanisms—scenarios where post-quantum resilience and long-term security are critical. However, the limitations of stateful schemes like XMSS and LMS, particularly the bounded number of signatures per key, restrict their usage to environments where state can be reliably managed. Stateless alternatives such as SPHINCS+ offer more flexibility at the cost of larger signatures and slower performance.
+
+This paper presents a comprehensive study of modern HBS schemes, focusing on the structural foundations, key and signature generation algorithms, and the design differences between XMSS and SPHINCS+. In addition to the algorithmic descriptions, we analyze the trade-offs between stateful and stateless constructions and investigate critical components such as address structures, Merkle trees, and Winternitz one-time signatures (WOTS). Furthermore, we explore known cryptanalytic approaches targeting HBS constructions, with an emphasis on multi-target attacks, fault injection strategies, and signature forgeries enabled through checksum manipulation or hash chain tampering.
+
+The purpose of this study is to bridge theoretical constructs with practical implications, offering a clear understanding of how hash-based signatures works.
+
+
+\input{section1}
+\input{section2}
+\input{section3}
+\newpage
+\input{section4}
+
+\newpage
+
+\printbibliography
+
+\end{document}
