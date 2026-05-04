@@ -4,46 +4,46 @@ The top-level auxiliary file: main.aux
 The style file: splncs04.bst
 Database file #1: main.bib
 Warning--entry type for "fips197aes" isn't style-file defined
---line 65 of file main.bib
-You've used 11 entries,
+--line 77 of file main.bib
+You've used 10 entries,
             2850 wiz_defined-function locations,
-            653 strings with 6163 characters,
-and the built_in function-call counts, 4604 in all, are:
-= -- 377
-> -- 102
+            650 strings with 6046 characters,
+and the built_in function-call counts, 4056 in all, are:
+= -- 323
+> -- 90
 < -- 5
-+ -- 44
-- -- 32
-* -- 241
-:= -- 600
-add.period$ -- 16
-call.type$ -- 11
-change.case$ -- 55
++ -- 39
+- -- 28
+* -- 214
+:= -- 530
+add.period$ -- 14
+call.type$ -- 10
+change.case$ -- 48
 chr.to.int$ -- 0
-cite$ -- 11
-duplicate$ -- 413
-empty$ -- 498
-format.name$ -- 36
-if$ -- 1036
+cite$ -- 10
+duplicate$ -- 367
+empty$ -- 441
+format.name$ -- 31
+if$ -- 906
 int.to.chr$ -- 0
-int.to.str$ -- 11
-missing$ -- 73
-newline$ -- 39
-num.names$ -- 22
-pop$ -- 181
+int.to.str$ -- 10
+missing$ -- 67
+newline$ -- 36
+num.names$ -- 20
+pop$ -- 165
 preamble$ -- 1
-purify$ -- 38
+purify$ -- 34
 quote$ -- 0
-skip$ -- 124
+skip$ -- 107
 stack$ -- 0
-substring$ -- 229
-swap$ -- 192
+substring$ -- 189
+swap$ -- 173
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 44
+type$ -- 40
 warning$ -- 0
-while$ -- 44
-width$ -- 13
-write$ -- 111
+while$ -- 38
+width$ -- 12
+write$ -- 103
 (There was 1 warning)

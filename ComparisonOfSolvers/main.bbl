@@ -7,11 +7,6 @@
 Berlin, Z.I.: Scip: Solving constraint integer programs.
   \url{https://www.scipopt.org/} (2023)
 
-\bibitem{biham1990differential}
-Biham, E., Shamir, A.: Differential cryptanalysis of des-like cryptosystems.
-  In: Workshop on the Theory and Application of Cryptographic Techniques. pp.
-  2--21. Springer (1990)
-
 \bibitem{dworkin2001advanced}
 Dworkin, M.J.: The advanced encryption standard (aes) and its use in
   cryptographic standards. NIST Special Publication  \textbf{800}, ~38 (2001)
@@ -38,10 +33,11 @@ Karako{\c{c}}, F., Demirci, H., Harmanc{\i}, A.E.: Itubee: a software oriented
   Privacy: Second International Workshop, LightSec 2013, Gebze, Turkey, May
   6-7, 2013, Revised Selected Papers 2. pp. 16--27. Springer (2013)
 
-\bibitem{mouha2012constraint}
-Mouha, N., Preneel, B.: Constraint-based differential cryptanalysis of block
-  ciphers. In: International Symposium on Research in Attacks, Intrusions, and
-  Defenses. pp. 139--158. Springer (2012)
+\bibitem{mouha2012differential}
+Mouha, N., Preneel, B.: Differential and linear cryptanalysis using
+  mixed-integer linear programming. In: Information Security and Cryptology --
+  ICISC 2012. Lecture Notes in Computer Science, vol.~7839, pp. 52--67.
+  Springer (2012). \doi{10.1007/978-3-642-36392-4_5}
 
 \bibitem{glpk2024}
 Project, G.: Glpk (gnu linear programming kit).

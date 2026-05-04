@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1777901658.71249 "main.aux" "main.bbl" "main" 1777901699.67612 0
+["bibtex main"] 1777902026.07853 "main.aux" "main.bbl" "main" 1777902056.68161 0
   "./main.bib" 1777901620.18813 2641 5b66db437b2625ac8e82dc8f31d662cc ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/llncs/splncs04.bst" 1698954974 32146 aadf770ded437d161532035219ea6f45 ""
-  "main.aux" 1777901699.43627 4507 f3915ff588fab68beb06e6376d144f4a "pdflatex"
+  "main.aux" 1777902056.4331 4370 0010d906f1c04f7de34dc110de0f073a "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1777901698.79692 "/home/halil/Desktop/GitHub/Articles/ComparisonOfSolvers/main.tex" "main.pdf" "main" 1777901699.67627 0
+["pdflatex"] 1777902055.7859 "/home/halil/Desktop/GitHub/Articles/ComparisonOfSolvers/main.tex" "main.pdf" "main" 1777902056.68175 0
   "/etc/texmf/web2c/texmf.cnf" 1770963895.84843 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/halil/Desktop/GitHub/Articles/ComparisonOfSolvers/main.tex" 1777901667.60694 1555 7504f864b5e981a103914a911f6c422a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -205,15 +205,15 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1777378088.85393 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1777378153 8213244 1b418aff86ce5054e04468465d13aae6 ""
-  "Conclusion.tex" 1777898147.71367 1329 f21d0a771807dce43c52e21b9f2f0779 ""
-  "abstract.tex" 1777897269.24676 831 2f40bd63299176af5b94ccfe4b42ab9c ""
-  "main.aux" 1777901699.43627 4507 f3915ff588fab68beb06e6376d144f4a "pdflatex"
-  "main.bbl" 1777901673.878 2099 39c3fc7af47c35d67c2a7c8ad3d40d89 "bibtex main"
+  "Conclusion.tex" 1777902034.3408 1066 1761207f6f6e7661c1223ecd8037feec ""
+  "abstract.tex" 1777902034.3408 821 3673ca664d31f4462a14cb2572f24fb3 ""
+  "main.aux" 1777902056.4331 4370 0010d906f1c04f7de34dc110de0f073a "pdflatex"
+  "main.bbl" 1777902026.18476 1634 87efdd4b42375f6e366c924a87e2a7eb "bibtex main"
   "main.tex" 1777901667.60694 1555 7504f864b5e981a103914a911f6c422a ""
-  "sec1.tex" 1777900396.53845 2494 25d4f92cf519cff73dabadea13b6fad7 ""
+  "sec1.tex" 1777901834.09168 2113 9e5dc5f85bba6ff942752d95da361dc0 ""
   "sec2.tex" 1777901620.18813 11302 9b97997a6fcd6339ae0649f7e149f5dc ""
-  "sec3.tex" 1777894819.11138 4375 6a7b1fa453055544a3f031a85b42499e ""
-  "sec4.tex" 1777901698.60954 4398 847ec408e115c6cad9c01cbf92163cd0 ""
+  "sec3.tex" 1777902034.3408 3321 4558624e43e266284869c7c6aa6c5e45 ""
+  "sec4.tex" 1777902055.59302 4352 9c1cbfdcdd6343a70fa4aee0ac0aa403 ""
   (generated)
   "main.aux"
   "main.log"

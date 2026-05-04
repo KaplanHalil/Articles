@@ -106,8 +106,9 @@ ITUbee has no key schedule. The algorithm splits the 80 bit key into two 40 bit 
 
 \subsection{Related-key Differential Cryptanalysis}
 
-For related key model, unlike the differential model, we must also take into account the keys. We also define binary variables for the keys and add constraints for activity of at least 1 key bytes.(Otherwise model will never give active bytes for key and it will be same as differential cryptanalysis) In this model we have more middle values than differential and linear model because we also need to chance the variable after the key xor in the middle.
-Sketch of the one round MILP model of the linear cryptanalysis is given in Figure \ref{fig:itubeeRelated}. 
+For the related-key model, we must explicitly represent the key differences in addition to the data differences. To do this, we introduce binary variables for key activity and add constraints that force at least one key byte to be active when a related-key difference is present. Without these constraints, the model could avoid key activity and would effectively reduce to the ordinary differential model.
+
+This related-key model also contains more intermediate variables than the differential and linear models, because we must represent the extra variables that appear after the key XOR operation in the middle of the round. The modeling of XOR, linear, and key-dependent components follows the MILP approach of Mouha and Preneel \cite{mouha2012differential}. A sketch of the one-round related-key MILP model is shown in Figure \ref{fig:itubeeRelated}.
 
 \begin{figure}[!ht]
 \centering

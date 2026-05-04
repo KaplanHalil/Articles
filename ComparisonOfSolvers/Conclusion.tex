@@ -1,13 +1,13 @@
 \section{Conclusion}
 
-This paper provides a systematic empirical comparison of five state-of-the-art MILP solvers in the context of cryptanalytic applications, specifically related-key differential attacks on the ITUbee lightweight block cipher. Our findings clearly demonstrate that solver selection significantly impacts the practical feasibility of MILP-based related-key differential cryptanalysis.
+This paper provides a comparison of five MILP solvers in the context of cryptanalytic applications, specifically related-key differential attacks on the ITUbee lightweight block cipher. Our findings show that solver selection has a large effect on the feasibility of MILP-based related-key differential cryptanalysis.
 
 Key conclusions include:
 \begin{enumerate}
-    \item Commercial MILP solvers (Gurobi and CPLEX) are substantially more efficient than open-source alternatives, justifying their use in computationally demanding related-key differential cryptanalytic applications.
-    \item For organizations without access to commercial solvers, SCIP represents a robust open-source option, providing reasonable performance for moderate problem sizes in related-key differential attacks.
-    \item The performance advantage of commercial solvers increases with problem complexity, suggesting that their advanced algorithms are particularly effective for hard instances of related-key differential attacks.
-    \item Cryptanalysts should carefully evaluate solver options based on their specific constraints (computational budget, licensing availability, problem size) when conducting related-key differential cryptanalysis.
+    \item Commercial MILP solvers (Gurobi and CPLEX) are more efficient than open-source alternatives and can be preferred for larger, time-sensitive analyses.
+    \item For organizations without access to commercial solvers, SCIP is a good open-source option that performs well on moderate problem sizes.
+    \item The performance advantage of commercial solvers grows with problem complexity, suggesting that their methods are more effective on harder instances.
+    \item Cryptanalysts should evaluate solver options based on their constraints (computational budget, licensing availability, problem size) when conducting related-key differential cryptanalysis.
 \end{enumerate}
 
 

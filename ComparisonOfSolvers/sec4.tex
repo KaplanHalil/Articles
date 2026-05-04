@@ -3,7 +3,7 @@
 Comprehensive benchmarking was conducted on MILP models for 8, 10, and 12-round related-key differential attacks on ITUbee. The results demonstrate clear performance distinctions between solver categories, with significant implications for practical related-key differential cryptanalysis.
 
 \subsection{8-Round Results}
-  Our 8-round model consist of 687 variables and 2147 constraints. Our results show that GLPK, the baseline open-source solver, required 257 seconds to find a solution. HiGHS improved on this with a time of 231 seconds, while SCIP further reduced the time to 86 seconds. The commercial solvers Gurobi and CPLEX achieved significantly faster times of 37 and 16 seconds, respectively, representing speedups of 6.9$\times$ and 16.0$\times$ compared to GLPK (see Table \ref{tab:8round}).
+  Our 8-round model consists of 687 variables and 2147 constraints. Our results show that GLPK, the baseline open-source solver, required 257 seconds to find a solution. HiGHS improved on this with a time of 231 seconds, while SCIP further reduced the time to 86 seconds. The commercial solvers Gurobi and CPLEX achieved faster times of 37 and 16 seconds, respectively, representing speedups of 6.9$\times$ and 16.0$\times$ compared to GLPK (see Table \ref{tab:8round}).
 \begin{table}[H]
   \centering
   \caption{Solution times for the 8-round model }
@@ -70,7 +70,7 @@ The experimental results reveal several important trends:
 \begin{enumerate}
     \item \textbf{Commercial vs. Open-Source Gap}: Commercial solvers (Gurobi and CPLEX) consistently outperform open-source alternatives, with speedups increasing dramatically for larger problem sizes. For the 12-round model, Gurobi achieves a 94.6$\times$ speedup over GLPK.
     
-    \item \textbf{Problem Scaling}: As the problem complexity increases (8 to 12 rounds), the performance gap between solvers widens. This suggests that more sophisticated optimization algorithms in commercial solvers are particularly effective on harder instances.
+    \item \textbf{Problem Scaling}: As the problem complexity increases (8 to 12 rounds), the performance gap between solvers widens. This suggests that the commercial solvers use methods that are more effective on harder instances.
     
     \item \textbf{Open-Source Alternatives}: Among open-source solvers, SCIP consistently outperforms both GLPK and HiGHS, achieving 2.9$\times$ speedup on 8-rounds and 12$\times$ speedup on 12-rounds compared to GLPK.
     
