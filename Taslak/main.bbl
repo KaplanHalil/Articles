@@ -1,0 +1,71 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{barnhart1998branch}
+Barnhart, C., Johnson, E.L., Nemhauser, G.L., Savelsbergh, M.W.P., Vance, P.H.:
+  Branch-and-price: Column generation for solving huge integer programs.
+  Operations Research  \textbf{46}(3),  316--329 (1998).
+  \doi{10.1287/opre.46.3.316}
+
+\bibitem{dantzig2002linear}
+Dantzig, G.B.: Linear programming. Operations research  \textbf{50}(1),  42--47
+  (2002)
+
+\bibitem{dworkin2001advanced}
+Dworkin, M.J., Barker, E.B., Nechvatal, J.R., Foti, J., Bassham, L.E., Roback,
+  E., Dray~Jr, J.F.: Advanced encryption standard (aes)  (2001)
+
+\bibitem{gurobi2021gurobi}
+Gurobi~Optimization, L.: Gurobi optimizer reference manual (2021)
+
+\bibitem{karakocc2013itubee}
+Karako{\c{c}}, F., Demirci, H., Harmanc{\i}, A.E.: Itubee: a software oriented
+  lightweight block cipher. In: Lightweight Cryptography for Security and
+  Privacy: Second International Workshop, LightSec 2013, Gebze, Turkey, May
+  6-7, 2013, Revised Selected Papers 2. pp. 16--27. Springer (2013)
+
+\bibitem{land1960branch}
+Land, A.H., Doig, A.G.: An automatic method of solving discrete programming
+  problems. Econometrica: Journal of the Econometric Society  \textbf{28}(3),
+  497--520 (1960). \doi{10.2307/1910129}
+
+\bibitem{makhorin2008glpk}
+Makhorin, A.: Glpk (gnu linear programming kit). http://www. gnu.
+  org/s/glpk/glpk. html  (2008)
+
+\bibitem{matsui1993linear}
+Matsui, M.: Linear cryptanalysis method for des cipher. In: Workshop on the
+  Theory and Application of of Cryptographic Techniques. pp. 386--397. Springer
+  (1993)
+
+\bibitem{mouha2012differential}
+Mouha, N., Wang, Q., Gu, D., Preneel, B.: Differential and linear cryptanalysis
+  using mixed-integer linear programming. In: Information Security and
+  Cryptology: 7th International Conference, Inscrypt 2011, Beijing, China,
+  November 30--December 3, 2011. Revised Selected Papers 7. pp. 57--76.
+  Springer (2012)
+
+\bibitem{padberg1991branch}
+Padberg, M., Rinaldi, G.: A branch-and-cut algorithm for the resolution of
+  large-scale symmetric traveling salesman problems. SIAM Review
+  \textbf{33}(1),  60--100 (1991). \doi{10.1137/1033003}
+
+\bibitem{sage}
+Sage~Developers, S.: the sage mathematics software system (version 9.5), 2022
+
+\bibitem{studio2016ibm}
+Studio, I.I.C.O.: Ibm ilog cplex optimization studio. CPLEX Parameters
+  reference p.~25 (2016)
+
+\bibitem{sun2014automatic}
+Sun, S., Hu, L., Wang, P., Qiao, K., Ma, X., Song, L.: Automatic security
+  evaluation and (related-key) differential characteristic search: application
+  to simon, present, lblock, des (l) and other bit-oriented block ciphers. In:
+  Advances in Cryptology--ASIACRYPT 2014: 20th International Conference on the
+  Theory and Application of Cryptology and Information Security, Kaoshiung,
+  Taiwan, ROC, December 7-11, 2014. Proceedings, Part I 20. pp. 158--178.
+  Springer (2014)
+
+\end{thebibliography}

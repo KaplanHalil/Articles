@@ -1,0 +1,95 @@
+\begin{section}{Differential Cryptanalysis of ITUbee}
+
+ITUbee algorithm has Fiestel structure so we divide input as a two variables $RO$ and $R1$. In model, we define them as a binary variables. After each operation in the cipher, if active byte can be passive or passive byte can be active we define new binary. In differential cryptanalysis, S-box does not change activity of the byte because S-box takes byte and if input byte is active, output byte is also active. It is same for inactive bytes. Therefore we don't define new variables after s-box operations. L operations are changes the active bytes so after them we define new variable. XOR operation changes active byte if it XOR two binary variables. In differential cryptanalysis we do not give active values to the keys therefore key xor's does not change the active byte. Skech of the 1 round modelling can be seen in the Figure \ref{fig: ITUbeeDif}. 
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\large]
+\node [font=\large] at (2.5,16) {R1};
+\draw (2.5,15.5) to[short] (2.5,14.5);
+\draw  (2.5,14) circle (0.5cm);
+\draw [short] (2.5,13.5) -- (2.5,11.5);
+\draw [->, >=Stealth] (2.5,11.5) -- (4,11.5);
+\draw  (4,12) rectangle  node {\large SLS} (5.25,11);
+\draw [->, >=Stealth] (5.25,11.5) -- (6.5,11.5);
+\draw [short] (2.5,14.5) -- (2.5,13.5);
+\draw [short] (2,14) -- (3,14);
+\draw  (7,11.5) circle (0.5cm);
+\draw [->, >=Stealth] (7.5,11.5) -- (8.75,11.5);
+\draw  (8.75,12) rectangle  node {\large L} (10,11);
+\draw [->, >=Stealth] (10,11.5) -- (11.5,11.5);
+\draw  (11.5,12) rectangle  node {\large SLS} (12.75,11);
+\draw [->, >=Stealth] (12.75,11.5) -- (14.5,11.5);
+\draw  (15,11.5) circle (0.5cm);
+\node [font=\large] at (15,16) {R0};
+\draw (15,15.5) to[short] (15,14.5);
+\draw  (15,14) circle (0.5cm);
+\node [font=\large] at (3,11.75) {};
+\draw [short] (15,13.5) -- (15,12);
+\draw [short] (6.5,11.5) -- (7.5,11.5);
+\draw [short] (7,12) -- (7,11);
+\draw [short] (14.5,11.5) -- (15.5,11.5);
+\draw [short] (15,12) -- (15,11);
+\draw [short] (14.5,14) -- (15.5,14);
+\draw [short] (15,14.5) -- (15,13.5);
+\draw [short] (15,11) -- (15,10.25);
+\draw [short] (2.5,11.5) -- (2.5,10.25);
+\draw [short] (2.5,10.25) -- (15,8.25);
+\draw [short] (15,10.25) -- (2.5,8.25);
+\node [font=\large] at (1.5,14) {KL};
+\node [font=\large] at (16,14) {KR};
+\node [font=\large] at (7,12.5) {KR};
+\node [font=\large] at (3.25,12) {R1};
+\node [font=\large] at (5.75,12) {R1a};
+\node [font=\large] at (8,12) {R1a};
+\node [font=\large] at (10.75,12) {R1b};
+\node [font=\large] at (13.75,12) {R1c};
+\node [font=\large] at (15.5,10.5) {R2};
+\node [font=\large] at (2.5,8) {R2};
+\node [font=\large] at (15,8) {R1};
+\end{circuitikz}
+}%
+\caption{ITUbee  MILP differential cryptanalysis sketch}
+\label{fig: ITUbeeDif}
+\end{figure}
+
+In MILP model we are trying to find best characteristic that makes minimum number of active s-box so we minimize binary values before and after s-box operation in the MILP model. ITUbee algorithm uses AES's \cite{dworkin2001advanced} s-box. AES s-box have best input-output difference $2^{-6}$. In our model we found that best characteristic in 3 round have minimum 16 active s-box. Therefore best probability for differential characteristic will be $(2^{-6})^{16}= 2^{-96}  $ which is not usable for differential attack. With this result we can say that 3 round of the algorithm is secure against the differential cryptanalysis. Our result is same for differential with \cite{karakocc2013itubee}. Best characteristic found with the model can be seen in Table \ref{fig: ITUbeeDif}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Stage} & \textbf{Binary Index} & \textbf{Characteristic} \\
+        \hline
+        1. round  & R1 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input      & R0 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        1. round  & R1a & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 1.0, 4: 1.0\} \\
+        middle values   & R1b & \{0: 0.0, 1: 1.0, 2: 1.0, 3: 0.0, 4: 1.0\} \\
+                   & R1c & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        2. round& R2 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input      & R1 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        2. round & R2a & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 1.0, 4: 1.0\} \\
+        middle values  & R2b & \{0: 0.0, 1: 1.0, 2: 1.0, 3: 0.0, 4: 1.0\} \\
+                   & R2c & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        3. round  & R3 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R2 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        3. round  & R3a & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        middle values   & R3b & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                   & R3c & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        4. round & R4 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input    & R3 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+    \end{tabular}
+    \caption{Best 3 round differential characteristic of ITUbee algorithm}
+    \label{tab:MILPcharDif}
+\end{table}
+
+\end{section}

@@ -1,0 +1,130 @@
+\section{Related-key Differential Cryptanalysis of ITUbee}
+
+For related key model, unlike the differential model, we must also take into account the keys. We also define binary variables for the keys and add constraints for activity of at least 1 key bytes.(Otherwise model will never give active bytes for key and it will be same as differential cryptanalysis) In this model we have more middle values than differential and linear model because we also need to chance the variable after the key xor in the middle.
+Sketch of the one round MILP model of the linear cryptanalysis is given in Figure \ref{fig:itubeeRelated}. 
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\large]
+
+\node [font=\large] at (2.5,16) {R1};
+\draw (2.5,15.5) to[short] (2.5,14.5);
+\draw  (2.5,14) circle (0.5cm);
+\draw [short] (2.5,13.5) -- (2.5,11.5);
+\draw [->, >=Stealth] (2.5,11.5) -- (4,11.5);
+\draw  (4,12) rectangle  node {\large SLS} (5.25,11);
+\draw [->, >=Stealth] (5.25,11.5) -- (6.5,11.5);
+\draw [short] (2.5,14.5) -- (2.5,13.5);
+\draw [short] (2,14) -- (3,14);
+\draw  (7,11.5) circle (0.5cm);
+\draw [->, >=Stealth] (7.5,11.5) -- (8.75,11.5);
+\draw  (8.75,12) rectangle  node {\large L} (10,11);
+\draw [->, >=Stealth] (10,11.5) -- (11.5,11.5);
+\draw  (11.5,12) rectangle  node {\large SLS} (12.75,11);
+\draw [->, >=Stealth] (12.75,11.5) -- (14.5,11.5);
+\draw  (15,11.5) circle (0.5cm);
+\node [font=\large] at (15,16) {R0};
+\draw (15,15.5) to[short] (15,14.5);
+\draw  (15,14) circle (0.5cm);
+\node [font=\large] at (3,11.75) {};
+\draw [short] (15,13.5) -- (15,12);
+\draw [short] (6.5,11.5) -- (7.5,11.5);
+\draw [short] (7,12) -- (7,11);
+\draw [short] (14.5,11.5) -- (15.5,11.5);
+\draw [short] (15,12) -- (15,11);
+\draw [short] (14.5,14) -- (15.5,14);
+\draw [short] (15,14.5) -- (15,13.5);
+\draw [short] (15,11) -- (15,10.25);
+\draw [short] (2.5,11.5) -- (2.5,10.25);
+\draw [short] (2.5,10.25) -- (15,8.25);
+\draw [short] (15,10.25) -- (2.5,8.25);
+\node [font=\large] at (1.5,14) {KL};
+\node [font=\large] at (16,14) {KR};
+\node [font=\large] at (7,12.5) {KR};
+\node [font=\large] at (3.25,12) {R3};
+\node [font=\large] at (5.75,12) {R3a};
+\node [font=\large] at (8,12) {R3b};
+\node [font=\large] at (10.75,12) {R3c};
+\node [font=\large] at (13.75,12) {R3d};
+\node [font=\large] at (15.5,10.5) {R4};
+\node [font=\large] at (2.5,8) {R4};
+\node [font=\large] at (15,8) {R3};
+\node [font=\large] at (2,12.5) {R3};
+\node [font=\large] at (15.5,12.5) {R2};
+\end{circuitikz}
+}%
+\caption{ITUbee MILP Related-Key Differential Cryptanalysis Sketch}
+\label{fig:itubeeRelated}
+\end{figure}
+
+We found that 8 round of the algorithm has minimum 16 active s-box. ITUbee algorithm uses AES's \cite{dworkin2001advanced} s-box. AES s-box have best input-output difference $2^{-6}$. Therefore best probability for differential characteristic will be $(2^{-6})^{16}= 2^{-96}  $ which is not usable for related key differential attack. Authors of the ITUbee algorithm claims in \cite{karakocc2013itubee} that algorithm is secure against related key differential cryptanalysis after 10 round. In our model we found that 8 round is enough for security against related key differential cryptanalysis.  Best 8 round characteristic found with the model can be seen in Table \ref{tab:RelatedKeyDif}
+
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Stage} & \textbf{Binary Index} & \textbf{Characteristic} \\
+        \hline
+        Key  & KL & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+                     & KR & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        1. round  & R1 & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        input     & R0 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        1. round  & R2 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        middle values & R3-3a-3b-3c-3d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\     
+        \hline
+        2. round  & R4 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input     & R3 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        2. round  & R4a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R4b-4c-4d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                      
+        \hline
+        3. round  & R5 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R4 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        3. round middle values     & R5a-5b-5c-5d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        4. round  & R6 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input     & R5 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        4. round  & R6a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R6b-6c-6d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                              \hline
+        5. round  & R7 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R6 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        5. round  & R7a & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        middle values & R7b-7c-7d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                      
+        \hline
+        6. round  & R8 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input     & R7 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        6. round  & R8a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R8b-8c-8d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                     
+        \hline
+        7. round  & R9 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R8 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        7. round middle values & R9a-9b-9c-9d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        8. round  & R10 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input      & R9  & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        8. round  & R10a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R10b-10c-10d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                      
+        \hline
+        9. round & R11 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R10 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+    \end{tabular}
+    \caption{Best 8 round related-key differential characteristic of ITUbee algorithm}
+    \label{tab:RelatedKeyDif}
+\end{table}
