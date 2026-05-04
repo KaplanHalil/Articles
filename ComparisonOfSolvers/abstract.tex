@@ -1,0 +1,7 @@
+\begin{abstract}
+
+This paper presents a comprehensive performance comparison of five state-of-the-art Mixed Integer Linear Programming (MILP) solvers when applied to related-key differential cryptanalysis of the ITUbee lightweight block cipher \cite{karakocc2013itubee}. We evaluate the open-source solvers GLPK, HiGHS, and SCIP, as well as the commercial solvers Gurobi and CPLEX, using MILP models for 8, 10, and 12-round related-key differential attacks. As the number of rounds increases, the number of equations and constraints in the models also increases exponentially. Experiments were conducted on an 11th Gen Intel Core i7-1165G7 processor with 32 GB of RAM. Our results demonstrate that commercial solvers (Gurobi and CPLEX) significantly outperform open-source alternatives, achieving speedups of up to 94$\times$ compared to GLPK for the 12-round model. This study was prepared to guide those who will choose a solver for the MILP model. The comparison results obtained may differ even if the number of equations and constraints in the model are the same, because the equations will be different.
+
+\keywords{Cryptanalysis \and MILP \and Differential Cryptanalysis \and Block Ciphers}
+
+\end{abstract}

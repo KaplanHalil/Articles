@@ -1,0 +1,76 @@
+\section{Results and Analysis}
+
+Comprehensive benchmarking was conducted on MILP models for 8, 10, and 12-round related-key differential attacks on ITUbee. The results demonstrate clear performance distinctions between solver categories, with significant implications for practical related-key differential cryptanalysis.
+
+\subsection{8-Round Results}
+
+\begin{table}[ht]
+  \centering
+  \caption{Solution times for the 8-round model (687 variables, 2147 constraints)}
+  \label{tab:8round}
+  \begin{tabular}{lrr}
+    \toprule
+    Solver  & Time (s) & Speedup \\
+    \midrule
+    GLPK   & 257  & 1.0$\times$ \\
+    HiGHS  & 231  & 1.1$\times$ \\
+    SCIP   & 86   & 2.9$\times$ \\
+    Gurobi & 37   & 6.9$\times$ \\
+    CPLEX  & 16   & 16.0$\times$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{10-Round Results}
+
+\begin{table}[ht]
+  \centering
+  \caption{Solution times for the 10-round model (945 variables, 3182 constraints)}
+  \label{tab:10round}
+  \begin{tabular}{lrr}
+    \toprule
+    Solver  & Time (s) & Speedup \\
+    \midrule
+    GLPK   & 1610 & 1.0$\times$ \\
+    HiGHS  & 321  & 5.0$\times$ \\
+    SCIP   & 202  & 7.9$\times$ \\
+    Gurobi & 34   & 47.4$\times$ \\
+    CPLEX  & 40   & 40.3$\times$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{12-Round Results}
+
+\begin{table}[ht]
+  \centering
+  \caption{Solution times for the 12-round model (1203 variables, 4217 constraints)}
+  \label{tab:12round}
+  \begin{tabular}{lrr}
+    \toprule
+    Solver  & Time (s) & Speedup \\
+    \midrule
+    GLPK   & 4543 & 1.0$\times$ \\
+    HiGHS  & 1780 & 2.5$\times$ \\
+    SCIP   & 376  & 12.0$\times$ \\
+    Gurobi & 48   & 94.6$\times$ \\
+    CPLEX  & 53   & 85.7$\times$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Discussion}
+
+The experimental results reveal several important trends:
+
+\begin{enumerate}
+    \item \textbf{Commercial vs. Open-Source Gap}: Commercial solvers (Gurobi and CPLEX) consistently outperform open-source alternatives, with speedups increasing dramatically for larger problem sizes. For the 12-round model, Gurobi achieves a 94.6$\times$ speedup over GLPK.
+    
+    \item \textbf{Problem Scaling}: As the problem complexity increases (8 to 12 rounds), the performance gap between solvers widens. This suggests that more sophisticated optimization algorithms in commercial solvers are particularly effective on harder instances.
+    
+    \item \textbf{Open-Source Alternatives}: Among open-source solvers, SCIP consistently outperforms both GLPK and HiGHS, achieving 2.9$\times$ speedup on 8-rounds and 12$\times$ speedup on 12-rounds compared to GLPK.
+    
+    \item \textbf{Commercial Solver Parity}: Gurobi and CPLEX show comparable performance, with Gurobi slightly faster on 10 and 12-round models, while CPLEX excels on the 8-round problem.
+\end{enumerate}
+
+The timing analysis demonstrates that solver choice is critical for practical cryptanalysis. For resource-constrained deployments, SCIP provides a reasonable alternative to commercial solvers. However, for optimal performance, commercial solutions are strongly recommended.
