@@ -3,10 +3,10 @@
 Comprehensive benchmarking was conducted on MILP models for 8, 10, and 12-round related-key differential attacks on ITUbee. The results demonstrate clear performance distinctions between solver categories, with significant implications for practical related-key differential cryptanalysis.
 
 \subsection{8-Round Results}
-
-\begin{table}[ht]
+  Our 8-round model consist of 687 variables and 2147 constraints. Our results show that GLPK, the baseline open-source solver, required 257 seconds to find a solution. HiGHS improved on this with a time of 231 seconds, while SCIP further reduced the time to 86 seconds. The commercial solvers Gurobi and CPLEX achieved significantly faster times of 37 and 16 seconds, respectively, representing speedups of 6.9$\times$ and 16.0$\times$ compared to GLPK (see Table \ref{tab:8round}).
+\begin{table}[H]
   \centering
-  \caption{Solution times for the 8-round model (687 variables, 2147 constraints)}
+  \caption{Solution times for the 8-round model }
   \label{tab:8round}
   \begin{tabular}{lrr}
     \toprule
@@ -23,9 +23,11 @@ Comprehensive benchmarking was conducted on MILP models for 8, 10, and 12-round 
 
 \subsection{10-Round Results}
 
-\begin{table}[ht]
+The 10-round model consists of 945 variables and 3182 constraints. In this harder instance, GLPK required 1610 seconds to solve the problem. HiGHS improved substantially, finishing in 321 seconds, and SCIP further reduced the time to 202 seconds. The commercial solvers again delivered the best performance, with Gurobi solving the model in 34 seconds and CPLEX in 40 seconds, representing speedups of 47.4$\times$ and 40.3$\times$ versus GLPK, respectively (see Table \ref{tab:10round}).
+
+\begin{table}[H]
   \centering
-  \caption{Solution times for the 10-round model (945 variables, 3182 constraints)}
+  \caption{Solution times for the 10-round model }
   \label{tab:10round}
   \begin{tabular}{lrr}
     \toprule
@@ -42,9 +44,11 @@ Comprehensive benchmarking was conducted on MILP models for 8, 10, and 12-round 
 
 \subsection{12-Round Results}
 
-\begin{table}[ht]
+The 12-round model is the most challenging benchmark, with 1203 variables and 4217 constraints. GLPK required 4543 seconds to solve this instance, while HiGHS completed in 1780 seconds. SCIP again offered a strong open-source alternative at 376 seconds. Gurobi and CPLEX achieved the fastest times of 48 and 53 seconds, corresponding to speedups of 94.6$\times$ and 85.7$\times$ relative to GLPK (Table \ref{tab:12round}).
+
+\begin{table}[H]
   \centering
-  \caption{Solution times for the 12-round model (1203 variables, 4217 constraints)}
+  \caption{Solution times for the 12-round model}
   \label{tab:12round}
   \begin{tabular}{lrr}
     \toprule

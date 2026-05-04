@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
@@ -12,6 +12,10 @@ Biham, E., Shamir, A.: Differential cryptanalysis of des-like cryptosystems.
   In: Workshop on the Theory and Application of Cryptographic Techniques. pp.
   2--21. Springer (1990)
 
+\bibitem{dworkin2001advanced}
+Dworkin, M.J.: The advanced encryption standard (aes) and its use in
+  cryptographic standards. NIST Special Publication  \textbf{800}, ~38 (2001)
+
 \bibitem{highs2023}
 of~Edinburgh, U.: Highs: High-performance interior-point solver.
   \url{https://github.com/ERGO-Code/HiGHS} (2023)
@@ -22,6 +26,11 @@ Gurobi~Optimization, L.: Gurobi optimizer. \url{https://www.gurobi.com/} (2024)
 \bibitem{cplex2024}
 IBM: Ibm cplex optimization studio.
   \url{https://www.ibm.com/products/ilog-cplex-optimization-studio} (2024)
+
+\bibitem{halil2026milp}
+İbrahim Kaplan, H.: Usage of mixed integer linear programming in cryptanalysis
+  of block ciphers. Cryptology {ePrint} Archive, Paper 2026/224 (2026),
+  \url{https://eprint.iacr.org/2026/224}
 
 \bibitem{karakoc2013itubee}
 Karako{\c{c}}, F., Demirci, H., Harmanc{\i}, A.E.: Itubee: a software oriented
@@ -37,5 +46,9 @@ Mouha, N., Preneel, B.: Constraint-based differential cryptanalysis of block
 \bibitem{glpk2024}
 Project, G.: Glpk (gnu linear programming kit).
   \url{https://www.gnu.org/software/glpk/} (2024)
+
+\bibitem{fips197aes}
+of~Standards, N.I., Technology: Advanced encryption standard (aes) (2001),
+  \url{https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf}
 
 \end{thebibliography}
