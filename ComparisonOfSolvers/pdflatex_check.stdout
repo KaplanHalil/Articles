@@ -220,7 +220,7 @@ Overfull \hbox (5.26305pt too wide) in paragraph at lines 3--4
 \T1/cmr/m/n/9 solvers when ap-plied to related-key dif-fer-en-tial crypt-anal-y
 -sis of the ITUbee
 
-Overfull \hbox (22.12798pt too wide) in paragraph at lines 3--4
+Overfull \hbox (22.12798pt too wide) in paragraph at lines 5--6
 \T1/cmr/m/n/9 CPLEX) sig-nif-i-cantly out-per-form open-source al-ter-na-tives,
  achiev-ing speedups
 ) (./sec1.tex [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/
@@ -231,11 +231,11 @@ Overfull \hbox (1.37914pt too wide) in paragraph at lines 71--72
 []\T1/cmr/bx/n/10 Open-Source Al-ter-na-tives\T1/cmr/m/n/10 : Among open-source
  solvers, SCIP con-sis-tently
 ) (./Conclusion.tex [5]) (./main.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 13--14
+Underfull \hbox (badness 10000) in paragraph at lines 16--18
 []\T1/cmr/m/n/9 of Ed-in-burgh, U.: Highs: High-performance interior-point solv
 er.
 
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
+Underfull \hbox (badness 10000) in paragraph at lines 38--40
 []\T1/cmr/m/n/9 Project, G.: Glpk (gnu lin-ear pro-gram-ming kit).
 ) [6] (./main.aux) )
 (see the transcript file for additional information)</usr/share/texlive/texmf-d
@@ -248,5 +248,5 @@ f/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public
 /cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.p
 fb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf
 /fonts/type1/public/cm-super/sftt0900.pfb>
-Output written on main.pdf (6 pages, 209766 bytes).
+Output written on main.pdf (6 pages, 209639 bytes).
 Transcript written on main.log.

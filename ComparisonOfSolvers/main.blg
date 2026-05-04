@@ -3,53 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: splncs04.bst
 Database file #1: main.bib
-Warning--I didn't find a database entry for "karakoc2013itubee"
-Warning--I didn't find a database entry for "biham1990differential"
-Warning--I didn't find a database entry for "mouha2012constraint"
-Warning--I didn't find a database entry for "glpk2024"
-Warning--I didn't find a database entry for "highs2023"
-Warning--I didn't find a database entry for "scip2023"
-Warning--I didn't find a database entry for "gurobi2024"
-Warning--I didn't find a database entry for "cplex2024"
-You've used 1 entry,
+You've used 8 entries,
             2850 wiz_defined-function locations,
-            608 strings with 4881 characters,
-and the built_in function-call counts, 659 in all, are:
-= -- 58
-> -- 17
-< -- 1
-+ -- 7
-- -- 6
-* -- 39
-:= -- 88
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 8
+            634 strings with 5648 characters,
+and the built_in function-call counts, 3459 in all, are:
+= -- 291
+> -- 76
+< -- 3
++ -- 32
+- -- 24
+* -- 176
+:= -- 450
+add.period$ -- 14
+call.type$ -- 8
+change.case$ -- 42
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 55
-empty$ -- 61
-format.name$ -- 7
-if$ -- 146
+cite$ -- 8
+duplicate$ -- 306
+empty$ -- 375
+format.name$ -- 27
+if$ -- 784
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 10
-newline$ -- 9
-num.names$ -- 2
-pop$ -- 21
+int.to.str$ -- 8
+missing$ -- 53
+newline$ -- 30
+num.names$ -- 16
+pop$ -- 134
 preamble$ -- 1
-purify$ -- 5
+purify$ -- 28
 quote$ -- 0
-skip$ -- 18
+skip$ -- 94
 stack$ -- 0
-substring$ -- 37
-swap$ -- 28
-text.length$ -- 1
+substring$ -- 179
+swap$ -- 140
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 4
+type$ -- 32
 warning$ -- 0
-while$ -- 6
-width$ -- 2
-write$ -- 16
-(There were 8 warnings)
+while$ -- 33
+width$ -- 9
+write$ -- 83

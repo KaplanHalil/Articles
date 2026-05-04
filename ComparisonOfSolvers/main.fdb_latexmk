@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex main"] 1777896613.20623 "main.aux" "main.bbl" "main" 1777896614.05406 0
-  "./main.bib" 1777896462.76388 13756 2494b14f0014712d051ec5b33f600be3 ""
+["bibtex main"] 1777897066.2823 "main.aux" "main.bbl" "main" 1777897078.01612 0
+  "./main.bib" 1777897077.03601 1839 108593926eb4e6b42d68b73ebdbf16c1 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/llncs/splncs04.bst" 1698954974 32146 aadf770ded437d161532035219ea6f45 ""
-  "main.aux" 1777896613.84414 3153 0e364d573528fb9363fbd4d3b5331bc0 "pdflatex"
+  "main.aux" 1777897077.77302 3333 9fba67befcbe078d0b58a804e9b0bb76 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1777896613.30065 "/home/halil/Desktop/GitHub/Articles/ComparisonOfSolvers/main.tex" "main.pdf" "main" 1777896614.05419 0
+["pdflatex"] 1777897077.21052 "/home/halil/Desktop/GitHub/Articles/ComparisonOfSolvers/main.tex" "main.pdf" "main" 1777897078.01627 0
   "/etc/texmf/web2c/texmf.cnf" 1770963895.84843 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/halil/Desktop/GitHub/Articles/ComparisonOfSolvers/main.tex" 1777895050.09821 1536 ac7aa97bccc65238f1ece715ddeffb6a ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -195,9 +195,9 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1777378088.85393 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1777378153 8213244 1b418aff86ce5054e04468465d13aae6 ""
   "Conclusion.tex" 1777895030.99506 1549 42669b5275fcd30682c4d11af2eb8882 ""
-  "abstract.tex" 1777896611.36612 1213 97ba306ac09bb178a6957dac3e5208a4 ""
-  "main.aux" 1777896613.84414 3153 0e364d573528fb9363fbd4d3b5331bc0 "pdflatex"
-  "main.bbl" 1777896613.29613 488 f8982ac27bf8b00fa84598cd27e98659 "bibtex main"
+  "abstract.tex" 1777897077.03601 1212 647e7b6cac8bcb1a49cf29f23cdfbfa9 ""
+  "main.aux" 1777897077.77302 3333 9fba67befcbe078d0b58a804e9b0bb76 "pdflatex"
+  "main.bbl" 1777897070.93896 1540 b2d46cb0e684a6adaf8d8ce9a9e9f006 "bibtex main"
   "main.tex" 1777895050.09821 1536 ac7aa97bccc65238f1ece715ddeffb6a ""
   "sec1.tex" 1777894588.2356 2756 f270fb65e860f088858576bc23241823 ""
   "sec2.tex" 1777894711.01054 99 9150b93d3f3ced5ee1ed2152f902b85c ""
