@@ -2,36 +2,28 @@
 \begin{thebibliography}{WWO{\etalchar{+}}23}
 
 \bibitem[BDE{\etalchar{+}}13]{buchmann2013security}
-Johannes Buchmann, Erik Dahmen, Sarah Ereth, Andreas H{\"u}lsing, and Markus
-  R{\"u}ckert.
+Johannes Buchmann, Erik Dahmen, Sarah Ereth, Andreas H{\"u}lsing, and Markus R{\"u}ckert.
 \newblock On the security of the winternitz one-time signature scheme.
-\newblock {\em International Journal of Applied Cryptography}, 3(1):84--96,
-  2013.
+\newblock {\em International Journal of Applied Cryptography}, 3(1):84--96, 2013.
 
 \bibitem[BHK{\etalchar{+}}19]{bernstein2019sphincs+}
-Daniel~J Bernstein, Andreas H{\"u}lsing, Stefan K{\"o}lbl, Ruben Niederhagen,
-  Joost Rijneveld, and Peter Schwabe.
+Daniel~J Bernstein, Andreas H{\"u}lsing, Stefan K{\"o}lbl, Ruben Niederhagen, Joost Rijneveld, and Peter Schwabe.
 \newblock The sphincs+ signature framework.
-\newblock In {\em Proceedings of the 2019 ACM SIGSAC conference on computer and
-  communications security}, pages 2129--2146, 2019.
+\newblock In {\em Proceedings of the 2019 ACM SIGSAC conference on computer and communications security}, pages 2129--2146, 2019.
 
 \bibitem[BHT98]{Brassard_1998}
 Gilles Brassard, Peter HØyer, and Alain Tapp.
-\newblock {\em Quantum cryptanalysis of hash and claw-free functions: Invited
-  paper}, page 163–169.
+\newblock {\em Quantum cryptanalysis of hash and claw-free functions: Invited paper}, page 163–169.
 \newblock Springer Berlin Heidelberg, 1998.
-\newblock URL: \url{http://dx.doi.org/10.1007/BFb0054319}, \href
-  {https://doi.org/10.1007/bfb0054319} {\path{doi:10.1007/bfb0054319}}.
+\newblock URL: \url{http://dx.doi.org/10.1007/BFb0054319}, \href {https://doi.org/10.1007/bfb0054319} {\path{doi:10.1007/bfb0054319}}.
 
 \bibitem[BXKSN21]{booth2021intermediate}
 Roland Booth, Yanhong Xu, Sabyasachi Karati, and Reihaneh Safavi-Naini.
 \newblock An intermediate secret-guessing attack on hash-based signatures.
-\newblock In {\em International Workshop on Security}, pages 195--215.
-  Springer, 2021.
+\newblock In {\em International Workshop on Security}, pages 195--215. Springer, 2021.
 
 \bibitem[CAD{\etalchar{+}}20]{cooper2020recommendation}
-David~A Cooper, Daniel~C Apon, Quynh~H Dang, Michael~S Davidson, Morris~J
-  Dworkin, Carl~A Miller, et~al.
+David~A Cooper, Daniel~C Apon, Quynh~H Dang, Michael~S Davidson, Morris~J Dworkin, Carl~A Miller, et~al.
 \newblock Recommendation for stateful hash-based signature schemes.
 \newblock {\em NIST Special Publication}, 800(208):800--208, 2020.
 
@@ -43,38 +35,29 @@ A~Huelsing, D~Butin, S~Gazdag, J~Rijneveld, and A~Mohaisen.
 Andreas Hülsing.
 \newblock {WOTS}+ -- shorter signatures for hash-based signature schemes.
 \newblock Cryptology {ePrint} Archive, Paper 2017/965, 2017.
-\newblock URL: \url{https://eprint.iacr.org/2017/965}, \href
-  {https://doi.org/10.1007/978-3-642-38553-7}
-  {\path{doi:10.1007/978-3-642-38553-7}}.
+\newblock URL: \url{https://eprint.iacr.org/2017/965}, \href {https://doi.org/10.1007/978-3-642-38553-7} {\path{doi:10.1007/978-3-642-38553-7}}.
 
 \bibitem[Lam79]{lamport1979constructing}
 Leslie Lamport.
 \newblock Constructing digital signatures from a one way function.
 \newblock Technical Report CSL-98, October 1979.
-\newblock This paper was published by IEEE in the Proceedings of HICSS-43 in
-  January, 2010.
-\newblock URL:
-  \url{https://www.microsoft.com/en-us/research/publication/constructing-digital-signatures-one-way-function/}.
+\newblock This paper was published by IEEE in the Proceedings of HICSS-43 in January, 2010.
+\newblock URL: \url{https://www.microsoft.com/en-us/research/publication/constructing-digital-signatures-one-way-function/}.
 
 \bibitem[NIS24]{gaithersburgmdnist_2024_stateless}
 Gaithersburg~MD NIST.
 \newblock Stateless hash-based digital signature standard.
 \newblock {\em NIST FIPS}, 01 2024.
-\newblock \href {https://doi.org/10.6028/nist.fips.205}
-  {\path{doi:10.6028/nist.fips.205}}.
+\newblock \href {https://doi.org/10.6028/nist.fips.205} {\path{doi:10.6028/nist.fips.205}}.
 
 \bibitem[PKC22]{perlner2022breaking}
 Ray Perlner, John Kelsey, and David Cooper.
 \newblock Breaking category five sphincs+ with sha-256.
-\newblock In {\em International Conference on Post-Quantum Cryptography}, pages
-  501--522. Springer, 2022.
+\newblock In {\em International Conference on Post-Quantum Cryptography}, pages 501--522. Springer, 2022.
 
 \bibitem[WWO{\etalchar{+}}23]{wagner2023faulting}
-Alexander Wagner, Vera Wesselkamp, Felix Oberhansl, Marc Schink, and Emanuele
-  Strieder.
-\newblock Faulting winternitz one-time signatures to forge lms, xmss, or
-  signatures.
-\newblock In {\em International Conference on Post-Quantum Cryptography}, pages
-  658--687. Springer, 2023.
+Alexander Wagner, Vera Wesselkamp, Felix Oberhansl, Marc Schink, and Emanuele Strieder.
+\newblock Faulting winternitz one-time signatures to forge lms, xmss, or signatures.
+\newblock In {\em International Conference on Post-Quantum Cryptography}, pages 658--687. Springer, 2023.
 
 \end{thebibliography}
