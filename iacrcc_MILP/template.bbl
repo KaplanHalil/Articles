@@ -1,0 +1,70 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{MWGP12}
+
+\bibitem[BJN{\etalchar{+}}98]{barnhart1998branch}
+Cynthia Barnhart, Ellis~L. Johnson, George~L. Nemhauser, Martin W.~P. Savelsbergh, and Pamela~H. Vance.
+\newblock Branch-and-price: Column generation for solving huge integer programs.
+\newblock {\em Operations Research}, 46(3):316--329, 1998.
+\newblock \href {https://doi.org/10.1287/opre.46.3.316} {\path{doi:10.1287/opre.46.3.316}}.
+
+\bibitem[Dan02]{dantzig2002linear}
+George~B Dantzig.
+\newblock Linear programming.
+\newblock {\em Operations research}, 50(1):42--47, 2002.
+
+\bibitem[DBN{\etalchar{+}}01]{dworkin2001advanced}
+Morris~J Dworkin, Elaine~B Barker, James~R Nechvatal, James Foti, Lawrence~E Bassham, E~Roback, and James~F Dray~Jr.
+\newblock Advanced encryption standard (aes).
+\newblock 2001.
+
+\bibitem[GO21]{gurobi2021gurobi}
+LLC Gurobi~Optimization.
+\newblock Gurobi optimizer reference manual, 2021.
+
+\bibitem[KDH13]{karakocc2013itubee}
+Ferhat Karako{\c{c}}, H{\"u}seyin Demirci, and A~Emre Harmanc{\i}.
+\newblock Itubee: a software oriented lightweight block cipher.
+\newblock In {\em Lightweight Cryptography for Security and Privacy: Second International Workshop, LightSec 2013, Gebze, Turkey, May 6-7, 2013, Revised Selected Papers 2}, pages 16--27. Springer, 2013.
+
+\bibitem[LD60]{land1960branch}
+A.~H. Land and A.~G. Doig.
+\newblock An automatic method of solving discrete programming problems.
+\newblock {\em Econometrica: Journal of the Econometric Society}, 28(3):497--520, 1960.
+\newblock \href {https://doi.org/10.2307/1910129} {\path{doi:10.2307/1910129}}.
+
+\bibitem[Mak08]{makhorin2008glpk}
+Andrew Makhorin.
+\newblock Glpk (gnu linear programming kit).
+\newblock {\em http://www. gnu. org/s/glpk/glpk. html}, 2008.
+
+\bibitem[Mat93]{matsui1993linear}
+Mitsuru Matsui.
+\newblock Linear cryptanalysis method for des cipher.
+\newblock In {\em Workshop on the Theory and Application of of Cryptographic Techniques}, pages 386--397. Springer, 1993.
+
+\bibitem[MWGP12]{mouha2012differential}
+Nicky Mouha, Qingju Wang, Dawu Gu, and Bart Preneel.
+\newblock Differential and linear cryptanalysis using mixed-integer linear programming.
+\newblock In {\em Information Security and Cryptology: 7th International Conference, Inscrypt 2011, Beijing, China, November 30--December 3, 2011. Revised Selected Papers 7}, pages 57--76. Springer, 2012.
+
+\bibitem[PR91]{padberg1991branch}
+Manfred Padberg and Giovanni Rinaldi.
+\newblock A branch-and-cut algorithm for the resolution of large-scale symmetric traveling salesman problems.
+\newblock {\em SIAM Review}, 33(1):60--100, 1991.
+\newblock \href {https://doi.org/10.1137/1033003} {\path{doi:10.1137/1033003}}.
+
+\bibitem[SD]{sage}
+Sagemath Sage~Developers.
+\newblock the sage mathematics software system (version 9.5), 2022.
+
+\bibitem[SHW{\etalchar{+}}14]{sun2014automatic}
+Siwei Sun, Lei Hu, Peng Wang, Kexin Qiao, Xiaoshuang Ma, and Ling Song.
+\newblock Automatic security evaluation and (related-key) differential characteristic search: application to simon, present, lblock, des (l) and other bit-oriented block ciphers.
+\newblock In {\em Advances in Cryptology--ASIACRYPT 2014: 20th International Conference on the Theory and Application of Cryptology and Information Security, Kaoshiung, Taiwan, ROC, December 7-11, 2014. Proceedings, Part I 20}, pages 158--178. Springer, 2014.
+
+\bibitem[Stu16]{studio2016ibm}
+IBM ILOG CPLEX~Optimization Studio.
+\newblock Ibm ilog cplex optimization studio.
+\newblock {\em CPLEX Parameters reference}, page~25, 2016.
+
+\end{thebibliography}

@@ -1,0 +1,952 @@
+% IACR Communications in Cryptology template file
+% This file shows how to use the iacrcc class to write a paper.
+
+%% Document mode
+% [version=xxx] where xxx is preprint, submission, or final. The default is preprint.
+%               version=submission puts line numbers into the document and makes it
+%               anonymous (which can be overridden).
+%               version=final is for submitting the final version. This requires a license
+%               to be specified.
+% [notanonymous]  Keep author names in submission mode
+%% Package options
+% [floatrow]      Load floatrow package with correct captions
+% [biblatex]      Use the biblatex package instead of bibtex. Note that options
+%                 may not be passed to biblatex at this time.
+
+% Uncomment the next line if you have TeX Live 2021 or later
+% and want to produce a PDF which complies with the PDF/A-2U standard
+% \DocumentMetadata{pdfstandard=a-2u}
+\documentclass [version=submission]{iacrcc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usetikzlibrary{arrows, positioning, calc, shapes, shapes.gates.logic.US}
+\usepackage{booktabs}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{red},
+  showstringspaces=false,
+  tabsize=4,
+  language=Python
+}
+\usepackage{graphicx}
+% When the *final* document mode is used
+% the authors need to provide a supported license.
+% In all other modes this information is ignored.
+% The currently provided ones are { CC-by }
+\license{CC-by}
+
+% Include LaTeX packages required by your paper
+% \usepackage{}
+
+% Provide the title of the paper
+% This should look like:
+\title[running  = {Usage of Mixed Integer Linear Programming in Cryptanalysis of Block Ciphers},
+       subtitle = {}
+      ]{Usage of Mixed Integer Linear Programming in Cryptanalysis of Block Ciphers}
+% Where the options in square brackets “[ ]” are optional and control the following:
+% running:   the running title displayed in the headers
+% subtitle:  provide a subtitle
+% plaintext: a text version of the title (mandatory if macros are used in the title)
+
+% Define authors and affiliations
+% Authors are listed individually using the \addauthor tag followed by a list of affiliations.
+% The idea is that every author makes a separate call to this command.
+% This should look like:
+% \addauthor[inst      = {1,2},
+%            orcid     = 0000-0000-0000-0000,
+%            footnote  = {Thanks to my supervisor for the support.},
+%            onclick   = {https://www.mypersonalwebpage.com}
+%           ]{Alice Accomplished}
+% Where the options in square brackets “[ ]” are optional 
+% and control the following:
+% inst:     a numerical list pointing to the index of the institution 
+%           in the affiliation array.
+% orcid:    create a small clickable orcid logo next to the authors name 
+%           linking to the authors ORCID iD see: orcid.org.
+% footnote: create an author-specific footnote.
+% surname:  indicate the surname of the author for indexing purposes.
+% onclick:  define what to do when clicking on the external link logo
+%           next to the author name: e.g., can point to the academic webpage.
+% email:    define the e-mail address of this author.
+\addauthor[orcid    = {0009-0006-0120-6512},
+           inst     = {1},
+           onclick  = {},
+           footnote = {},
+           email    = {halil.kaplan@tubitak.gov.tr},
+           surname  = {Kaplan}
+          ]{Halil İbrahim Kaplan}
+
+
+
+% The following command controls the running header for authors
+% This is optional for <= 4 authors and mandatory for > 4 authors
+% \authorrunning{Joppe W. Bos and Kevin S. McCurley}
+
+% Affiliations are listed individually using the \addaffiliation command 
+% *after* the (list of) authors using \addauthor
+% This should look like (full example):
+% \addaffiliation[ror        = 05f950310,
+%                 department = {Computer Security and Industrial Cryptography},              
+%                 street     = {Kasteelpark Arenberg 10, box 2452},
+%                 city       = {Leuven},
+%                 state      = {Vlaams-Brabant},
+%                 postcode   = {3001},
+%                 country    = {Belgium}
+%                ]{KU Leuven}
+% Where the options in square brackets “[ ]” are optional and control 
+% the following (optional information is mainly used for meta-data collection):
+% ror:        provide the Research Organization Registry (ROR) identifier 
+%             for this affiliation (see: ror.org). This is used for meta-data 
+%             collection only.
+% department: department or suborganization name
+% street:     street address
+% city:       city name
+% state:      state or province name
+% postcode:   zip or postal code
+% country:    country name. Required for [version=final]
+\addaffiliation[ror     = 031v4g827,
+                street  = {},
+                city    = {Kocaeli/Gebze},
+                postcode= {3001},
+                country = {Turkey}
+               ]{TÜBİTAK BİLGEM}
+\addaffiliation[]{Cryptanalysis Laboratory}
+
+% Authors should use the \addfunding macro to make sure that funding agencies
+% can find papers published under their sponsorship.
+% You can use the online tool at
+% https://publish.iacr.org/funding
+% to help you find fundref and ror identifiers.
+% Note that \addfunding *does not* automatically create footnotes or
+% an acknowledgements section to identify funding - it only collects the
+% metadata for indexing.
+% An example is:
+
+% \addfunding[country  = {europe},
+%             grantid  = {1234},
+%             fundref = {100010661}
+%            ]{Horizon 2020 Framework Programme}
+
+% A footnote can be placed on the front page without a symbol / numbering using:
+%\genericfootnote{This is the full version of our paper published at XX}
+
+\begin{document}
+
+\maketitle
+
+% Provide the keywords *before* the abstract
+% When keywords contain macros provide the text version as the optional argument
+
+\keywords{MILP , Cryptanalysis, Block Ciphers}
+
+% Provide the abstract of your paper
+\begin{abstract}
+  This paper presents a comprehensive approach to the cryptanalysis of block ciphers using Mixed Integer Linear Programming (MILP). By formulating the cipher’s components including substitution boxes, linear layers, and key schedules as systems of linear inequalities, MILP enables the automated discovery of optimal cryptanalytic characteristics. Our methodology is demonstrate the MILP modelling through the analysis of the ITUbee cipher under three attack models: differential, linear, and related-key differential cryptanalysis. This work highlights the potential of MILP as a robust, generalizable tool for evaluating cipher security and guiding the design of resilient cryptographic primitives.
+\end{abstract}
+
+% A separate text-only abstract must be supplied in your final version.
+% This will be used for web pages and indexing and should not contain macros.
+\begin{textabstract}
+  This paper presents a comprehensive approach to the cryptanalysis of block ciphers using Mixed Integer Linear Programming (MILP). By formulating the cipher’s components including substitution boxes, linear layers, and key schedules as systems of linear inequalities, MILP enables the automated discovery of optimal cryptanalytic characteristics. Our methodology is demonstrate the MILP modelling through the analysis of the ITUbee cipher under three attack models: differential, linear, and related-key differential cryptanalysis. This work highlights the potential of MILP as a robust, generalizable tool for evaluating cipher security and guiding the design of resilient cryptographic primitives.
+\end{textabstract}
+
+% The content of the paper starts here
+\section{Introduction}
+Cryptanalysis of block ciphers has long been a cornerstone of cryptographic research, driven by the need to ensure the security of data across various platforms. Block ciphers are essential in securing communication in environments ranging from the Internet of Things (IoT) and RFID systems to Smart Cards and sensor networks. The security requirements for these platforms differ significantly, often necessitating the use of lightweight cryptographic algorithms that can operate efficiently under constraints like limited area, energy, and code size. As a result, traditional ciphers such as the Advanced Encryption Standard (AES) may not be suitable for all applications, highlighting the importance of designing and thoroughly analyzing alternative cryptographic algorithms. 
+
+Differential, linear and related key are among the most fundamental techniques in the cryptanalyst's toolkit. These methods have been playing important role in evaluating of the security of block ciphers. However, the complexity and time-consuming nature of these analyses pose significant challenges. 
+
+The improvements in the area of cryptanalysis have led to the development of automated and semi-automated tools designed to enhance the efficiency of cryptanalysis. Among these tools, Mixed-Integer Linear Programming (MILP) has emerged as a particularly powerful method for cryptanalysis. MILP offers a flexible and effective approach to modeling and analyzing the security of block ciphers, making it easier to evaluate their resistance to cryptographic attacks.
+
+
+
+\textbf{Organization of the paper}. The rest of the paper is organized as follows. Section 2 introduces Linear and mixed-integer linear programming with example. Section 3 defines ITUbee algorithm. Section 4 studies how to model block cipher components and. Section 6 introduces our MILP models for differantial, linear, relatekey differential cryptanalysis.
+
+\section{LP and MILP}
+
+\subsection{Linear Programming}
+Linear Programming (LP) is a fundamental mathematical optimization technique that was first introduced in the 1940s by George Dantzig \cite{dantzig2002linear}, although its development continued into the 1950s. LP has become an essential tool across various fields, including economics, operations research, engineering, logistics, and the natural sciences. The primary goal of LP is to optimize (maximize or minimize) a linear objective function subject to a set of linear constraints.
+
+\subsubsection{Mathematical Formulation}
+The standard form of a linear programming problem can be expressed mathematically as follows:
+
+\text{Maximize (or Minimize)} 
+\begin{center}
+    $c_1x_1 + c_2x_2 + \dots + c_nx_n $
+\end{center}
+\text{Subject to:} 
+\begin{center}
+    $  a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n \leq b_1 $ \\
+    $ a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n \leq b_2 $ \\
+    $ \quad \vdots $ \\
+    $ a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n \leq b_m $ \\
+    $ x_{1}, x_{2}, \dots, x_n \geq 0 $
+\end{center}
+
+Here, $ x_1, x_2, \dots, x_n $ represent the decision variables, $ c_1, c_2, \dots, c_n $ are the coefficients of the objective function, $ a_{ij} $ are the coefficients of the constraints, and $ b_1, b_2, \dots, b_m $ are the bounds of the constraints. The decision variables are typically constrained to be non-negative, although this condition can be relaxed or modified depending on the problem context.
+
+The objective function is linear, meaning that the relationship between the decision variables and the function value is additive and proportional. The constraints are also linear, implying that each constraint defines a half-space in the decision variable space. The feasible region, which is the set of all points that satisfy the constraints, is a convex polytope. The optimal solution, if it exists, lies on a vertex of this polytope.
+
+
+\subsection{Mixed-Integer Linear Programming}
+Mixed-Integer Linear Programming (MILP) extends the framework of Linear Programming by incorporating integer constraints on some or all of the decision variables. 
+
+\subsubsection{Mathematical Formulation}
+The mathematical formulation of an MILP problem is similar to that of an LP problem, but with the addition of integer constraints on certain decision variables:
+
+
+\text{Maximize (or Minimize)} 
+\begin{center}
+    $c_1x_1 + c_2x_2 + \dots + c_nx_n $
+\end{center}
+\text{Subject to:} 
+\begin{center}
+    $  a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n \leq b_1 $ \\
+    $ a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n \leq b_2 $ \\
+    $ \quad \vdots $ \\
+    $ a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n \leq b_m $ \\
+    $ x_1, x_2, \dots, x_p \in \mathbb{Z} $ \\
+    $ x_{p+1}, x_{p+2}, \dots, x_n \geq 0 $
+\end{center}
+
+
+
+In this formulation, the first $ p $ decision variables $ x_1, x_2, \dots, x_p $ are constrained to take integer values, while the remaining $ n-p $ variables $ x_{p+1}, x_{p+2}, \dots, x_n $ are real-valued. 
+
+\subsubsection{Computational Complexity and Solution Methods}
+MILP problems are generally NP-hard, meaning that there is no known algorithm that can solve all instances of MILP problems in polynomial time. The presence of integer variables introduces combinatorial complexity, making MILP significantly more challenging than LP.
+
+Despite this complexity, several algorithms have been developed to solve MILP problems efficiently in practice. Some example of theese algorithms are
+Branch and Bound \cite{land1960branch}, Branch and Cut \cite{padberg1991branch}, Branch and Price \cite{barnhart1998branch}.
+These algorithms are implemented in various commercial and open-source MILP solvers, such as CPLEX \cite{studio2016ibm}, Gurobi \cite{gurobi2021gurobi}, and GLPK \cite{makhorin2008glpk}, which are widely used in industry and academia.
+
+\subsubsection{Toy Example of MILP Modeling}
+
+A company produces two types of products, \textbf{Product A} and \textbf{Product B}. The goal is to maximize profit while considering production capacity, resource availability, and a minimum production requirement. The constraints involve available labor hours, machine hours, and minimum production levels.
+
+\subsubsection{Variables}
+Let:
+\begin{itemize}
+    \item $x$ be the number of units produced of \textbf{Product A}.
+    \item $y$ be the number of units produced of \textbf{Product B}.
+\end{itemize}
+
+Both $x$ and $y$ are integer variables.
+
+\subsubsection{Objective Function}
+Maximize the total profit:
+$
+\text{Maximize} \quad Z = 40x + 30y
+$
+where:
+\begin{itemize}
+    \item 40 is the profit per unit of \textbf{Product A},
+    \item 30 is the profit per unit of \textbf{Product B}.
+\end{itemize}
+
+\subsubsection{Constraints}
+\begin{enumerate}
+    \item \textbf{Labor Constraint}: Each unit of \textbf{Product A} requires 2 hours of labor, and each unit of \textbf{Product B} requires 1 hour of labor. The total available labor hours are 100.
+    $
+    2x + y \leq 100
+    $
+    
+    \item \textbf{Machine Hours Constraint}: Each unit of \textbf{Product A} requires 1 hour of machine time, and each unit of \textbf{Product B} requires 3 hours of machine time. The total available machine hours are 90.
+    $
+    x + 3y \leq 90
+    $
+    
+    \item \textbf{Minimum Production Constraint}: At least 20 units of \textbf{Product A} must be produced to meet market demand.
+    $
+    x \geq 20
+    $
+    
+    \item \textbf{Non-Negativity Constraint}: The number of units produced cannot be negative.
+    $
+    x \geq 0, \quad y \geq 0
+    $
+\end{enumerate}
+
+\subsubsection{Formulation}
+The entire problem can be formulated as follows:
+
+\text{Maximize} 
+\begin{center}
+    $  Z = 40x + 30y $ 
+\end{center}
+\text{subject to:}
+\begin{center}
+    $ 2x + y \leq 100 $ \\
+    $ x + 3y \leq 90 $ \\
+    $ x \geq 20 $ \\
+    $ y \geq 0 \quad $
+\end{center}
+
+\subsubsection{Modelling and Result}
+
+We will use Sagemath and GLPK solver for modeling Toy example. After running code in Listing  \ref{lst:toyExample} . We found that Maximum profit 2160 can be achieved by producing  42 A product and 16 B product.
+\begin{lstlisting}[caption={Sagemath MILP modelling of toy example }, label={lst:toyExample}]
+
+p.<x,y> = MixedIntegerLinearProgram 
+(maximization=True, solver = "GLPK")
+
+p.set_objective(40*x[0]+ 30*y[0])
+
+p.add_constraint(2*x[0] + y[0] == 100)
+p.add_constraint(x[0] + 3*y[0] == 90)
+p.add_constraint(x[0] >= 20)
+p.add_constraint(y[0] >= 0)
+
+print(p.solve())
+print(p.get_values(x,y))
+
+\end{lstlisting}
+
+
+
+\begin{section}{ITUbee Algorithm}
+    
+ITUbee \cite{karakocc2013itubee} is a lightweight software-oriented block cipher specifically designed for resource-constrained devices which include a microcontroller and have a limited battery power such as sensor nodes in wireless sensor networks.
+
+The cipher has Fiestel structure which consists of 20 rounds. İt has 80 bits block size and 80 bits key size. The round structure of the cipher is given in Figure \ref{fig:itubee}. Cipher also has a key whitening layer in the beginning and end of the 20 rounds. The encryption process of the cipher is given in Algorithm \ref{alg:ITUbee}. Round constants of the cipher is given in Table \ref{tab:ITUbee_rc} 
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\LARGE]
+\node [font=\LARGE] at (0.75,15.25) {};
+\node [font=\LARGE] at (2.5,16.75) {PL};
+\draw [short] (2.5,16.25) -- (2.5,15);
+\draw  (2.5,14.5) circle (0.5cm);
+\draw [short] (2,14.5) -- (3,14.5);
+\draw [short] (2.5,15) -- (2.5,14);
+\draw [->, >=Stealth] (2.5,12.5) -- (3.75,12.5);
+\draw  (3.75,13) rectangle  node {\LARGE F} (5,12);
+\draw [->, >=Stealth] (5,12.5) -- (6.25,12.5);
+\draw  (6.75,12.5) circle (0.5cm);
+\draw [short] (6.25,12.5) -- (7.25,12.5);
+\draw [short] (6.75,13) -- (6.75,12);
+\draw [->, >=Stealth] (7.25,12.5) -- (8.5,12.5);
+\draw  (9,12.5) circle (0.5cm);
+\draw [short] (8.5,12.5) -- (9.5,12.5);
+\draw [short] (9,13) -- (9,12);
+\draw [->, >=Stealth] (9.5,12.5) -- (11,12.5);
+\draw  (11,13) rectangle  node {\LARGE L} (12.25,12);
+\draw [->, >=Stealth] (12.25,12.5) -- (13.75,12.5);
+\draw  (13.75,13) rectangle  node {\LARGE F} (15,12);
+\draw [->, >=Stealth] (15,12.5) -- (17,12.5);
+\draw  (17.5,12.5) circle (0.5cm);
+\draw [short] (17,12.5) -- (18,12.5);
+\draw [short] (17.5,13) -- (17.5,12);
+\draw [short] (17.5,13) -- (17.5,13.25);
+\node [font=\LARGE] at (17.5,16.75) {PR};
+\draw [short] (17.5,16.25) -- (17.5,15);
+\draw  (17.5,14.5) circle (0.5cm);
+\draw [short] (17,14.5) -- (18,14.5);
+\draw [short] (17.5,15) -- (17.5,14);
+\draw [short] (17.5,14) -- (17.5,13.25);
+\draw [short] (2.5,14) -- (2.5,12.5);
+\draw [short] (2.5,12.5) -- (2.5,11.25);
+\draw [short] (17.5,12) -- (17.5,11.25);
+\draw [short] (17.5,11.25) -- (2.5,8.75);
+\draw [short] (2.5,11.25) -- (17.5,8.75);
+\draw [->, >=Stealth] (2.5,8.75) -- (2.5,8);
+\draw [->, >=Stealth] (17.5,8.75) -- (17.5,8);
+\node [font=\LARGE] at (1.5,14.5) {KL};
+\node [font=\LARGE] at (18.5,14.5) {KR};
+\node [font=\LARGE] at (6.75,13.5) {KR};
+\node [font=\LARGE] at (9,13.5) {Rc};
+\node [font=\LARGE] at (9,13.5) {};
+\end{circuitikz}
+}%
+\caption{ITUbee round structure}
+\label{fig:itubee}
+\end{figure}
+
+
+\begin{algorithm}
+    \caption{Pseudo code for ITUbee encryption}
+    \label{alg:ITUbee}
+    \begin{algorithmic}[1]
+        \STATE $X_1 \gets P_L \oplus K_L$
+        \STATE $X_0 \gets P_R \oplus K_R$
+        \FOR{$i = 1$ to $20$}
+            \IF{$i \in \{1, 3, \dots, 19\}$}
+                \STATE $RK \gets K_R$
+            \ELSE
+                \STATE $RK \gets K_L$
+            \ENDIF
+            \STATE $X_{i+1} \gets X_{i-1} \oplus F(L(RK \oplus RC_i \oplus F(X_i)))$
+            \STATE \text{Round constant is added to the rightmost 16 bits}
+        \ENDFOR
+        \STATE $C_L \gets X_{20} \oplus K_R$
+        \STATE $C_R \gets X_{21} \oplus K_L$
+    \end{algorithmic}
+\end{algorithm}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Round} & \textbf{Round Constant (Hex)} & \textbf{Round} & \textbf{Round Constant (Hex)} \\
+        \hline
+        1  & 0x1428 & 11 & 0x0a1e \\
+        2  & 0x1327 & 12 & 0x091d \\
+        3  & 0x1226 & 13 & 0x081c \\
+        4  & 0x1125 & 14 & 0x071b \\
+        5  & 0x1024 & 15 & 0x061a \\
+        6  & 0x0f23 & 16 & 0x0519 \\
+        7  & 0x0e22 & 17 & 0x0418 \\
+        8  & 0x0d21 & 18 & 0x0317 \\
+        9  & 0x0c20 & 19 & 0x0216 \\
+        10 & 0x0b1f & 20 & 0x0115 \\
+        \hline
+    \end{tabular}
+    \caption{Round Constants of ITUbee algorithm}
+    \label{tab:ITUbee_rc}
+\end{table}
+
+\subsection{L Function}
+The L funtion which has branch number 4 is computed as,\\
+$L(a \parallel b \parallel c \parallel d \parallel e) = (e \oplus a \oplus b) \parallel (a \oplus b \oplus c) \parallel (b \oplus c \oplus d) \parallel (c \oplus d \oplus e) \parallel (d \oplus e \oplus a)$
+\\This function can also be represented as matrix multiplication using rotational matrix:
+
+\begin{center}
+    $
+    \begin{pmatrix}
+    1 & 1 & 0 & 0 & 1 \\
+    1 & 1 & 1 & 0 & 0 \\
+    0 & 1 & 1 & 1 & 0 \\
+    0 & 0 & 1 & 1 & 1 \\
+    1 & 0 & 0 & 1 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+    a \\
+    b \\
+    c \\
+    d \\
+    e
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    e \oplus a \oplus b \\
+    a \oplus b \oplus c \\
+    b \oplus c \oplus d \\
+    c \oplus d \oplus e \\
+    d \oplus e \oplus a
+    \end{pmatrix}
+    $
+\end{center}
+
+
+\subsection{F Function}
+The F function is computed as,\\
+\begin{center}
+    $F (X) = S(L(S(X)))$
+\end{center}
+
+S is the S-box used in AES \cite{dworkin2001advanced}. S is the only non-linear structure in the ITUbee algorithm.  40 bit input of S is splitted into 8 bits then enters the s-box.
+\begin{center}
+    $S(a\parallel b \parallel c \parallel d \parallel e) = s[a] \parallel s[b] \parallel s[c] \parallel s[d] \parallel s[e]$ 
+\end{center}
+
+\subsection{Key Schedule}
+
+ITUbee has no key schedule. The algorithm splits the 80 bit key into two 40 bit parts $K_L$ and $K_R$ and uses the right part of the key in odd rounds and the left part of the keys in even rounds.
+
+
+
+\end{section}
+
+\begin{section}{Construction of MILP Modeling}
+
+\subsection{Branch Number} \label{sec:branch}
+Branch number is a critical parameter used to evaluate the diffusion properties of cipher's components. The concept of branch number originates from the study of linear codes and is particularly relevant when assessing the security and strength of cryptographic primitives.
+
+\subsubsection{Definition and Calculation}
+
+Formally, if we consider a transformation $\mathcal{T}$ applied to an $n$-element vector, the branch number is given by:
+$$
+B = \min_{\mathbf{x} \neq \mathbf{0}} \left\{ \text{wt}(\mathbf{x}) + \text{wt}(\mathcal{T}(\mathbf{x})) \right\},
+$$
+where $\text{wt}(\mathbf{x})$ denotes the Hamming weight of the vector $\mathbf{x}$, i.e., the number of non-zero elements in $\mathbf{x}$.
+
+The branch number is significant in cryptanalysis because it provides a lower bound on the diffusion introduced by a transformation. A higher branch number indicates better diffusion, which implies that any single bit/byte difference in the input will affect a larger portion of the output thereby increasing the complexity of differential and linear attacks.
+
+\subsubsection{Example: Branch Number of AES's MDS Matrix}
+
+
+For AES \cite{dworkin2001advanced}, the MDS matrix used in the MixColumns operation has a branch number $5$. This means that minimum number of total active byte of input and output of the MDS is 5. Table \ref{tab:aes-mds} shows possible active byte patterns of the AES MDS matrix.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Input Active Bytes} & \textbf{Output Active Bytes}           \\ \hline
+1                           & 4                                      \\ \hline
+2                           & 3 / 4                                   \\ \hline
+3                           & 2 / 3 / 4                               \\ \hline
+4                           & 1 / 2 / 3 / 4                           \\ \hline
+\end{tabular} \\
+\caption{Possible active byte patterns of the AES MDS matrix}
+\label{tab:aes-mds}
+\end{table}
+
+\subsubsection{Role of Branch Number in MILP Modeling}
+Branch number is encoded directly into the MILP model, ensuring that any feasible solution must respect the minimum branch number criteria.In this way, the MILP model we obtain will give us the correct characteristic for the algorithm.
+
+\subsection{H-representation}
+
+The H-representation, also known as the half-space representation, describes a polyhedron as the intersection of a finite number of half-spaces, each defined by a linear inequality of the form $ \mathbf{a}^T \mathbf{x} \leq b $, where $\mathbf{a} $ is a vector of coefficients, $ \mathbf{x} $ is the vector of variables, and $ b $ is a scalar. This representation is integral to the MILP modeling of block ciphers as it encapsulates the constraints from the cipher's operations, including the behavior of S-boxes, linear layers, and key additions.
+
+In the context of cryptanalysis, using the H-representation allows complex relationships between variables to be expressed linearly, enabling MILP solvers to explore the solution space efficiently. This approach is especially crucial when identifying optimal characteristics for differential or linear attacks.
+
+\subsubsection{Example of H-representation}
+
+Consider linear function L which takes 6 bit input, 6 bit output and computed as:
+\begin{center}
+    $L(a,b,c)=(a \oplus b , a \oplus c , b \oplus c ) \text{ where a,b,c are 2 bit values}  $
+\end{center}
+
+
+H-representation of this function can be found in 2 steps with using  Sagemath polyhedra library. \cite{sage}
+
+\begin{enumerate}
+    \item We scan the outputs for all possible inputs and give a value of 0 if the output value is 0 and 1 if it is different from zero. Possible input and output values of the $L$ function can be seen in Table \ref{tab:hreptab}.
+
+    \item These points are given as input to the sage polyhedra library and the inequalities given in table \ref{tab:h-repineq} are obtained.
+    
+\end{enumerate}
+
+In table \ref{tab:h-repineq} ,  $(1, 1, 1, -1, -1, -1) x + 1 \geq 0$ means that $ x_0 + x_1 + x_2 -x_3 - x_4 -x_5 +1 \geq 0 $ where $x_0$ , $x_1$ and $x_2$ are input differences, $x_3$ , $x_4$ and $x_5$ are output differences.  
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Input Differences} & \textbf{Output Differences} \\ \hline
+0 0 0 & 0 0 0 \\ \hline
+0 0 1 & 0 1 1 \\ \hline
+0 1 0 & 1 0 1 \\ \hline
+0 1 1 & 1 1 0 \\ \hline
+0 1 1 & 1 1 1 \\ \hline
+1 0 0 & 1 1 0 \\ \hline
+1 0 1 & 1 0 1 \\ \hline
+1 0 1 & 1 1 1 \\ \hline
+1 1 0 & 0 1 1 \\ \hline
+1 1 1 & 0 0 0 \\ \hline
+1 1 1 & 0 1 1 \\ \hline
+1 1 0 & 1 1 1 \\ \hline
+1 1 1 & 1 0 1 \\ \hline
+1 1 1 & 1 1 0 \\ \hline
+1 1 1 & 1 1 1 \\ \hline
+\end{tabular}
+\caption{Input and Output Differences of $L$ function}
+\label{tab:hreptab}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|l|}
+\hline
+\textbf{No.} & \textbf{Inequality} \\ \hline
+1  & $(0, 0, -1, 0, 0, 0) x + 1 \geq 0$ \\ \hline
+2  & $(0, -1, 0, 0, 0, 0) x + 1 \geq 0$ \\ \hline
+3  & $(-1, 0, 0, 0, 0, 0) x + 1 \geq 0$ \\ \hline
+4  & $(0, 0, 0, -1, 0, 0) x + 1 \geq 0$ \\ \hline
+5  & $(0, 0, 0, 0, -1, 0) x + 1 \geq 0$ \\ \hline
+6  & $(0, 0, 0, 0, 0, -1) x + 1 \geq 0$ \\ \hline
+7  & $(0, -1, 1, 0, 0, 1) x + 0 \geq 0$ \\ \hline
+8  & $(0, 0, 0, -1, 1, 1) x + 0 \geq 0$ \\ \hline
+9  & $(0, 1, -1, 0, 0, 1) x + 0 \geq 0$ \\ \hline
+10 & $(0, 0, 0, 1, -1, 1) x + 0 \geq 0$ \\ \hline
+11 & $(1, 0, -1, 0, 1, 0) x + 0 \geq 0$ \\ \hline
+12 & $(0, 0, 0, 1, 1, -1) x + 0 \geq 0$ \\ \hline
+13 & $(1, 0, 1, 0, -1, 0) x + 0 \geq 0$ \\ \hline
+14 & $(0, 1, 1, 0, 0, -1) x + 0 \geq 0$ \\ \hline
+15 & $(1, 1, 1, -1, -1, -1) x + 1 \geq 0$ \\ \hline
+16 & $(1, 1, 0, -1, 0, 0) x + 0 \geq 0$ \\ \hline
+17 & $(-1, 0, 1, 0, 1, 0) x + 0 \geq 0$ \\ \hline
+18 & $(-1, 1, 0, 1, 0, 0) x + 0 \geq 0$ \\ \hline
+19 & $(1, -1, -1, 1, 1, -1) x + 1 \geq 0$ \\ \hline
+20 & $(1, -1, 0, 1, 0, 0) x + 0 \geq 0$ \\ \hline
+21 & $(-1, 1, -1, 1, -1, 1) x + 1 \geq 0$ \\ \hline
+22 & $(-1, -1, 1, -1, 1, 1) x + 1 \geq 0$ \\ \hline
+\end{tabular}
+\caption{H-representation of $L$ function}
+\label{tab:h-repineq}
+\end{table}
+
+\subsection{Milp Modeling of XOR Operation }
+We will use modeling defined in \cite{mouha2012differential}. Lets $x_{in1}$ and $x_{in2}$ be input and $x_{out}$ be output difference of xor operation. Branch number is defined in Section \ref{sec:branch}. Branch number of xor operation is 2. We use a dummy variable $d$ to add the branch number to the equation system. The dummy variable is equal to 0 if $x_{in1}$, $x_{in2}$ and $x_{out}$ are equal to 0, otherwise it is equal to 1. Using this information, the xor operation can be expressed with the following equations.
+
+\begin{center}
+    $x_{in1} + x_{in2} + x_{out} \geq 2d $ \\
+    $d \geq x_{in1} $ \\
+    $d \geq x_{in2} $ \\
+    $d \geq x_{out} $ 
+\end{center}
+
+\subsection{Milp Modeling of Linear Transformation }
+We will also use modeling defined in \cite{mouha2012differential}. Lets $x_{in1}, x_{in2}, ... ,x_{inM}, $ be input differences and $x_{out1}, x_{out2}, ... ,x_{outM}, $ be output difference of linear transformation. We will use dummy variable $d$ like in XOR modelling and we have branch number $B$ of Linear transformation. Then we can define linear transformation with following equations. 
+
+\begin{center}
+    $x_{in1} + x_{in2} + x_{inM} + ... + x_{out1} + x_{out2} + ... + x_{outM}  \geq B*d $ \\
+    $d \geq x_{in1} $ \\
+    $d \geq x_{in2} $ \\
+    $...$\\
+    $d \geq x_{inM} $ \\
+    $d \geq x_{out1} $\\
+    $d \geq x_{out2} $ \\
+    $...$\\
+    $d \geq x_{outM} $
+\end{center}
+
+In block ciphers, any nonlinear structure can be considered as a linear transformation. For example, xor operation or matrix multiplication are linear transformations. When the branch number value is given as 2 in the equation above, the equations given for XOR operation are obtained.
+
+\subsection{Milp Modeling of S-box}
+
+Since the main purpose of this article is to show that the algorithm is secure by calculating the minimum number of active s-boxes, s-boxes are not modeled in the MILP models of cryptographic attacks. The reason for this is that if the input of the s-box is active, its output is also active, and similarly, passive input gives passive output. Therefore, the model of the s-box has no effect on the minimum number of active s-boxes. However, if the purpose of the modeling is not to find the minimum active s-box but to find the best characteristic, the s-box must be modeled. Therefore, the s-box model defined in \cite{sun2014automatic} is given below as a reference for the reader.
+
+Let S be a 4x4 bijective S-box whichs inputs are $x_{in1},x_{in2},x_{in3},x_{in4}$ and outputs are $x_{out1},x_{out2},x_{out3},x_{out4}$. $A$ is equal to 1 if and of the input bits are active. Otherwise A is 0. Then S can be defined by following equations.
+
+\begin{center}
+    $x_{in1} - A \leq 0$ \\
+    $x_{in2} - A \leq 0$ \\
+    $x_{in3} - A \leq 0$ \\
+    $x_{in4} - A \leq 0$ \\
+    $x_{in1} + x_{in2} + x_{in3} + x_{in4} - A \geq 0$ \\
+    $4*(x_{in1} + x_{in2} + x_{in3} + x_{in4}) - (x_{out1} + x_{out2} + x_{out3} + x_{out4}) \geq 0$ \\
+    $4*(x_{out1} + x_{out2} + x_{out3} + x_{out4}) - (x_{in1} + x_{in2} + x_{in3} + x_{in4}) \geq 0$ \\
+\end{center}
+
+\subsection{Milp Modeling of three-forked branch }
+
+We will use modeling defined in \cite{mouha2012differential}. This model will be used in linear cryptanalysis. Lets $y_{in}$ be input and $x_{out1}$ and $x_{out2}$ be output mask of three-forked branch. Modeling is similar to modeling xor operation. We use a dummy variable $d$ which is equal to 0 if $x_{in}$, $x_{out1}$ and $x_{out2}$ are equal to 0, otherwise it is equal to 1. Using these information, the three-forked branch can be expressed with the following equations.
+
+\begin{center}
+    $x_{in} + x_{out1} + x_{out2} \geq 2d $ \\
+    $d \geq y_{in} $ \\
+    $d \geq y_{out1} $ \\
+    $d \geq y_{out2} $ 
+\end{center}
+
+\end{section}
+
+\begin{section}{Differential Cryptanalysis of ITUbee}
+
+ITUbee algorithm has Fiestel structure so we divide input as a two variables $RO$ and $R1$. In model, we define them as a binary variables. After each operation in the cipher, if active byte can be passive or passive byte can be active we define new binary. In differential cryptanalysis, S-box does not change activity of the byte because S-box takes byte and if input byte is active, output byte is also active. It is same for inactive bytes. Therefore we don't define new variables after s-box operations. L operations are changes the active bytes so after them we define new variable. XOR operation changes active byte if it XOR two binary variables. In differential cryptanalysis we do not give active values to the keys therefore key xor's does not change the active byte. Skech of the 1 round modelling can be seen in the Figure \ref{fig: ITUbeeDif}. 
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\large]
+\node [font=\large] at (2.5,16) {R1};
+\draw (2.5,15.5) to[short] (2.5,14.5);
+\draw  (2.5,14) circle (0.5cm);
+\draw [short] (2.5,13.5) -- (2.5,11.5);
+\draw [->, >=Stealth] (2.5,11.5) -- (4,11.5);
+\draw  (4,12) rectangle  node {\large SLS} (5.25,11);
+\draw [->, >=Stealth] (5.25,11.5) -- (6.5,11.5);
+\draw [short] (2.5,14.5) -- (2.5,13.5);
+\draw [short] (2,14) -- (3,14);
+\draw  (7,11.5) circle (0.5cm);
+\draw [->, >=Stealth] (7.5,11.5) -- (8.75,11.5);
+\draw  (8.75,12) rectangle  node {\large L} (10,11);
+\draw [->, >=Stealth] (10,11.5) -- (11.5,11.5);
+\draw  (11.5,12) rectangle  node {\large SLS} (12.75,11);
+\draw [->, >=Stealth] (12.75,11.5) -- (14.5,11.5);
+\draw  (15,11.5) circle (0.5cm);
+\node [font=\large] at (15,16) {R0};
+\draw (15,15.5) to[short] (15,14.5);
+\draw  (15,14) circle (0.5cm);
+\node [font=\large] at (3,11.75) {};
+\draw [short] (15,13.5) -- (15,12);
+\draw [short] (6.5,11.5) -- (7.5,11.5);
+\draw [short] (7,12) -- (7,11);
+\draw [short] (14.5,11.5) -- (15.5,11.5);
+\draw [short] (15,12) -- (15,11);
+\draw [short] (14.5,14) -- (15.5,14);
+\draw [short] (15,14.5) -- (15,13.5);
+\draw [short] (15,11) -- (15,10.25);
+\draw [short] (2.5,11.5) -- (2.5,10.25);
+\draw [short] (2.5,10.25) -- (15,8.25);
+\draw [short] (15,10.25) -- (2.5,8.25);
+\node [font=\large] at (1.5,14) {KL};
+\node [font=\large] at (16,14) {KR};
+\node [font=\large] at (7,12.5) {KR};
+\node [font=\large] at (3.25,12) {R1};
+\node [font=\large] at (5.75,12) {R1a};
+\node [font=\large] at (8,12) {R1a};
+\node [font=\large] at (10.75,12) {R1b};
+\node [font=\large] at (13.75,12) {R1c};
+\node [font=\large] at (15.5,10.5) {R2};
+\node [font=\large] at (2.5,8) {R2};
+\node [font=\large] at (15,8) {R1};
+\end{circuitikz}
+}%
+\caption{ITUbee  MILP differential cryptanalysis sketch}
+\label{fig: ITUbeeDif}
+\end{figure}
+
+In MILP model we are trying to find best characteristic that makes minimum number of active s-box so we minimize binary values before and after s-box operation in the MILP model. ITUbee algorithm uses AES's \cite{dworkin2001advanced} s-box. AES s-box have best input-output difference $2^{-6}$. In our model we found that best characteristic in 3 round have minimum 16 active s-box. Therefore best probability for differential characteristic will be $(2^{-6})^{16}= 2^{-96}  $ which is not usable for differential attack. With this result we can say that 3 round of the algorithm is secure against the differential cryptanalysis. Our result is same for differential with \cite{karakocc2013itubee}. Best characteristic found with the model can be seen in Table \ref{fig: ITUbeeDif}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Stage} & \textbf{Binary Index} & \textbf{Characteristic} \\
+        \hline
+        1. round  & R1 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input      & R0 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        1. round  & R1a & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 1.0, 4: 1.0\} \\
+        middle values   & R1b & \{0: 0.0, 1: 1.0, 2: 1.0, 3: 0.0, 4: 1.0\} \\
+                   & R1c & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        2. round& R2 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input      & R1 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        2. round & R2a & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 1.0, 4: 1.0\} \\
+        middle values  & R2b & \{0: 0.0, 1: 1.0, 2: 1.0, 3: 0.0, 4: 1.0\} \\
+                   & R2c & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        3. round  & R3 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R2 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        3. round  & R3a & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        middle values   & R3b & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                   & R3c & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        4. round & R4 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input    & R3 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+    \end{tabular}
+    \caption{Best 3 round differential characteristic of ITUbee algorithm}
+    \label{tab:MILPcharDif}
+\end{table}
+
+\end{section}
+\section{Linear Cryptanalysis of ITUbee}
+
+Linear cryptanalysis model is very similar to the differential model. Only difference is XOR and three-forked branch changes their role in the model. In linear model we add constraints for three-forked branch and pass the XOR operation. Since middle of the fiestel structure is symmetric and XOR and three-forked branch have same constraints, same model with differential cryptanalysis can be also used for linear cryptanalysis. Sketch of the one round MILP model of the linear cryptanalysis is given in Figure \ref{fig: ITUbeeLin}
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\large]
+\node [font=\large] at (2.5,16) {R1};
+\draw (2.5,15.5) to[short] (2.5,14.5);
+\draw  (2.5,14) circle (0.5cm);
+\draw [short] (2.5,13.5) -- (2.5,11.5);
+\draw [->, >=Stealth] (2.5,11.5) -- (4,11.5);
+\draw  (4,12) rectangle  node {\large SLS} (5.25,11);
+\draw [->, >=Stealth] (5.25,11.5) -- (6.5,11.5);
+\draw [short] (2.5,14.5) -- (2.5,13.5);
+\draw [short] (2,14) -- (3,14);
+\draw  (7,11.5) circle (0.5cm);
+\draw [->, >=Stealth] (7.5,11.5) -- (8.75,11.5);
+\draw  (8.75,12) rectangle  node {\large L} (10,11);
+\draw [->, >=Stealth] (10,11.5) -- (11.5,11.5);
+\draw  (11.5,12) rectangle  node {\large SLS} (12.75,11);
+\draw [->, >=Stealth] (12.75,11.5) -- (14.5,11.5);
+\draw  (15,11.5) circle (0.5cm);
+\node [font=\large] at (15,16) {R0};
+\draw (15,15.5) to[short] (15,14.5);
+\draw  (15,14) circle (0.5cm);
+\node [font=\large] at (3,11.75) {};
+\draw [short] (15,13.5) -- (15,12);
+\draw [short] (6.5,11.5) -- (7.5,11.5);
+\draw [short] (7,12) -- (7,11);
+\draw [short] (14.5,11.5) -- (15.5,11.5);
+\draw [short] (15,12) -- (15,11);
+\draw [short] (14.5,14) -- (15.5,14);
+\draw [short] (15,14.5) -- (15,13.5);
+\draw [short] (15,11) -- (15,10.25);
+\draw [short] (2.5,11.5) -- (2.5,10.25);
+\draw [short] (2.5,10.25) -- (15,8.25);
+\draw [short] (15,10.25) -- (2.5,8.25);
+\node [font=\large] at (1.5,14) {KL};
+\node [font=\large] at (16,14) {KR};
+\node [font=\large] at (7,12.5) {KR};
+\node [font=\large] at (3.25,12) {R1a};
+\node [font=\large] at (5.75,12) {R1b};
+\node [font=\large] at (8,12) {R1b};
+\node [font=\large] at (10.75,12) {R1c};
+\node [font=\large] at (13.75,12) {R0};
+\node [font=\large] at (2,11) {R2};
+\node [font=\large] at (2.5,8) {R0};
+\node [font=\large] at (15,8) {R2};
+\end{circuitikz}
+}%
+\caption{ITUbee MILP linear cryptanalysis sketch}
+\label{fig: ITUbeeLin}
+\end{figure}
+
+Best linear bias for ITUbee S-box input-output mask is $2^{-4}$. In our MILP model we found that minimum number of active s-box for 3 consecutive round is 16. We use piling up lemma in \cite{matsui1993linear} for calculating 3 round probability. 3 round probability is $2^{15}*(2^{-4})^{16}=2^{-49}$. Linear cryptanalysis is known-plaintext attack. Number of required plaintexts for the three round attack is $(2^{-49})^{-2}= 2 ^{96}$ which is more than all possible plaintexts for the cipher. As a conclusion, we can say that 3 round of the ITUbee algorithm is secure against linear cryptanalysis.    
+
+\section{Related-key Differential Cryptanalysis of ITUbee}
+
+For related key model, unlike the differential model, we must also take into account the keys. We also define binary variables for the keys and add constraints for activity of at least 1 key bytes.(Otherwise model will never give active bytes for key and it will be same as differential cryptanalysis) In this model we have more middle values than differential and linear model because we also need to chance the variable after the key xor in the middle.
+Sketch of the one round MILP model of the linear cryptanalysis is given in Figure \ref{fig:itubeeRelated}. 
+
+\begin{figure}[!ht]
+\centering
+\resizebox{1\textwidth}{!}{%
+\begin{circuitikz}
+\tikzstyle{every node}=[font=\large]
+
+\node [font=\large] at (2.5,16) {R1};
+\draw (2.5,15.5) to[short] (2.5,14.5);
+\draw  (2.5,14) circle (0.5cm);
+\draw [short] (2.5,13.5) -- (2.5,11.5);
+\draw [->, >=Stealth] (2.5,11.5) -- (4,11.5);
+\draw  (4,12) rectangle  node {\large SLS} (5.25,11);
+\draw [->, >=Stealth] (5.25,11.5) -- (6.5,11.5);
+\draw [short] (2.5,14.5) -- (2.5,13.5);
+\draw [short] (2,14) -- (3,14);
+\draw  (7,11.5) circle (0.5cm);
+\draw [->, >=Stealth] (7.5,11.5) -- (8.75,11.5);
+\draw  (8.75,12) rectangle  node {\large L} (10,11);
+\draw [->, >=Stealth] (10,11.5) -- (11.5,11.5);
+\draw  (11.5,12) rectangle  node {\large SLS} (12.75,11);
+\draw [->, >=Stealth] (12.75,11.5) -- (14.5,11.5);
+\draw  (15,11.5) circle (0.5cm);
+\node [font=\large] at (15,16) {R0};
+\draw (15,15.5) to[short] (15,14.5);
+\draw  (15,14) circle (0.5cm);
+\node [font=\large] at (3,11.75) {};
+\draw [short] (15,13.5) -- (15,12);
+\draw [short] (6.5,11.5) -- (7.5,11.5);
+\draw [short] (7,12) -- (7,11);
+\draw [short] (14.5,11.5) -- (15.5,11.5);
+\draw [short] (15,12) -- (15,11);
+\draw [short] (14.5,14) -- (15.5,14);
+\draw [short] (15,14.5) -- (15,13.5);
+\draw [short] (15,11) -- (15,10.25);
+\draw [short] (2.5,11.5) -- (2.5,10.25);
+\draw [short] (2.5,10.25) -- (15,8.25);
+\draw [short] (15,10.25) -- (2.5,8.25);
+\node [font=\large] at (1.5,14) {KL};
+\node [font=\large] at (16,14) {KR};
+\node [font=\large] at (7,12.5) {KR};
+\node [font=\large] at (3.25,12) {R3};
+\node [font=\large] at (5.75,12) {R3a};
+\node [font=\large] at (8,12) {R3b};
+\node [font=\large] at (10.75,12) {R3c};
+\node [font=\large] at (13.75,12) {R3d};
+\node [font=\large] at (15.5,10.5) {R4};
+\node [font=\large] at (2.5,8) {R4};
+\node [font=\large] at (15,8) {R3};
+\node [font=\large] at (2,12.5) {R3};
+\node [font=\large] at (15.5,12.5) {R2};
+\end{circuitikz}
+}%
+\caption{ITUbee MILP Related-Key Differential Cryptanalysis Sketch}
+\label{fig:itubeeRelated}
+\end{figure}
+
+We found that 8 round of the algorithm has minimum 16 active s-box. ITUbee algorithm uses AES's \cite{dworkin2001advanced} s-box. AES s-box have best input-output difference $2^{-6}$. Therefore best probability for differential characteristic will be $(2^{-6})^{16}= 2^{-96}  $ which is not usable for related key differential attack. Authors of the ITUbee algorithm claims in \cite{karakocc2013itubee} that algorithm is secure against related key differential cryptanalysis after 10 round. In our model we found that 8 round is enough for security against related key differential cryptanalysis.  Best 8 round characteristic found with the model can be seen in Table \ref{tab:RelatedKeyDif}
+
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        \textbf{Stage} & \textbf{Binary Index} & \textbf{Characteristic} \\
+        \hline
+        Key  & KL & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+                     & KR & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        1. round  & R1 & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        input     & R0 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        1. round  & R2 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        middle values & R3-3a-3b-3c-3d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\     
+        \hline
+        2. round  & R4 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input     & R3 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        2. round  & R4a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R4b-4c-4d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                      
+        \hline
+        3. round  & R5 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R4 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        3. round middle values     & R5a-5b-5c-5d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        4. round  & R6 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input     & R5 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        4. round  & R6a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R6b-6c-6d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                              \hline
+        5. round  & R7 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R6 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        5. round  & R7a & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        middle values & R7b-7c-7d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                      
+        \hline
+        6. round  & R8 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input     & R7 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        6. round  & R8a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R8b-8c-8d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                     
+        \hline
+        7. round  & R9 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R8 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+        7. round middle values & R9a-9b-9c-9d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        8. round  & R10 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        input      & R9  & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        \hline
+        8. round  & R10a & \{0: 0.0, 1: 1.0, 2: 0.0, 3: 1.0, 4: 0.0\} \\
+        middle values & R10b-10c-10d & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+                      
+        \hline
+        9. round & R11 & \{0: 0.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0\} \\
+        input     & R10 & \{0: 1.0, 1: 0.0, 2: 0.0, 3: 0.0, 4: 1.0\} \\
+        \hline
+    \end{tabular}
+    \caption{Best 8 round related-key differential characteristic of ITUbee algorithm}
+    \label{tab:RelatedKeyDif}
+\end{table}
+
+\section{Conclusion}
+As a conclusion, our results demonstrate that ITUbee exhibits strong resistance to classical differential and linear cryptanalysis for more than three rounds, in alignment with the theoretical claims of the original authors. No effective differential or linear trails with sufficiently high probability or correlation could be found beyond this threshold, affirming the cipher’s robustness in this context.
+
+In the case of related-key differential cryptanalysis, our MILP-based analysis reveals a better security margin compared to what was originally proposed. While the designers asserted security against related-key differential attack after 10 rounds, our models shows that algorithm is secure against related-key differential cryptanalysis after 8 rounds. This observation provides valuable insight into the actual security margin of the cipher under related-key scenarios and highlights the importance of model-based cryptanalysis during the cipher evaluation process.
+
+The MILP models developed in this work serve as a reusable framework for analyzing other block ciphers with similar structures. Moreover, the results presented here emphasize the utility of MILP in confirming or challenging security claims and in revealing potential structural vulnerabilities that may not be immediately apparent through manual analysis alone.
+
+Overall, this study reinforces the value of MILP as a precise, automatable, and interpretable method for evaluating security of  cryptographic algorithms. All MILP models we developed can be found at \url{https://anonymous.4open.science/r/Milp-79E6/} and discovered characteristics are included within the thesis  to support further research and reproducibility.
+
+
+% This sample uses bibtex rather than biblatex.
+\bibliography{template}
+
+% NOTES
+% - Download abbrev3.bib and crypto.bib from https://cryptobib.di.ens.fr/
+% - Use biblio.bib for additional references not in the cryptobib database.
+%   If possible, take them from DBLP.
+
+\end{document}

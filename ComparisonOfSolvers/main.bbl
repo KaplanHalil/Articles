@@ -4,47 +4,33 @@
 \providecommand{\doi}[1]{https://doi.org/#1}
 
 \bibitem{scip2023}
-Berlin, Z.I.: Scip: Solving constraint integer programs.
-  \url{https://www.scipopt.org/} (2023)
+Berlin, Z.I.: Scip: Solving constraint integer programs. \url{https://www.scipopt.org/} (2023)
 
 \bibitem{dworkin2001advanced}
-Dworkin, M.J.: The advanced encryption standard (aes) and its use in
-  cryptographic standards. NIST Special Publication  \textbf{800}, ~38 (2001)
+Dworkin, M.J.: The advanced encryption standard (aes) and its use in cryptographic standards. NIST Special Publication  \textbf{800}, ~38 (2001)
 
 \bibitem{highs2023}
-of~Edinburgh, U.: Highs: High-performance interior-point solver.
-  \url{https://github.com/ERGO-Code/HiGHS} (2023)
+of~Edinburgh, U.: Highs: High-performance interior-point solver. \url{https://github.com/ERGO-Code/HiGHS} (2023)
 
 \bibitem{gurobi2024}
 Gurobi~Optimization, L.: Gurobi optimizer. \url{https://www.gurobi.com/} (2024)
 
 \bibitem{cplex2024}
-IBM: Ibm cplex optimization studio.
-  \url{https://www.ibm.com/products/ilog-cplex-optimization-studio} (2024)
+IBM: Ibm cplex optimization studio. \url{https://www.ibm.com/products/ilog-cplex-optimization-studio} (2024)
 
 \bibitem{halil2026milp}
-İbrahim Kaplan, H.: Usage of mixed integer linear programming in cryptanalysis
-  of block ciphers. Cryptology {ePrint} Archive, Paper 2026/224 (2026),
-  \url{https://eprint.iacr.org/2026/224}
+İbrahim Kaplan, H.: Usage of mixed integer linear programming in cryptanalysis of block ciphers. Cryptology {ePrint} Archive, Paper 2026/224 (2026), \url{https://eprint.iacr.org/2026/224}
 
 \bibitem{karakoc2013itubee}
-Karako{\c{c}}, F., Demirci, H., Harmanc{\i}, A.E.: Itubee: a software oriented
-  lightweight block cipher. In: Lightweight Cryptography for Security and
-  Privacy: Second International Workshop, LightSec 2013, Gebze, Turkey, May
-  6-7, 2013, Revised Selected Papers 2. pp. 16--27. Springer (2013)
+Karako{\c{c}}, F., Demirci, H., Harmanc{\i}, A.E.: Itubee: a software oriented lightweight block cipher. In: Lightweight Cryptography for Security and Privacy: Second International Workshop, LightSec 2013, Gebze, Turkey, May 6-7, 2013, Revised Selected Papers 2. pp. 16--27. Springer (2013)
 
 \bibitem{mouha2012differential}
-Mouha, N., Preneel, B.: Differential and linear cryptanalysis using
-  mixed-integer linear programming. In: Information Security and Cryptology --
-  ICISC 2012. Lecture Notes in Computer Science, vol.~7839, pp. 52--67.
-  Springer (2012). \doi{10.1007/978-3-642-36392-4_5}
+Mouha, N., Preneel, B.: Differential and linear cryptanalysis using mixed-integer linear programming. In: Information Security and Cryptology -- ICISC 2012. Lecture Notes in Computer Science, vol.~7839, pp. 52--67. Springer (2012). \doi{10.1007/978-3-642-36392-4_5}
 
 \bibitem{glpk2024}
-Project, G.: Glpk (gnu linear programming kit).
-  \url{https://www.gnu.org/software/glpk/} (2024)
+Project, G.: Glpk (gnu linear programming kit). \url{https://www.gnu.org/software/glpk/} (2024)
 
 \bibitem{fips197aes}
-of~Standards, N.I., Technology: Advanced encryption standard (aes) (2001),
-  \url{https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf}
+of~Standards, N.I., Technology: Advanced encryption standard (aes) (2001), \url{https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf}
 
 \end{thebibliography}
