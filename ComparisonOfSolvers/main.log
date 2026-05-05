@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.28)  5 MAY 2026 08:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.28)  5 MAY 2026 14:21
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -666,12 +666,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 91--92
 
  []
 
-[2] [3]) (./sec3.tex [4]) (./sec4.tex [5] [6]
+
+Overfull \hbox (2.81879pt too wide) in paragraph at lines 109--110
+\T1/cmr/m/n/10 Related-key dif-fer-en-tial crypt-anal-y-sis is an ex-ten-sion of clas-si-cal dif-fer-en-tial crypt-
+ []
+
+[2] [3]
+Underfull \vbox (badness 1694) has occurred while \output is active []
+
+ [4]) (./sec3.tex [5] [6]) (./sec4.tex [7] [8]
 Overfull \hbox (1.37914pt too wide) in paragraph at lines 75--76
 []\T1/cmr/bx/n/10 Open-Source Al-ter-na-tives\T1/cmr/m/n/10 : Among open-source solvers, SCIP con-sis-tently
  []
 
-) (./Conclusion.tex [7]
+) (./Conclusion.tex
 Overfull \hbox (0.35132pt too wide) in paragraph at lines 10--11
 []\T1/cmr/m/n/10 Cryptanalysts should eval-u-ate solver op-tions based on their con-straints (com-
  []
@@ -681,32 +689,32 @@ Overfull \hbox (11.34863pt too wide) in paragraph at lines 10--11
 \T1/cmr/m/n/10 pu-ta-tional bud-get, li-cens-ing avail-abil-ity, prob-lem size) when con-duct-ing related-
  []
 
-) (./main.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 13--14
+) (./main.bbl [9]
+Underfull \hbox (badness 10000) in paragraph at lines 19--20
 []\T1/cmr/m/n/9 of Ed-in-burgh, U.: Highs: High-performance interior-point solver.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--32
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
 []\T1/cmr/m/n/9 Project, G.: Glpk (gnu lin-ear pro-gram-ming kit).
  []
 
-[8]) [9] [10] (./main.aux)
+) [10] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 35345 strings out of 474222
- 892313 string characters out of 5748733
+ 35353 strings out of 474222
+ 892476 string characters out of 5748733
  1946975 words of memory out of 5000000
- 57179 multiletter control sequences out of 15000+600000
+ 57187 multiletter control sequences out of 15000+600000
  570451 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 102i,10n,107p,801b,816s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 102i,10n,107p,1045b,816s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0900.pfb>
-Output written on main.pdf (10 pages, 315821 bytes).
+Output written on main.pdf (10 pages, 319240 bytes).
 PDF statistics:
  150 PDF objects out of 1000 (max. 8388607)
  94 compressed objects within 1 object stream

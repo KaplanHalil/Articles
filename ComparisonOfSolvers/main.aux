@@ -9,57 +9,88 @@
 \citation{halil2026milp}
 \citation{karakoc2013itubee}
 \citation{fips197aes}
+\citation{biham1990differential}
+\citation{kelsey1996related}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Our MILP Model}{2}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}ITUbee}{2}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{L Function}{2}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{F Function}{2}{}\protected@file@percent }
-\citation{mouha2012differential}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces ITUbee round structure}}{3}{}\protected@file@percent }
 \newlabel{fig:itubee}{{1}{3}{}{}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Pseudo code for ITUbee encryption}}{3}{}\protected@file@percent }
 \newlabel{alg:ITUbee}{{1}{3}{}{}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Key Schedule}{3}{}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Related-key Differential Cryptanalysis}{3}{}\protected@file@percent }
+\citation{mouha2012differential}
 \citation{dworkin2001advanced}
 \citation{karakoc2013itubee}
-\citation{glpk2024}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces ITUbee MILP Related-Key Differential Cryptanalysis Sketch}}{4}{}\protected@file@percent }
 \newlabel{fig:itubeeRelated}{{2}{4}{}{}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Solver Specifications}{4}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}GLPK (GNU Linear Programming Kit)}{4}{}\protected@file@percent }
+\citation{dantzig1963linear}
+\citation{karmarkar1984interior}
+\citation{land1960automatic}
+\citation{gomory1958outline}
+\citation{nemhauser1988integer,wolsey1998integer}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Best 8 round related-key differential characteristic of ITUbee algorithm}}{5}{}\protected@file@percent }
+\newlabel{tab:RelatedKeyDif}{{1}{5}{}{}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Solver Specifications}{5}{}\protected@file@percent }
+\citation{glpk2024}
+\citation{dantzig1963linear}
+\citation{land1960automatic}
+\citation{gomory1958outline}
 \citation{highs2023}
+\citation{dantzig1963linear}
+\citation{karmarkar1984interior}
+\citation{land1960automatic}
 \citation{scip2023}
+\citation{nemhauser1988integer}
+\citation{land1960automatic}
+\citation{gomory1958outline}
 \citation{gurobi2024}
+\citation{nemhauser1988integer,wolsey1998integer}
+\citation{dantzig1963linear}
+\citation{karmarkar1984interior}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}GLPK (GNU Linear Programming Kit)}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}HiGHS (High-performance Interior-point Solver)}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}SCIP (Solving Constraint Integer Programs)}{6}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Gurobi Optimizer}{6}{}\protected@file@percent }
 \citation{cplex2024}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}HiGHS (High-performance Interior-point Solver)}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}SCIP (Solving Constraint Integer Programs)}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Gurobi Optimizer}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}CPLEX (IBM CPLEX Optimization Studio)}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Experimental Configuration}{5}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results and Analysis}{6}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}8-Round Results}{6}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Solution times for the 8-round model }}{6}{}\protected@file@percent }
-\newlabel{tab:8round}{{2}{6}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}10-Round Results}{6}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Solution times for the 10-round model }}{7}{}\protected@file@percent }
-\newlabel{tab:10round}{{3}{7}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}12-Round Results}{7}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Solution times for the 12-round model}}{7}{}\protected@file@percent }
-\newlabel{tab:12round}{{4}{7}{}{}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Discussion}{7}{}\protected@file@percent }
+\citation{dantzig1963linear}
+\citation{karmarkar1984interior}
+\citation{nemhauser1988integer}
+\citation{gomory1958outline}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}CPLEX (IBM CPLEX Optimization Studio)}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Experimental Configuration}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results and Analysis}{7}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}8-Round Results}{7}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Solution times for the 8-round model }}{8}{}\protected@file@percent }
+\newlabel{tab:8round}{{2}{8}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}10-Round Results}{8}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Solution times for the 10-round model }}{8}{}\protected@file@percent }
+\newlabel{tab:10round}{{3}{8}{}{}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}12-Round Results}{8}{}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Solution times for the 12-round model}}{8}{}\protected@file@percent }
+\newlabel{tab:12round}{{4}{8}{}{}{}}
 \bibstyle{splncs04}
 \bibdata{main}
 \bibcite{scip2023}{1}
-\bibcite{dworkin2001advanced}{2}
-\bibcite{highs2023}{3}
-\bibcite{gurobi2024}{4}
-\bibcite{cplex2024}{5}
-\bibcite{halil2026milp}{6}
-\bibcite{karakoc2013itubee}{7}
-\bibcite{mouha2012differential}{8}
-\bibcite{glpk2024}{9}
-\bibcite{fips197aes}{10}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{8}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Best 8 round related-key differential characteristic of ITUbee algorithm}}{10}{}\protected@file@percent }
-\newlabel{tab:RelatedKeyDif}{{1}{10}{}{}{}}
+\bibcite{biham1990differential}{2}
+\bibcite{dantzig1963linear}{3}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Discussion}{9}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{9}{}\protected@file@percent }
+\bibcite{dworkin2001advanced}{4}
+\bibcite{highs2023}{5}
+\bibcite{gomory1958outline}{6}
+\bibcite{gurobi2024}{7}
+\bibcite{cplex2024}{8}
+\bibcite{halil2026milp}{9}
+\bibcite{karakoc2013itubee}{10}
+\bibcite{karmarkar1984interior}{11}
+\bibcite{kelsey1996related}{12}
+\bibcite{land1960automatic}{13}
+\bibcite{mouha2012differential}{14}
+\bibcite{nemhauser1988integer}{15}
+\bibcite{glpk2024}{16}
+\bibcite{fips197aes}{17}
+\bibcite{wolsey1998integer}{18}
 \gdef \@abspage@last{10}

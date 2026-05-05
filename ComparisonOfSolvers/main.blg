@@ -3,47 +3,46 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 The style file: splncs04.bst
 Database file #1: main.bib
-Warning--entry type for "fips197aes" isn't style-file defined
---line 77 of file main.bib
-You've used 10 entries,
+Warning--empty chapter and pages in dantzig1963linear
+You've used 18 entries,
             2850 wiz_defined-function locations,
-            650 strings with 6046 characters,
-and the built_in function-call counts, 4056 in all, are:
-= -- 323
-> -- 90
-< -- 5
-+ -- 39
-- -- 28
-* -- 214
-:= -- 530
-add.period$ -- 14
-call.type$ -- 10
-change.case$ -- 48
+            697 strings with 7200 characters,
+and the built_in function-call counts, 8119 in all, are:
+= -- 672
+> -- 171
+< -- 12
++ -- 75
+- -- 54
+* -- 441
+:= -- 1034
+add.period$ -- 28
+call.type$ -- 18
+change.case$ -- 88
 chr.to.int$ -- 0
-cite$ -- 10
-duplicate$ -- 367
-empty$ -- 441
-format.name$ -- 31
-if$ -- 906
+cite$ -- 19
+duplicate$ -- 742
+empty$ -- 862
+format.name$ -- 61
+if$ -- 1832
 int.to.chr$ -- 0
-int.to.str$ -- 10
-missing$ -- 67
-newline$ -- 36
-num.names$ -- 20
-pop$ -- 165
+int.to.str$ -- 18
+missing$ -- 136
+newline$ -- 60
+num.names$ -- 36
+pop$ -- 301
 preamble$ -- 1
-purify$ -- 34
+purify$ -- 63
 quote$ -- 0
-skip$ -- 107
+skip$ -- 233
 stack$ -- 0
-substring$ -- 189
-swap$ -- 173
-text.length$ -- 5
+substring$ -- 442
+swap$ -- 361
+text.length$ -- 12
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 40
-warning$ -- 0
-while$ -- 38
-width$ -- 12
-write$ -- 103
+type$ -- 66
+warning$ -- 1
+while$ -- 77
+width$ -- 20
+write$ -- 183
 (There was 1 warning)

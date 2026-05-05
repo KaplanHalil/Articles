@@ -6,11 +6,20 @@
 \bibitem{scip2023}
 Berlin, Z.I.: Scip: Solving constraint integer programs. \url{https://www.scipopt.org/} (2023)
 
+\bibitem{biham1990differential}
+Biham, E., Shamir, A.: Differential cryptanalysis of des-like cryptosystems. In: Workshop on the Theory and Application of Cryptographic Techniques. pp. 2--21. Springer (1990)
+
+\bibitem{dantzig1963linear}
+Dantzig, G.B.: Linear programming and extensions. Princeton university press (1963)
+
 \bibitem{dworkin2001advanced}
 Dworkin, M.J.: The advanced encryption standard (aes) and its use in cryptographic standards. NIST Special Publication  \textbf{800}, ~38 (2001)
 
 \bibitem{highs2023}
 of~Edinburgh, U.: Highs: High-performance interior-point solver. \url{https://github.com/ERGO-Code/HiGHS} (2023)
+
+\bibitem{gomory1958outline}
+Gomory, R.E.: Outline of an algorithm for integer solutions to linear programs. Bulletin of the American Mathematical Society  \textbf{64}(5),  275--278 (1958)
 
 \bibitem{gurobi2024}
 Gurobi~Optimization, L.: Gurobi optimizer. \url{https://www.gurobi.com/} (2024)
@@ -24,13 +33,28 @@ IBM: Ibm cplex optimization studio. \url{https://www.ibm.com/products/ilog-cplex
 \bibitem{karakoc2013itubee}
 Karako{\c{c}}, F., Demirci, H., Harmanc{\i}, A.E.: Itubee: a software oriented lightweight block cipher. In: Lightweight Cryptography for Security and Privacy: Second International Workshop, LightSec 2013, Gebze, Turkey, May 6-7, 2013, Revised Selected Papers 2. pp. 16--27. Springer (2013)
 
+\bibitem{karmarkar1984interior}
+Karmarkar, N.: A new polynomial-time algorithm for linear programming. Combinatorica  \textbf{4}(4),  373--395 (1984)
+
+\bibitem{kelsey1996related}
+Kelsey, J., Schneier, B., Wagner, D.: Related-key cryptanalysis of 3-way, biham-des, cast, des-x, newdes, rc2, and tea. In: International Conference on Information and Communications Security. pp. 233--246. Springer (1996)
+
+\bibitem{land1960automatic}
+Land, A.H., Doig, A.G.: An automatic method of solving discrete programming problems. In: Econometrica: journal of the Econometric Society. pp. 497--520. JSTOR (1960)
+
 \bibitem{mouha2012differential}
 Mouha, N., Preneel, B.: Differential and linear cryptanalysis using mixed-integer linear programming. In: Information Security and Cryptology -- ICISC 2012. Lecture Notes in Computer Science, vol.~7839, pp. 52--67. Springer (2012). \doi{10.1007/978-3-642-36392-4_5}
+
+\bibitem{nemhauser1988integer}
+Nemhauser, G.L., Wolsey, L.A.: Integer and combinatorial optimization. John Wiley \& Sons (1988)
 
 \bibitem{glpk2024}
 Project, G.: Glpk (gnu linear programming kit). \url{https://www.gnu.org/software/glpk/} (2024)
 
 \bibitem{fips197aes}
 of~Standards, N.I., Technology: Advanced encryption standard (aes) (2001), \url{https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197.pdf}
+
+\bibitem{wolsey1998integer}
+Wolsey, L.A.: Integer programming. John Wiley \& Sons (1998)
 
 \end{thebibliography}
