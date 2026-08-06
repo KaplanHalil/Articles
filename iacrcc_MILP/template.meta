@@ -1,4 +1,18 @@
 license: CC-by
-version: submission
+author:
+  name: Halil İbrahim Kaplan
+  surname: Kaplan
+  affil: 1
+  email: halil.kaplan@tubitak.gov.tr
+  orcid: 0009-0006-0120-6512
+affiliation:
+  name: TÜBİTAK BİLGEM
+  ror: 031v4g827
+  city: Kocaeli/Gebze
+  postcode: 3001
+  country: Turkey
+affiliation:
+  name: Cryptanalysis Laboratory
+version: final
 title: Usage of Mixed Integer Linear Programming in Cryptanalysis of Block Ciphers
 keywords: MILP , Cryptanalysis, Block Ciphers

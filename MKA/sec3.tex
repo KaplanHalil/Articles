@@ -1,0 +1,24 @@
+\section{Formal Analysis and Tamarin Prover}
+\label{sec:analysis}
+
+The Tamarin Prover~\cite{meier2013tamarin,basin2015tamarin} is a widely used tool for the automated symbolic verification of security protocols. It operates in the Dolev--Yao adversary model~\cite{dolevyao1983}: the adversary controls the network (can intercept, replay, modify, and inject messages) but cannot break cryptographic primitives (for example, cannot invert a hash, decrypt without the key, or forge a MAC).
+
+\paragraph{Modelling language.} Tamarin protocols are specified as \emph{multiset rewriting rules} over a set of \emph{facts}. Each rule has the form
+\[
+  [\text{premise facts}] \xrightarrow{[\text{action facts}]} [\text{conclusion facts}]
+\]
+The premise specifies what facts must be present in the current system state, action facts annotate the rule firing with observable events, and the conclusion specifies what facts are produced. The special facts \texttt{Fr(x)} generate fresh nonces, \texttt{In(m)} receives a network message, and \texttt{Out(m)} sends one. Persistent facts (prefixed with \texttt{!}) survive consumption.
+
+\paragraph{Equational theories.} Tamarin supports equational theories that model algebraic properties of cryptographic operations. For instance, \texttt{sdec(senc(m,k),k) = m} captures symmetric encryption/decryption. The tool reasons about an arbitrary Dolev-Yao adversary that can apply these equations to derive new messages.
+
+\paragraph{Restrictions and lemmas.} Restrictions (formerly called axioms) constrain the set of valid execution traces, allowing the modeller to express protocol-specific validity conditions (e.g., ``a MAC must verify''). Lemmas specify security properties in a fragment of first-order logic with time annotations:
+\begin{itemize}
+  \item \texttt{all-traces} lemmas express universal properties (safety, authentication, secrecy).
+  \item \texttt{exists-trace} lemmas assert executability or demonstrate attack traces.
+\end{itemize}
+Tamarin employs a constraint-solving procedure with manual or automatic heuristics to discharge lemmas. Its soundness and completeness guarantees hold relative to the modelled equational theory.
+
+
+\paragraph{Debugging and reproducibility.} When a lemma fails, Tamarin produces a concrete counterexample trace. This trace can be exported to LaTeX via the \texttt{--trace} option, which generates a \texttt{trace.tex} file that can be directly included in the paper. For reproducibility, all proof outputs—including \texttt{summary.pdf}, \texttt{trace.tex}, and the exact command-line invocation—are archived alongside the model in the repository.
+
+

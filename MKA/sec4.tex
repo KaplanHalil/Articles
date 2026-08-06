@@ -1,0 +1,174 @@
+\section{Tamarin Model}
+\label{sec:model}
+
+\subsection{Cryptographic Primitives and Equational Theory}
+
+Our Tamarin model is built on the following builtins and functions:
+\begin{itemize}
+  \item \textbf{Symmetric encryption/decryption:} We used predefined functions \texttt{senc}/\texttt{sdec} satisfying \texttt{sdec(senc(m,k),k) = m} for symmetric encryption and decryption. The adversary can only decrypt a ciphertext if it knows the corresponding key.
+  \item \textbf{Key derivation:} \texttt{kdf(key,label)} is modelled as an uninterpreted two-argument function; no algebraic identities are assumed, which captures the idealised one-way property of a KDF.
+  \item \textbf{Message authentication:} There is no predifined MAC in the Tamarin, therefore we defined \texttt{mac(M,K)} and \texttt{macverify(mac(M,K),M,K) = mactrue}; the equation ensures that the adversary can only produce a valid ICV if it knows the ICK.
+  \item \textbf{Monotone counters:} We define \texttt{count(x)} function to models counter advancement and is used for both MN and KN progression. 
+  \item \textbf{Message-number generation:} In the model, we proceeded with the assumption that the Keyserver was pre-selected. Therefore, both the server and the keyserver must have previously sent MKAPDU messages and a MN. For this reason, we defined a private function called \texttt{genMN(\$Party)}. 
+\end{itemize}
+
+\subsection{Protocol Participants and Long-Term State}
+
+\paragraph{CAK setup.} The rule \texttt{Setup\_CAK} generates a fresh CAK ${\mathit{cak}}$ and stores it as a persistent shared fact \texttt{!SharedCAK(\textasciitilde cak)}, available to both parties.
+
+\paragraph{Derived keys.} Both participants independently compute
+\[
+  \mathit{kek} = \mathtt{kdf}(\mathit{cak}, \texttt{'KEK'}),\quad
+  \mathit{ick} = \mathtt{kdf}(\mathit{cak}, \texttt{'ICK'})
+\]
+at the beginning of each protocol step, since both parties share the same CAK.
+
+\subsection{Initial Session Rules}
+
+\paragraph{Initial\_KeyServer\_Send.} The Key Server:
+\begin{enumerate}
+  \item Retrieves \texttt{!SharedCAK(\textasciitilde cak)}.
+  \item Generates a fresh Key Number ${\mathit{kn}}$ and a fresh nonce ${\mathit{KS\_nonce0}}$.
+  \item Derives $\mathit{sak1} = \mathtt{kdf}(\mathit{cak}, \langle \$\mathit{Keyserver}, {\mathit{kn}},{\mathit{KS\_nonce0}}\rangle)$.
+  \item Computes $\mathit{c1} = \mathtt{senc}(\mathit{sak1}, \mathit{kek})$.
+  \item Computes $\mathit{icv1} = \mathtt{mac}(\langle \$\mathit{Keyserver}, \mathit{mn\_ks1},{\mathit{kn}}, \mathit{c1}\rangle, \mathit{ick})$.
+  \item Sends $\langle \$\mathit{Keyserver}, \mathit{mn\_ks1}, {\mathit{kn}}, \mathit{c1}, \mathit{icv1}\rangle$ and stores \texttt{KSSTATE0}.
+\end{enumerate}
+The action fact \texttt{SentInitialSAK} is recorded for use in the authentication lemmas.
+
+\paragraph{Initial\_Server\_Receive.} The Server:
+\begin{enumerate}
+  \item Receives the MKAPDU from the network.
+  \item Retrieves \texttt{!SharedCAK(\textasciitilde cak)} and verifies $\mathit{icv1}$ using a \texttt{\_restrict} action: \texttt{macverify(icv1, \ldots, ick) = mactrue}.
+  \item Restricts the received MN to match the expected counter: $\mathit{mn\_ks1} = \mathtt{count}(\mathit{mn\_ks})$.
+  \item Decrypts the payload: $\mathit{sak1} = \mathtt{sdec}(\mathit{c1}, \mathit{kek})$.
+  \item Computes and sends its acknowledgement ICV2.
+  \item Records \texttt{ServerAcceptedSAK} and stores \texttt{SSTATE0}.
+\end{enumerate}
+
+\paragraph{Initial\_KeyServer\_Confirm.} The Key Server receives the Server's ACK, verifies ICV2, checks that the received MN matches the expected counter, and transitions to \texttt{KSSTATE1}, recording \texttt{InitialSessionCompleted}.
+
+\subsection{Rekey Rules}
+
+The rekey phase mirrors the initial phase structurally, but it reads the previous state (\texttt{KSSTATE1}/\texttt{SSTATE0}) to enforce monotonicity. Specifically:
+
+\begin{itemize}
+  \item $\mathit{mn\_ks2} = \mathtt{count}(\mathit{mn\_ks1})$ and $\mathit{kn1} = \mathtt{count}({\mathit{kn}})$ ensure both counters advance.
+  \item A fresh nonce ${\mathit{KS\_nonce1}}$ ensures SAK2 is independent of SAK1 even for identical KN paths.
+  
+\end{itemize}
+
+\subsection{Adversary Model and Compromise Rules}
+
+We model a standard Dolev--Yao adversary augmented with two compromise rules:
+\begin{itemize}
+  \item \texttt{Reveal\_SAK}: exposes an initial SAK from \texttt{KSSTATE0}; records \texttt{RevealSAK}.
+  \item \texttt{Reveal\_CAK}: exposes the CAK from \texttt{!SharedCAK}; records \texttt{RevealCAK}.
+\end{itemize}
+These rules allow the formulation of conditional security properties, for example that secrecy holds unless the CAK is revealed, and they capture the forward-secrecy limitations inherent in a pure pre-shared-key protocol.
+
+The rule \texttt{Malicious\_KeyServer\_Send} models a Key Server that uses the CAK to construct a well-formed MKAPDU carrying an arbitrary fresh SAK ($\widetilde{\mathit{fakeSAK}}$) instead of a properly KDF-derived one. This rule is used to probe the protocol's acceptance mechanism.
+
+Quantum adversaries is not thread for this model because all cryptographic primitives in the prothocol is based on symmetric key cryptography. Therefore, the model does not include any quantum-specific adversary rules.
+
+\subsection{Security Properties}
+\label{sec:properties}
+
+We specify twelve security properties as Tamarin lemmas. Table~\ref{tab:lemmas} summarises them. The checked entries show that the protocol is executable and that the main agreement, authentication, secrecy, and ordering properties hold under the stated assumptions. The two existence lemmas are especially important: they confirm that the model admits a valid execution trace, while also exposing the structural acceptance weakness in which a malicious Key Server can inject a non-KDF-derived SAK that the Server accepts.
+
+\begin{table}[t]
+\centering
+\caption{Security lemmas verified against the MKA model.}
+\label{tab:lemmas}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{5.6cm}p{3.3cm}p{3.3cm}c@{}}
+\toprule
+\textbf{Lemma} & \textbf{Type} & \textbf{Property} & \textbf{Res.} \\
+\midrule
+\texttt{executable} & exists-trace & Executability & \cmark \\
+\texttt{initial\_agreement} & all-traces & Initial agreement & \cmark \\
+\texttt{rekey\_agreement} & all-traces & Rekey agreement & \cmark \\
+\texttt{server\_authentication\_initial} & all-traces & Server aliveness & \cmark \\
+\texttt{server\_authentication\_rekey} & all-traces & Rekey aliveness & \cmark \\
+\texttt{initial\_sak\_secrecy\_no\_reveal} & all-traces & SAK1 secrecy & \cmark \\
+\texttt{rekey\_sak\_secrecy\_no\_reveal} & all-traces & SAK2 secrecy & \cmark \\
+\texttt{rekey\_cannot\_start\_before\_initial} & all-traces & Ordering & \cmark \\
+\texttt{rekey\_after\_initial\_completion} & all-traces & Ordering & \cmark \\
+\texttt{key\_update} & all-traces & SAK1 $\neq$ SAK2 & \cmark \\
+\texttt{key\_number\_progress} & all-traces & KN monotonicity & \cmark \\
+\texttt{fresh\_rekey\_key} & all-traces & Rekey freshness & \cmark \\
+\texttt{server\_only\_accepts\_kdf\_keys} & exists-trace & KDF bypass & \cmark \\
+\texttt{accepts\_non\_kdf\_sak} & exists-trace & Malicious SAK & \cmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+\subsection{Lemma Details}
+
+The following paragraphs summarise the principal Tamarin lemmas defined in our model and their intended security meaning. In Tamarin, a lemma is a property asserted over all possible execution traces of the protocol. The notation \texttt{\#i} and \texttt{\#j} denotes time points on a trace: a fact annotated with \texttt{@i} is observed at time \texttt{\#i}. Hence, expressions such as \texttt{j < i} indicate that one event precedes another. The ellipses in the formulas indicate that some fact arguments are omitted for readability; the complete set of lemmas is available in the public repository~\cite{mka-tamarin-repo}.
+
+\begin{itemize}[leftmargin=*,itemsep=0.3em]
+\item \textbf{Executable lemma.} \texttt{exists-trace; Ex mn\_ks1 mn\_s1 kn sak1 mn\_ks2 mn\_s2 kn1 sak2 \#i \#j. InitialSessionCompleted(...)@i \& RekeySessionCompleted(...)@j.}
+
+This checks that the model admits at least one complete execution trace in which both the initial session and the rekey session finish successfully.
+
+\item \textbf{Initial agreement.} \texttt{ All mn\_ks1 mn\_s1 kn sak1 \#i. InitialSessionCompleted(...)@i ==> (Ex \#j. SentInitialSAK(...)@j \& j < i).}
+
+This states that whenever the initial session completes, the corresponding SAK must have been sent earlier by the Key Server.
+
+\item \textbf{Rekey agreement.} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> (Ex \#j. RekeyStarted(...)@j \& j < i).}
+
+This expresses the analogous requirement for the rekey phase: a completed rekey must have been initiated earlier.
+
+\item \textbf{Server authentication (initial).} \texttt{ All mn\_ks1 mn\_s1 kn sak1 \#i. InitialSessionCompleted(...)@i ==> (Ex \#j. InitialAckPrepared(...)@j \& j < i).}
+
+This captures the intuition that the Key Server does not accept an initial session as complete unless the Server has already prepared an acknowledgement.
+
+\item \textbf{Server authentication (rekey).} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> (Ex \#j. RekeyAckPrepared(...)@j \& j < i).}
+
+The same authentication property is enforced for the rekey phase.
+
+\item \textbf{Initial SAK secrecy.} \texttt{ All mn\_ks1 mn\_s1 kn sak1 \#i. InitialSessionCompleted(...)@i ==> not(Ex \#k. RevealSAK(...)@k) \& not(Ex \#l. RevealCAK(...)@l) ==> not(Ex \#m. K(sak1)@m).}
+
+This ensures that, unless the SAK or the CAK is explicitly revealed, the adversary cannot learn the initial SAK.
+
+\item \textbf{Rekey SAK secrecy.} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> not(Ex \#k. RevealSAK(...)@k) \& not(Ex \#l. RevealCAK(...)@l) ==> not(Ex \#m. K(sak2)@m).}
+
+The same secrecy requirement is applied to the rekey SAK.
+
+\item \textbf{Rekey ordering (cannot start before initial completion).} \texttt{ All mn\_ks2 kn1 sak2 \#i. RekeyStarted(...)@i ==> (Ex mn\_ks1 mn\_s1 kn sak1 \#j. InitialSessionCompleted(...)@j \& j < i).}
+
+This forbids a rekey from starting before a successful initial session has completed.
+
+\item \textbf{Rekey ordering (after initial completion).} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> (Ex mn\_ks1 mn\_s1 kn sak1 \#j. InitialSessionCompleted(...)@j \& j < i).}
+
+This strengthens the previous condition by requiring that a completed rekey must also be preceded by an initial session completion.
+
+\item \textbf{Key update.} \texttt{ All mn\_ks1 mn\_s1 kn sak1 mn\_ks2 mn\_s2 kn1 sak2 \#i \#j. InitialSessionCompleted(...)@i \& RekeySessionCompleted(...)@j ==> not(sak1 = sak2).}
+
+This asserts that the rekey phase produces a fresh SAK rather than reusing the one from the initial session.
+
+\item \textbf{Key-number progression.} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> (Ex kn mn\_ks1 mn\_s1 sak1 \#j. InitialSessionCompleted(...)@j \& kn1 = count(kn)).}
+
+This captures the intended monotonic progression of the key-number counter across the rekey transition.
+
+\item \textbf{Fresh rekey key.} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> not(Ex mn\_ks1 mn\_s1 kn sak1 \#j. InitialSessionCompleted(...)@j \& sak2 = sak1).}
+
+This prevents the rekey from reusing a SAK that already appeared in the initial session.
+
+\item \textbf{KDF-only acceptance.} \texttt{ exists-trace; Ex sak \#i. ServerAcceptedSAK(sak)@i ==> (Ex \#j. KDFGeneratedSAK(sak)@j).}
+
+This is the positive sanity check showing that the server may accept a SAK only if it was produced by the KDF path in the model.
+
+\item \textbf{Non-KDF acceptance weakness.} \texttt{ exists-trace; Ex sak \#i \#j. MaliciousSAKSent(sak)@i \& ServerAcceptedSAK(sak)@j.}
+
+This captures the structural weakness: a malicious Key Server can send an arbitrary fresh SAK that the Server still accepts.
+
+\end{itemize}
+
+\subsection{Structural Weakness: KDF-Bypass Attack}
+
+\begin{definition}[Malicious SAK Acceptance]
+There exists a trace in which \texttt{MaliciousSAKSent}($sak$) is observed before \texttt{ServerAcceptedSAK}($sak$), and $sak$ was never output by \texttt{KDFGeneratedSAK}.
+\end{definition}
+
+This exists-trace lemma captures the scenario in which a Key Server holding the CAK injects a fresh but non-KDF-derived SAK into a well-formed MKAPDU. The Server, having no independent means of verifying whether the SAK was derived through the prescribed KDF path or was arbitrary, accepts it. This is a \emph{structural} property of the protocol rather than a cryptographic break.
