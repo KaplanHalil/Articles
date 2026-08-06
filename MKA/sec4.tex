@@ -174,3 +174,14 @@ There exists a trace in which \texttt{MaliciousSAKSent}($sak$) is observed befor
 \end{definition}
 
 This exists-trace lemma captures the scenario in which a Key Server holding the CAK injects a fresh but non-KDF-derived SAK into a well-formed MKAPDU. The Server, having no independent means of verifying whether the SAK was derived through the prescribed KDF path or was arbitrary, accepts it. This is a \emph{structural} property of the protocol rather than a cryptographic break.
+
+\subsection{Gap between IEEE 802.1X-2020 and our model}
+
+While our Tamarin model successfully verifies MKA under a standard Dolev-Yao adversary, the model necessarily abstracts away several operational details present in the IEEE 802.1X-2020 standard. The primary gaps include:
+\begin{itemize}
+    \item \textbf{Keyserver Selection:} We omit the keyserver selection process and assume keyserver is already selected. This assumption is valid for our model because we are primarily concerned with the security of the key agreement protocol itself, not the keyserver discovery process. 
+    \item \textbf{Detailed State Machines:} IEEE 802.1X-2020 specifies comprehensive finite-state machines for key generation, SA activation, and session state transitions. Our model captures the high-level logic (initiation, key exchange, rekeying) but omits low-level transitions like timers, retry counts, and error states.
+    \item \textbf{Message Numbering:} The IEEE 802.1X-2020 standard specifies a message numbering scheme for MKAPDU messages. We assumed that both participant alredy send MK-PDUs therefore they know all participants' message numbers and can compare new message numbers with previous message numbers. This assumption is valid in our model because we assume that both participants have already exchanged MK-PDUs and know each other's message numbers.  
+\end{itemize}
+
+
