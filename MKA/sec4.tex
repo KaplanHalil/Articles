@@ -72,7 +72,7 @@ The rule \texttt{Malicious\_KeyServer\_Send} models a Key Server that uses the C
 
 Quantum adversaries is not thread for this model because all cryptographic primitives in the prothocol is based on symmetric key cryptography. Therefore, the model does not include any quantum-specific adversary rules.
 
-\subsection{Security Properties}
+\subsection{Security Properties and Lemmas}
 \label{sec:properties}
 
 We specify twelve security properties as Tamarin lemmas. Table~\ref{tab:lemmas} summarises them. The checked entries show that the protocol is executable and that the main agreement, authentication, secrecy, and ordering properties hold under the stated assumptions. The two existence lemmas are especially important: they confirm that the model admits a valid execution trace, while also exposing the structural acceptance weakness in which a malicious Key Server can inject a non-KDF-derived SAK that the Server accepts.
@@ -103,69 +103,14 @@ We specify twelve security properties as Tamarin lemmas. Table~\ref{tab:lemmas} 
 \bottomrule
 \end{tabular}
 \end{table}
-\subsection{Lemma Details}
+
 
 The following paragraphs summarise the principal Tamarin lemmas defined in our model and their intended security meaning. In Tamarin, a lemma is a property asserted over all possible execution traces of the protocol. The notation \texttt{\#i} and \texttt{\#j} denotes time points on a trace: a fact annotated with \texttt{@i} is observed at time \texttt{\#i}. Hence, expressions such as \texttt{j < i} indicate that one event precedes another. The ellipses in the formulas indicate that some fact arguments are omitted for readability; the complete set of lemmas is available in the public repository~\cite{mka-tamarin-repo}.
 
-\begin{sloppypar}
-\begin{itemize}[leftmargin=*,itemsep=0.3em]
-  \item \textbf{Executable lemma.} \texttt{exists-trace;} Ex \texttt{mn_ks1 mn_s1 kn sak1 mn_ks2 mn_s2 kn1 sak2 \#i \#j.} \texttt{InitialSessionCompleted(...)@i} \& \texttt{RekeySessionCompleted(...)@j}.
 
-  This checks that the model admits at least one complete execution trace in which both the initial session and the rekey session finish successfully.
 
-  \item \textbf{Initial agreement.} \texttt{All mn_ks1 mn_s1 kn sak1 \#i. InitialSessionCompleted(...)@i ==> (Ex \#j. SentInitialSAK(...)@j \& j < i).}
 
-This states that whenever the initial session completes, the corresponding SAK must have been sent earlier by the Key Server.
 
-\item \textbf{Rekey agreement.} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> (Ex \#j. RekeyStarted(...)@j \& j < i).}
-
-This expresses the analogous requirement for the rekey phase: a completed rekey must have been initiated earlier.
-
-\item \textbf{Server authentication (initial).} \texttt{ All mn\_ks1 mn\_s1 kn sak1 \#i. InitialSessionCompleted(...)@i ==> (Ex \#j. InitialAckPrepared(...)@j \& j < i).}
-
-This captures the intuition that the Key Server does not accept an initial session as complete unless the Server has already prepared an acknowledgement.
-
-\item \textbf{Server authentication (rekey).} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> (Ex \#j. RekeyAckPrepared(...)@j \& j < i).}
-
-The same authentication property is enforced for the rekey phase.
-
-\item \textbf{Initial SAK secrecy.} \texttt{ All mn\_ks1 mn\_s1 kn sak1 \#i. InitialSessionCompleted(...)@i ==> not(Ex \#k. RevealSAK(...)@k) \& not(Ex \#l. RevealCAK(...)@l) ==> not(Ex \#m. K(sak1)@m).}
-
-This ensures that, unless the SAK or the CAK is explicitly revealed, the adversary cannot learn the initial SAK.
-
-\item \textbf{Rekey SAK secrecy.} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> not(Ex \#k. RevealSAK(...)@k) \& not(Ex \#l. RevealCAK(...)@l) ==> not(Ex \#m. K(sak2)@m).}
-
-The same secrecy requirement is applied to the rekey SAK.
-
-\item \textbf{Rekey ordering (cannot start before initial completion).} \texttt{ All mn\_ks2 kn1 sak2 \#i. RekeyStarted(...)@i ==> (Ex mn\_ks1 mn\_s1 kn sak1 \#j. InitialSessionCompleted(...)@j \& j < i).}
-
-This forbids a rekey from starting before a successful initial session has completed.
-
-\item \textbf{Rekey ordering (after initial completion).} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> (Ex mn\_ks1 mn\_s1 kn sak1 \#j. InitialSessionCompleted(...)@j \& j < i).}
-
-This strengthens the previous condition by requiring that a completed rekey must also be preceded by an initial session completion.
-
-\item \textbf{Key update.} \texttt{ All mn\_ks1 mn\_s1 kn sak1 mn\_ks2 mn\_s2 kn1 sak2 \#i \#j. InitialSessionCompleted(...)@i \& RekeySessionCompleted(...)@j ==> not(sak1 = sak2).}
-
-This asserts that the rekey phase produces a fresh SAK rather than reusing the one from the initial session.
-
-\item \textbf{Key-number progression.} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> (Ex kn mn\_ks1 mn\_s1 sak1 \#j. InitialSessionCompleted(...)@j \& kn1 = count(kn)).}
-
-This captures the intended monotonic progression of the key-number counter across the rekey transition.
-
-\item \textbf{Fresh rekey key.} \texttt{ All mn\_ks2 mn\_s2 kn1 sak2 \#i. RekeySessionCompleted(...)@i ==> not(Ex mn\_ks1 mn\_s1 kn sak1 \#j. InitialSessionCompleted(...)@j \& sak2 = sak1).}
-
-This prevents the rekey from reusing a SAK that already appeared in the initial session.
-
-\item \textbf{KDF-only acceptance.} \texttt{ exists-trace; Ex sak \#i. ServerAcceptedSAK(sak)@i ==> (Ex \#j. KDFGeneratedSAK(sak)@j).}
-
-This is the positive sanity check showing that the server may accept a SAK only if it was produced by the KDF path in the model.
-
-\item \textbf{Non-KDF acceptance weakness.} \texttt{ exists-trace; Ex sak \#i \#j. MaliciousSAKSent(sak)@i \& ServerAcceptedSAK(sak)@j.}
-
-This captures the structural weakness: a malicious Key Server can send an arbitrary fresh SAK that the Server still accepts.
-
-\end{itemize}
 
 \subsection{Structural Weakness: KDF-Bypass Attack}
 
