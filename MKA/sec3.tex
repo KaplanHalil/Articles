@@ -16,7 +16,7 @@ The premise specifies what facts must be present in the current system state, ac
   \item \texttt{all-traces} lemmas express universal properties (safety, authentication, secrecy).
   \item \texttt{exists-trace} lemmas assert executability or demonstrate attack traces.
 \end{itemize}
-Tamarin employs a constraint-solving procedure with manual or automatic heuristics to discharge lemmas. Its soundness and completeness guarantees hold relative to the modelled equational theory.
+Tamarin employs a constraint-solving procedure to discharge lemmas. It can run with manual or automatic heuristics. Its soundness and completeness guarantees hold relative to the modelled equational theory.
 
 
 \paragraph{Debugging and reproducibility.} When a lemma fails, Tamarin produces a concrete counterexample trace. This trace can be exported to LaTeX via the \texttt{--trace} option, which generates a \texttt{trace.tex} file that can be directly included in the paper. For reproducibility, all proof outputs—including \texttt{summary.pdf}, \texttt{trace.tex}, and the exact command-line invocation—are archived alongside the model in the repository.

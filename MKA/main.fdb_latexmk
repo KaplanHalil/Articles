@@ -1,15 +1,15 @@
 # Fdb version 4
-["bibtex main"] 0 "main.aux" "main.bbl" "main" 0 -1
+["bibtex main"] 1785999369.1788 "main.aux" "main.bbl" "main" 1785999370.21412 0
   "./main.bib" 1785832463.82122 18644 b947471b208a3b4b3f6d8c47947a921e ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/ieeetran/IEEEtran.bst" 1440712899 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "main.aux" 1785998717.31616 5454 679056312638208232326b2cc27e5fda "pdflatex"
+  "main.aux" 1785999369.9718 5905 67344594b83e5b63c7f51180edf194dc "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1785998716.58959 "/home/halil/Desktop/GitHub/Articles/MKA/main.tex" "main.pdf" "main" 1785998717.61842 2
+["pdflatex"] 1785999369.26002 "/home/halil/Desktop/GitHub/Articles/MKA/main.tex" "main.pdf" "main" 1785999370.21426 0
   "/etc/texmf/web2c/texmf.cnf" 1785139332.82559 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/halil/Desktop/GitHub/Articles/MKA/main.tex" 1785933386.74782 1611 a0bc8976293ad916e806ad060e501255 ""
+  "/home/halil/Desktop/GitHub/Articles/MKA/main.tex" 1785999267.23425 1607 6c4185a67064b734b2ef4ef13043298c ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx0700.tfm" 1136768653 3584 ca0c423beaacd28d53ddce5a826cd558 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecbx0900.tfm" 1136768653 3584 1a7de6c99457381c64abc1a7c545505f ""
@@ -242,6 +242,7 @@
   "/usr/share/texmf/fonts/type1/public/cm-super/sfrm0900.pfb" 1785221344.30316 149037 995a6f1e12c1d647b99b1cf55db78699 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb" 1764096569 138258 6525c253f16cededa14c7fd0da7f67b2 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfti0700.pfb" 1785221344.36943 184338 71ec80cd6b45d5405da0f23c65ebdef8 ""
+  "/usr/share/texmf/fonts/type1/public/cm-super/sfti0900.pfb" 1785221344.37153 183673 6df73819bb3e1246a6315a4913a2d331 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfti1000.pfb" 1764096569 186554 e8f0fa8ca05e038f257a06405232745f ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb" 1785221344.37843 175641 e30a691dc1402b08fd6535cf8a31e5b7 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sftt0900.pfb" 1785221344.37943 170827 2e4b634de7b58578eae1dc93e51dfe48 ""
@@ -249,11 +250,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1769369718 41603 27f93b3067076450172040dcd57ca8b3 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1785221355 5541477 3118940318599480888143717dd32d64 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1785221429 3640496 2957c0e9bf97e855c454b6959d1b960d ""
-  "main.aux" 1785998717.31616 5454 679056312638208232326b2cc27e5fda "pdflatex"
-  "main.bbl" 1785998712.85508 0 d41d8cd98f00b204e9800998ecf8427e "bibtex main"
-  "main.out" 1785998717.31716 451 f3d18f1b1c476d49c137cc3c4d711be6 "pdflatex"
-  "main.tex" 1785933386.74782 1611 a0bc8976293ad916e806ad060e501255 ""
-  "sec2.tex" 1785998606.51725 8355 2477c2b3771e82a0725d66ee6e877917 ""
+  "main.aux" 1785999369.9718 5905 67344594b83e5b63c7f51180edf194dc "pdflatex"
+  "main.bbl" 1785999369.25379 3524 84e02262c310e6d393ba8b7f42b517bc "bibtex main"
+  "main.out" 1785999369.9728 451 f3d18f1b1c476d49c137cc3c4d711be6 "pdflatex"
+  "main.tex" 1785999267.23425 1607 6c4185a67064b734b2ef4ef13043298c ""
+  "sec2.tex" 1785999367.96501 8402 8e99662eb6431969ced6c83e6d93c897 ""
   "sec3.tex" 1785925917.03856 2635 1bccf095275e7aec10541ea7d0139d4b ""
   "sec4.tex" 1785925835.13397 12648 cce2048c2fb9c21bfdccaf6d2d0522e9 ""
   "sec5.tex" 1785925638.88035 2669 6aaba192a84e2d973afcf71da7e98af3 ""

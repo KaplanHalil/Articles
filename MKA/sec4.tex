@@ -4,14 +4,15 @@
 \subsection{Cryptographic Primitives and Equational Theory}
 
 Our Tamarin model is built on the following builtins and functions:
+\begin{sloppypar}
 \begin{itemize}
   \item \textbf{Symmetric encryption/decryption:} We used predefined functions \texttt{senc}/\texttt{sdec} satisfying \texttt{sdec(senc(m,k),k) = m} for symmetric encryption and decryption. The adversary can only decrypt a ciphertext if it knows the corresponding key.
   \item \textbf{Key derivation:} \texttt{kdf(key,label)} is modelled as an uninterpreted two-argument function; no algebraic identities are assumed, which captures the idealised one-way property of a KDF.
-  \item \textbf{Message authentication:} There is no predifined MAC in the Tamarin, therefore we defined \texttt{mac(M,K)} and \texttt{macverify(mac(M,K),M,K) = mactrue}; the equation ensures that the adversary can only produce a valid ICV if it knows the ICK.
-  \item \textbf{Monotone counters:} We define \texttt{count(x)} function to models counter advancement and is used for both MN and KN progression. 
-  \item \textbf{Message-number generation:} In the model, we proceeded with the assumption that the Keyserver was pre-selected. Therefore, both the server and the keyserver must have previously sent MKAPDU messages and a MN. For this reason, we defined a private function called \texttt{genMN(\$Party)}. 
+  \item \textbf{Message authentication:} Tamarin does not provide a built-in MAC primitive, so we define \texttt{mac(M,K)} and \texttt{macverify(mac(M,K),M,K) = mactrue}; the equation ensures that the adversary can only produce a valid ICV if it knows the ICK.
+  \item \textbf{Monotone counters:} We define \texttt{count(x)} to model counter advancement and use it for both MN and KN progression.
+  \item \textbf{Message-number generation:} In the model, we proceed with the assumption that the Key Server was pre-selected. Therefore, both the Server and the Key Server must have previously sent MKAPDU messages and a MN. For this reason, we define a private function called \texttt{genMN(\$Party)}.
 \end{itemize}
-
+\end{sloppypar}
 \subsection{Protocol Participants and Long-Term State}
 
 \paragraph{CAK setup.} The rule \texttt{Setup\_CAK} generates a fresh CAK ${\mathit{cak}}$ and stores it as a persistent shared fact \texttt{!SharedCAK(\textasciitilde cak)}, available to both parties.
@@ -106,12 +107,13 @@ We specify twelve security properties as Tamarin lemmas. Table~\ref{tab:lemmas} 
 
 The following paragraphs summarise the principal Tamarin lemmas defined in our model and their intended security meaning. In Tamarin, a lemma is a property asserted over all possible execution traces of the protocol. The notation \texttt{\#i} and \texttt{\#j} denotes time points on a trace: a fact annotated with \texttt{@i} is observed at time \texttt{\#i}. Hence, expressions such as \texttt{j < i} indicate that one event precedes another. The ellipses in the formulas indicate that some fact arguments are omitted for readability; the complete set of lemmas is available in the public repository~\cite{mka-tamarin-repo}.
 
+\begin{sloppypar}
 \begin{itemize}[leftmargin=*,itemsep=0.3em]
-\item \textbf{Executable lemma.} \texttt{exists-trace; Ex mn\_ks1 mn\_s1 kn sak1 mn\_ks2 mn\_s2 kn1 sak2 \#i \#j. InitialSessionCompleted(...)@i \& RekeySessionCompleted(...)@j.}
+  \item \textbf{Executable lemma.} \texttt{exists-trace;} Ex \texttt{mn_ks1 mn_s1 kn sak1 mn_ks2 mn_s2 kn1 sak2 \#i \#j.} \texttt{InitialSessionCompleted(...)@i} \& \texttt{RekeySessionCompleted(...)@j}.
 
-This checks that the model admits at least one complete execution trace in which both the initial session and the rekey session finish successfully.
+  This checks that the model admits at least one complete execution trace in which both the initial session and the rekey session finish successfully.
 
-\item \textbf{Initial agreement.} \texttt{ All mn\_ks1 mn\_s1 kn sak1 \#i. InitialSessionCompleted(...)@i ==> (Ex \#j. SentInitialSAK(...)@j \& j < i).}
+  \item \textbf{Initial agreement.} \texttt{All mn_ks1 mn_s1 kn sak1 \#i. InitialSessionCompleted(...)@i ==> (Ex \#j. SentInitialSAK(...)@j \& j < i).}
 
 This states that whenever the initial session completes, the corresponding SAK must have been sent earlier by the Key Server.
 
