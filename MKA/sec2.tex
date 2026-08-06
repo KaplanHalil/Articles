@@ -3,18 +3,24 @@
 
 \subsection{General Structure of MKA}
 
-IEEE 802.1AE (MACsec)~\cite{ieee8021ae} provides confidentiality, integrity, and replay protection for Ethernet frames on a per-hop basis. The associated key-management protocol, defined in IEEE 802.1X~\cite{ieee8021x}, is MACsec Key Agreement (MKA). MKA operates over the EAP over LAN (EAPoL) control plane and supports the following lifecycle:
+IEEE 802.1AE (MACsec)~\cite{ieee8021ae} provides link-layer confidentiality, integrity, and replay protection for Ethernet frames on point-to-point and multi-point topologies. While MACsec specifies frame-level encapsulation and hardware/driver data-plane protection, the associated control-plane protocol specified in IEEE 802.1X-2020~\cite{ieee8021x} is the MACsec Key Agreement (MKA) protocol. MKA operates over EAP over LAN (EAPoL) control frames (EtherType \texttt{0x888E}) and is responsible for establishing, discovering, authenticating, and maintaining the shared cryptographic keys—specifically the Secure Association Keys (SAKs)—required by MACsec.
+
+The general protocol lifecycle of MKA consists of the following key phases:
 
 \begin{enumerate}
-  \item \textbf{Connectivity Association setup.} Participants share a \emph{Connectivity Association Key} (CAK) through pre-provisioning or through an EAP exchange. A Connectivity Association (CA) is formed among peers that share the same CAK.
-  \item \textbf{MKAPDU exchange} Each party in CA periadically exchanges \emph{MACsec Key Agreement Protocol Data Units} (MKAPDUs) to establish and maintain the cryptographic state. MKAPDUs carry the Key Number (KN), Message Number (MN), and encrypted Secure Association Keys (SAKs)(For Keyserver) along with an Integrity Check Value (ICV).
-  \item \textbf{Key Server election.} A Key Server is elected among CA members according to the protocol’s priority and tie-breaking rules. The elected Key Server is responsible for generating SAKs.
-  \item \textbf{Key derivation.} Each participant independently derives a \emph{Key Encryption Key} (KEK) and an \emph{Integrity Check Value Key} (ICK) from the CAK using a key derivation function (KDF). KEK is used for protection of Secure Association Keys (SAKs), while ICK is used to compute an Integrity Check Value (ICV) for message authentication.
-  \item \textbf{SAK distribution.} The Key Server generates a fresh SAK, encrypts it with the KEK, appends an Integrity Check Value (ICV) computed with the ICK, and distributes the resulting MKAPDU to the other members. Each receiver verifies the ICV, decrypts the SAK, and acknowledges receipt.
-  \item \textbf{Rekey.} SAKs are periodically refreshed, either because of traffic thresholds or administrative policy. Rekeying follows the same structure as the initial distribution, but with incremented Key Number (KN) and Message Number (MN) values.
+  \item \textbf{Connectivity Association setup.} Participants sharing identical administrative security policies form a \emph{Connectivity Association} (CA). All members of a CA share a long-term secret key known as the \emph{Connectivity Association Key} (CAK). The CAK is either statically pre-provisioned (PSK mode) or dynamically derived via an Extensible Authentication Protocol (EAP) session (e.g., EAP-TLS) with an authentication server.
+  \item \textbf{Key Derivation Function (KDF) initialization.} Using a standardized Key Derivation Function (typically based on AES-CMAC-128 or HMAC-SHA256), each participant independently derives two operational sub-keys from the shared CAK:
+  \begin{itemize}
+    \item \emph{Key Encryption Key} (KEK): Used by the Key Server to encrypt distributed SAKs.
+    \item \emph{Integrity Check Value Key} (ICK): Used to authenticate all MKA Protocol Data Units (MKAPDUs) by appending a MAC-based Integrity Check Value (ICV).
+  \end{itemize}
+  \item \textbf{Key Server election.} Rather than performing pairwise negotiations, MKA designates a single participant as the \emph{Key Server}. Election is performed deterministically based on member priority fields and numeric Secure Channel Identifiers (SCI) acting as tie-breakers. The elected Key Server assumes exclusive responsibility for generating and distributing operational SAKs.
+  \item \textbf{Periodic MKAPDU exchange and peer management.} Members continuously broadcast MKAPDUs carrying Parameter Sets. Every participant maintains a \emph{Live Peer List} and a \emph{Potential Peer List} to monitor peer availability and verify bidirectional connectivity. Each MKAPDU includes a strictly increasing \emph{Message Number} (MN) counter to prevent message replay.
+  \item \textbf{SAK distribution.} The Key Server generates a fresh symmetric key (SAK) for MACsec data encryption, encrypts it under the KEK, attaches the active \emph{Key Number} (KN), computes an ICV using the ICK, and transmits the resulting MKAPDU to CA members. Upon receiving the frame, non-Key Server participants verify the ICV, validate the MN counter, decrypt the SAK, and confirm activation by acknowledging receipt.
+  \item \textbf{Periodic and event-driven rekeying.} SAKs must be refreshed periodically before sequence number exhaustion in MACsec frames or when member membership changes (e.g., peer departure). Rekeying follows the distribution structure, advancing the Key Number ($KN$) monotonically to maintain key freshness and synchronization.
 \end{enumerate}
 
-The simplified tamarin-based protocol flow shown in Figure~\ref{fig:mka_flow} illustrates the simplified two-party MKA exchange between a Key Server and a Server that we analyse in this paper, using the exact variable names and state facts of our Tamarin model.
+The simplified Tamarin-based protocol flow shown in Figure~\ref{fig:mka_flow} illustrates the two-party MKA exchange between a Key Server and a Server analyzed in this paper, mapping directly to the rules and state facts of our formal model.
 
 \begin{figure}[htbp]
 \centering
@@ -123,4 +129,23 @@ The simplified tamarin-based protocol flow shown in Figure~\ref{fig:mka_flow} il
 \label{fig:mka_flow}
 \end{figure}
 
-\subsection{Security requrements of MKA}
+\subsection{Security Requirements of MKA}
+\label{sec:requirements}
+
+To ensure secure operating guarantees across untrusted Ethernet links, MKA must fulfill a precise set of cryptographic and protocol-level security requirements. Based on the specifications in IEEE 802.1X-2020~\cite{ieee8021x} and established formal protocol analysis standards, we define seven key security requirements:
+
+\begin{enumerate}[label=\textbf{SR\arabic*.}]
+  \item \textbf{Protocol Executability and Reachability:} Under benign network conditions (without active adversarial blocking), the protocol execution must be reachable. Legitimate Key Server and participant nodes must successfully complete both initial session establishment and subsequent rekeying rounds without encountering deadlocks or invalid state transitions.
+  
+  \item \textbf{Entity Authentication and Mutual Agreement:} The protocol must guarantee mutual entity authentication and parameter agreement. When a participant completes a session believing it communicated with a specific Key Server (and vice versa), the counterpart must have actively initiated and participated in the corresponding protocol execution with identical parameters, including node identities, Key Numbers ($KN$), and Message Numbers ($MN$).
+
+  \item \textbf{SAK Confidentiality and Secrecy:} Operational SAKs generated by the Key Server and distributed to participants must remain confidential. An adversary controlling the public network (Dolev--Yao model) must be unable to infer or compute any SAK value, provided the long-term CAK and the target SAK have not been explicitly compromised.
+
+  \item \textbf{Session Ordering and Sequential Integrity:} Session state transitions must adhere strictly to protocol sequencing. Rekeying phases must be strictly conditioned on the successful completion of the preceding initial session. Out-of-order execution, premature rekeying, or backward state rollbacks must be impossible.
+
+  \item \textbf{SAK Freshness and Key Uniqueness:} Every rekeying round must produce a fresh, cryptographically independent SAK ($SAK_2 \neq SAK_1$). Reusing old SAKs across distinct sessions or rekey rounds must be strictly prohibited, and every newly established key must be bound to a monotonically advancing Key Number ($KN_2 > KN_1$).
+
+  \item \textbf{Anti-Replay Protection:} The protocol must prevent replay attacks involving stale MKAPDUs. The continuous increment of Message Numbers ($MN$) per participant, validated against local peer state, ensures that delayed, duplicated, or replayed control frames are immediately dropped.
+
+  \item \textbf{Trust Boundary and Acceptance Semantics:} Non-Key Server participants accepting a distributed SAK must be assured of its cryptographic integrity and origin. The security model must evaluate whether participants can verify that a distributed SAK was legitimately generated through the prescribed Key Derivation Function (KDF) path rather than being arbitrarily chosen or manipulated by a compromised entity.
+\end{enumerate}

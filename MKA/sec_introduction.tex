@@ -6,5 +6,13 @@ This paper addresses that gap by presenting a formal analysis of a simplified tw
 
 \paragraph{Contributions.} This work makes three contributions. First, it constructs a Tamarin model of a two-party MKA exchange that captures the initial session and a rekey round, including the monotonic MN/KN counters. Second, it formalizes and verifies core security properties such as executability, agreement, authentication, secrecy, ordering, and freshness. Third, it identifies and demonstrates a structural weakness in the protocol's acceptance logic: a malicious or compromised Key Server that possesses the CAK can inject an arbitrary SAK that the Server accepts.
 
-\paragraph{Organization.} Section~\ref{sec:background} explains MKA and its lifecycle. Section~\ref{sec:analysis} introduces the formal analysis and the Tamarin prover. Section~\ref{sec:model} presents our formal model and the protocol flow in Figure~\ref{fig:mka_flow}. Section~\ref{sec:results} reports the verification results, and Section~\ref{sec:conclusion} concludes the paper.
+\subsection{Related Work}
+\label{sec:related}
+
+Formal verification has become standard for protocol analysis. Classical examples include Lowe's analysis of Needham--Schroeder with FDR~\cite{lowe1996breaking}, Blanchet's ProVerif-based work on authentication protocols~\cite{blanchet2001efficient}, and later Tamarin studies of TLS~1.3~\cite{cremers2017comprehensive}, Signal~\cite{kobeissi2017automated}, and WPA2~\cite{vanhoef2017key}. Within the IEEE 802 family, the closest related work concerns WPA2's 4-way handshake; however, the MKA key-agreement logic has received comparatively little machine-checked analysis.
+
+Our contribution is therefore complementary. To the best of our knowledge, this is the first machine-verified symbolic analysis of a simplified MKA exchange. The closest methodological precedent is the Tamarin analysis of TLS~1.3 by Cremers et al.~\cite{cremers2017comprehensive}, which similarly verifies authentication, secrecy, and ordering properties. Our work applies the same general methodology to the Ethernet security domain, where the role of the Key Server introduces a distinct acceptance semantics that is not present in classical protocol examples.
+
+\paragraph{Organization.} Section~\ref{sec:background} provides an overview of MKA and its security requirements. Section~\ref{sec:analysis} introduces the Tamarin Prover framework. Section~\ref{sec:model} presents our formal Tamarin model and details the fourteen security lemmas. Finally, Section~\ref{sec:conclusion} concludes the paper by synthesizing the verification results, structural trust limitations, and future research directions.
+
 

@@ -1,23 +1,10 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-We presented the first (to our knowledge) machine-verified formal security analysis of the MACsec Key Agreement (MKA) protocol using the Tamarin Prover. Our model closely captures the two-party MKA exchange, including the natural-number counter structure for Message Numbers and Key Numbers, and covers both the initial SAK distribution and a subsequent rekey round.
+In this paper, we presented a formal symbolic security analysis of the MACsec Key Agreement (MKA) protocol using the Tamarin Prover. Our model captures a two-party MKA exchange, incorporating natural-number counter abstractions for Message Numbers ($MN$) and Key Numbers ($KN$), and covers both the initial SAK distribution and a subsequent rekey round.
 
-The analysis confirms that the core security goals of MKA hold under the Dolev--Yao adversary model when the pre-shared CAK is not compromised:
-\begin{itemize}
-  \item \textbf{Agreement }: the Key Server cannot complete a session with parameters it did not initiate, and the Server must have participated for the session to complete.
-  \item \textbf{SAK secrecy}: the adversary cannot learn a session key without compromising the CAK.
-  \item \textbf{Session ordering}: rekeying is strictly sequenced after a successful initial session.
-  \item \textbf{Key freshness}: each rekeyed SAK is distinct from the preceding one, and its KN advances monotonically.
-\end{itemize}
+We formally specified and verified fourteen security properties under a standard Dolev--Yao adversary model. The analysis proves that when the long-term Connectivity Association Key (CAK) is uncompromised, MKA successfully guarantees protocol executability, mutual agreement on session parameters, SAK confidentiality, strict session ordering, and key freshness across rekeying rounds.
 
-At the same time, we formally demonstrate a structural limitation: a malicious or compromised Key Server that holds the CAK can inject an arbitrary SAK value that the Server will accept without any means of detection. This reflects MKA's design assumption that the Key Server is fully trusted. Deployments that cannot uphold this trust assumption should consider additional controls, such as cryptographic binding of SAKs to the KDF derivation path through an out-of-band verification mechanism or a distributed key-agreement overlay.
+At the same time, our verification reveals a structural trust limitation in MKA's acceptance logic: a compromised or malicious Key Server possessing the CAK can inject an arbitrary SAK value that the Server accepts. Because non-Key Server participants rely solely on ICV verification using the derived ICK, they cannot independently verify whether an accepted SAK originated from the standard KDF path. This underlines an implicit trust assumption in IEEE 802.1X-2020 and motivates future work on cryptographic binding mechanisms for SAK derivation.
 
-\paragraph{Future work.} Several directions remain open:
-\begin{itemize}
-  \item Extending the model to multi-party MKA scenarios (multiple CA members beyond two parties).
-  \item Modelling the full IEEE 802.1X-2020 MKA state machine, including the live peer list and SAP/SAI management.
-  
-\end{itemize}
-
-Our Tamarin model is publicly available at \url{https://github.com/KaplanHalil/MKA_tamarin} to support reproducibility and further research.
+\paragraph{Future Work.} Future directions include extending the model to multi-party MKA topologies, modeling dynamic peer lists and election logic, and combining symbolic verification with computational proofs. Our complete Tamarin model is publicly available at \url{https://github.com/KaplanHalil/MKA_tamarin}.
