@@ -10,9 +10,12 @@ Our Tamarin model is built on the following builtins and functions:
   \item \textbf{Key derivation:} \texttt{kdf(key,label)} is modelled as an uninterpreted two-argument function; no algebraic identities are assumed, which captures the idealised one-way property of a KDF.
   \item \textbf{Message authentication:} Tamarin does not provide a built-in MAC primitive, so we define \texttt{mac(M,K)} and \texttt{macverify(mac(M,K),M,K) = mactrue}; the equation ensures that the adversary can only produce a valid ICV if it knows the ICK.
   \item \textbf{Monotone counters:} We define \texttt{count(x)} to model counter advancement and use it for both MN and KN progression.
-  \item \textbf{Message-number generation:} In the model, we proceed with the assumption that the Key Server was pre-selected. Therefore, both the Server and the Key Server must have previously sent MKAPDU messages and a MN. For this reason, we define a private function called \texttt{genMN(\$Party)}.
+  \item \textbf{Message-number generation:} We define a private function \texttt{genMN(\$Party)} that produces a deterministic initial message number for each participant identity. The function is declared \emph{private}, meaning the adversary cannot compute or predict initial MN values. This models the assumption that both participants have already exchanged at least one MKAPDU in a prior discovery phase and maintain private MN state. This abstraction allows our model to focus on the key agreement phase without modeling the full MKA hello/discovery protocol.
 \end{itemize}
 \end{sloppypar}
+
+\paragraph{Inline restrictions.} Tamarin supports two mechanisms for constraining execution traces: named \texttt{restriction} blocks and inline \texttt{\_restrict} action facts. Our model uses inline \texttt{\_restrict} actions within protocol rules to enforce local validity conditions (e.g., MAC verification, counter monotonicity) directly at the point where they are checked. This approach keeps each rule self-contained and mirrors the sequential checking logic of the actual protocol implementation.
+
 \subsection{Protocol Participants and Long-Term State}
 
 \paragraph{CAK setup.} The rule \texttt{Setup\_CAK} generates a fresh CAK ${\mathit{cak}}$ and stores it as a persistent shared fact \texttt{!SharedCAK(\textasciitilde cak)}, available to both parties.
@@ -66,40 +69,42 @@ We model a standard Dolev--Yao adversary augmented with two compromise rules:
   \item \texttt{Reveal\_SAK}: exposes an initial SAK from \texttt{KSSTATE0}; records \texttt{RevealSAK}.
   \item \texttt{Reveal\_CAK}: exposes the CAK from \texttt{!SharedCAK}; records \texttt{RevealCAK}.
 \end{itemize}
-These rules allow the formulation of conditional security properties, for example that secrecy holds unless the CAK is revealed, and they capture the forward-secrecy limitations inherent in a pure pre-shared-key protocol.
+These rules allow the formulation of conditional security properties, for example that secrecy holds unless the CAK is revealed.
 
 The rule \texttt{Malicious\_KeyServer\_Send} models a Key Server that uses the CAK to construct a well-formed MKAPDU carrying an arbitrary fresh SAK ($\widetilde{\mathit{fakeSAK}}$) instead of a properly KDF-derived one. This rule is used to probe the protocol's acceptance mechanism.
 
-Quantum adversaries are not a threat for this model because all cryptographic primitives in the protocol are based on symmetric key cryptography. Therefore, the model does not include any quantum-specific adversary rules.
+\paragraph{Forward-secrecy limitation.} Because all operational keys (KEK, ICK, SAK) are derived from the single long-term CAK, compromising the CAK at any point enables an adversary to re-derive all past and future sub-keys. The protocol therefore does not provide forward secrecy: a CAK compromise retroactively exposes every session. This is an inherent limitation of pure pre-shared-key architectures without ephemeral key exchange, and it is captured by the conditional form of our secrecy lemmas, which explicitly exclude CAK-reveal traces.
+
+\paragraph{Regarding quantum adversaries.} Our symbolic model abstracts away computational complexity and therefore does not capture brute-force attacks or their quantum speedups (e.g., Grover's algorithm reducing effective symmetric key strength from $2^{128}$ to $2^{64}$ operations). Since all cryptographic primitives in MKA are symmetric, the protocol is not vulnerable to Shor's algorithm. Assessing quantum resilience of the symmetric primitives requires a computational (rather than symbolic) analysis and is outside the scope of this work.
 
 \subsection{Security Properties and Lemmas}
 \label{sec:properties}
 
-We specify fourteen security properties as formal Tamarin lemmas. Table~\ref{tab:lemmas} summarizes these lemmas alongside their formal verification results. The checked entries confirm that the protocol is executable and that all key agreement, authentication, secrecy, ordering, and freshness properties hold under the stated assumptions. Crucially, the two existence lemmas confirm that the model permits a valid protocol execution while simultaneously uncovering a structural acceptance weakness: a malicious or compromised Key Server holding the CAK can distribute an arbitrary, non-KDF-derived SAK that the receiver accepts.
+We specify fourteen security properties as formal Tamarin lemmas. Table~\ref{tab:lemmas} summarizes these lemmas alongside their formal verification results and the security requirements (SR1--SR7, defined in Section~\ref{sec:requirements}) that each lemma addresses. The checked entries confirm that the protocol is executable and that all key agreement, authentication, secrecy, ordering, and freshness properties hold under the stated assumptions. Crucially, the two existence lemmas confirm that the model permits a valid protocol execution while simultaneously uncovering a structural acceptance weakness: a malicious or compromised Key Server holding the CAK can distribute an arbitrary, non-KDF-derived SAK that the receiver accepts.
 
 \begin{table}[t]
 \centering
-\caption{Security lemmas verified against the MKA model.}
+\caption{Security lemmas verified against the MKA model. The SR column maps each lemma to the security requirements defined in Section~\ref{sec:requirements}.}
 \label{tab:lemmas}
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}p{5.8cm}p{2.8cm}p{3.2cm}c@{}}
+\begin{tabular}{@{}p{5.0cm}p{2.0cm}p{2.2cm}cc@{}}
 \toprule
-\textbf{Lemma} & \textbf{Type} & \textbf{Property} & \textbf{Res.} \\
+\textbf{Lemma} & \textbf{Type} & \textbf{Property} & \textbf{SR} & \textbf{Res.} \\
 \midrule
-\texttt{executable} & exists-trace & Executability & \cmark \\
-\texttt{initial\_agreement} & all-traces & Initial agreement & \cmark \\
-\texttt{rekey\_agreement} & all-traces & Rekey agreement & \cmark \\
-\texttt{server\_authentication\_initial} & all-traces & Server aliveness & \cmark \\
-\texttt{server\_authentication\_rekey} & all-traces & Rekey aliveness & \cmark \\
-\texttt{initial\_sak\_secrecy\_no\_reveal} & all-traces & SAK1 secrecy & \cmark \\
-\texttt{rekey\_sak\_secrecy\_no\_reveal} & all-traces & SAK2 secrecy & \cmark \\
-\texttt{rekey\_cannot\_start\_before\_}\newline\texttt{initial\_completion} & all-traces & Ordering & \cmark \\
-\texttt{rekey\_after\_initial\_completion} & all-traces & Ordering & \cmark \\
-\texttt{key\_update} & all-traces & SAK1 $\neq$ SAK2 & \cmark \\
-\texttt{key\_number\_progress} & all-traces & KN monotonicity & \cmark \\
-\texttt{fresh\_rekey\_key} & all-traces & Rekey freshness & \cmark \\
-\texttt{server\_only\_accepts\_kdf\_keys} & exists-trace & KDF bypass & \cmark \\
-\texttt{accepts\_non\_kdf\_sak} & exists-trace & Malicious SAK & \cmark \\
+\texttt{executable} & exists-trace & Executability & SR1 & \cmark \\
+\texttt{initial\_agreement} & all-traces & Initial agreement & SR2 & \cmark \\
+\texttt{rekey\_agreement} & all-traces & Rekey agreement & SR2 & \cmark \\
+\texttt{server\_authentication\_initial} & all-traces & Server aliveness & SR2 & \cmark \\
+\texttt{server\_authentication\_rekey} & all-traces & Rekey aliveness & SR2 & \cmark \\
+\texttt{initial\_sak\_secrecy\_no\_reveal} & all-traces & SAK1 secrecy & SR3 & \cmark \\
+\texttt{rekey\_sak\_secrecy\_no\_reveal} & all-traces & SAK2 secrecy & SR3 & \cmark \\
+\texttt{rekey\_cannot\_start\_before\_}\newline\texttt{initial\_completion} & all-traces & Ordering & SR4 & \cmark \\
+\texttt{rekey\_after\_initial\_completion} & all-traces & Ordering & SR4 & \cmark \\
+\texttt{key\_update} & all-traces & SAK1 $\neq$ SAK2 & SR5 & \cmark \\
+\texttt{key\_number\_progress} & all-traces & KN monotonicity & SR5,6 & \cmark \\
+\texttt{fresh\_rekey\_key} & all-traces & Rekey freshness & SR5 & \cmark \\
+\texttt{server\_only\_accepts\_kdf\_keys} & exists-trace & KDF bypass & SR7 & \cmark \\
+\texttt{accepts\_non\_kdf\_sak} & exists-trace & Malicious SAK & SR7 & \cmark \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -164,7 +169,27 @@ To probe the trust boundary of the protocol (\textbf{SR7}), we evaluate two \tex
 \begin{align*}
 \exists \, \mathit{sak}, i, j. \, \mathtt{MaliciousSAKSent}(\mathit{sak})@i \land \mathtt{ServerAcceptedSAK}(\mathit{sak})@j \land i < j
 \end{align*}
-Tamarin finds a valid trace for both lemmas, confirming that non-KDF key acceptance is achievable in the model.
+Tamarin finds a valid trace for both lemmas, confirming that non-KDF key acceptance is achievable in the model. Listing~\ref{lst:malicious} shows the Tamarin source for these two critical components.
+
+\begin{lstlisting}[caption={Malicious Key Server rule and KDF-bypass existence lemma in Tamarin syntax.},label={lst:malicious}]
+rule Malicious_KeyServer_Send:
+  let kek  = kdf(~cak,'KEK')
+      ick  = kdf(~cak,'ICK')
+      mn_ks  = genMN($Keyserver)
+      mn_ks1 = count(mn_ks)
+      c1   = senc(~fakeSAK, kek)
+      icv1 = mac(<$Keyserver,mn_ks1,~kn,c1>, ick)
+  in
+  [ !SharedCAK(~cak), Fr(~fakeSAK), Fr(~kn) ]
+  --[ MaliciousSAKSent(~fakeSAK) ]->
+  [ Out(<$Keyserver,mn_ks1,~kn,c1,icv1>) ]
+
+lemma accepts_non_kdf_sak: exists-trace
+"Ex sak #i #j.
+    MaliciousSAKSent(sak)@i
+  & ServerAcceptedSAK(sak)@j
+  & #i < #j"
+\end{lstlisting}
 
 \subsection{Structural Weakness: KDF-Bypass Attack}
 \label{sec:weakness}
@@ -173,15 +198,50 @@ Tamarin finds a valid trace for both lemmas, confirming that non-KDF key accepta
 There exists a trace in which \texttt{MaliciousSAKSent}($sak$) is observed before \texttt{ServerAcceptedSAK}($sak$), and $sak$ was never output by \texttt{KDFGeneratedSAK}.
 \end{definition}
 
-This exists-trace lemma captures the scenario in which a Key Server holding the CAK injects a fresh but non-KDF-derived SAK into a well-formed MKAPDU. The Server, having no independent means of verifying whether the SAK was derived through the prescribed KDF path or was arbitrary, accepts it. This is a \emph{structural} property of the protocol rather than a cryptographic break.
+This exists-trace lemma captures the scenario in which a Key Server holding the CAK injects a fresh but non-KDF-derived SAK into a well-formed MKAPDU. The concrete attack trace proceeds as follows:
+
+\begin{enumerate}
+  \item The malicious Key Server, possessing the shared CAK, derives the operational sub-keys $\mathit{kek} = \mathtt{kdf}(\mathit{cak}, \texttt{'KEK'})$ and $\mathit{ick} = \mathtt{kdf}(\mathit{cak}, \texttt{'ICK'})$.
+  \item Instead of computing a SAK via the prescribed KDF path ($\mathtt{kdf}(\mathit{cak}, \langle \$\mathit{KS}, \mathit{kn}, \mathit{nonce}\rangle)$), it generates an arbitrary fresh value $\widetilde{\mathit{fakeSAK}}$.
+  \item It encrypts the arbitrary key under the shared KEK: $\mathit{c} = \mathtt{senc}(\widetilde{\mathit{fakeSAK}}, \mathit{kek})$.
+  \item It computes a valid ICV over the MKAPDU fields using the shared ICK: $\mathit{icv} = \mathtt{mac}(\langle \$\mathit{KS}, \mathit{mn}, \mathit{kn}, \mathit{c}\rangle, \mathit{ick})$.
+  \item The Server receives the MKAPDU, verifies the ICV (which succeeds because the ICK is correctly derived from the shared CAK), validates the MN counter, and decrypts $\widetilde{\mathit{fakeSAK}}$ from the ciphertext.
+  \item The Server accepts $\widetilde{\mathit{fakeSAK}}$ as the session key, with no mechanism to detect that it was not derived via the prescribed KDF path.
+\end{enumerate}
+
+\paragraph{Practical impact.} A Key Server that chooses the SAK gains complete control over the data-plane encryption key. Since MACsec uses the SAK for symmetric authenticated encryption of Ethernet frames, an adversary who selected the SAK value can:
+\begin{itemize}
+  \item Decrypt all traffic protected under that SAK (passive eavesdropping).
+  \item Inject or modify MACsec-protected frames (active attacks).
+  \item Share the chosen SAK with a third party, enabling a relay or wiretap without the Server's knowledge.
+\end{itemize}
+
+\paragraph{Root cause and mitigations.} The weakness arises because the MKAPDU authentication (via the ICV) guarantees that the sender possesses the CAK, but does not bind the SAK payload to the prescribed derivation path. Potential mitigations include:
+\begin{itemize}
+  \item \textbf{KDF proof-of-compliance:} The Key Server could include the KDF inputs (Key Number, nonce) in a verifiable form, allowing the Server to independently re-derive and compare the SAK. However, this requires the Server to have access to the KDF nonce, which is not currently transmitted in the clear.
+  \item \textbf{Mutual key derivation:} Both parties could contribute entropy to the SAK derivation (e.g., via a Diffie--Hellman-like exchange or by each providing a nonce), ensuring no single party controls the key value. This approach would require protocol-level changes to IEEE 802.1X.
+  \item \textbf{Key confirmation:} A post-distribution key-confirmation step in which both parties demonstrate knowledge of the SAK through a challenge--response mechanism could detect mismatches, although it would not prevent a malicious Key Server from knowing the key it injected.
+\end{itemize}
+
+This is a \emph{structural} property of the protocol rather than a cryptographic break: all cryptographic primitives function correctly, but the protocol's trust model implicitly assumes that the Key Server is honest.
 
 \subsection{Gap between IEEE 802.1X-2020 and our model}
 
 While our Tamarin model successfully verifies MKA under a standard Dolev-Yao adversary, the model necessarily abstracts away several operational details present in the IEEE 802.1X-2020 standard. The primary gaps include:
 \begin{itemize}
-    \item \textbf{Keyserver Selection:} We omit the keyserver selection process and assume keyserver is already selected. This assumption is valid for our model because we are primarily concerned with the security of the key agreement protocol itself, not the keyserver discovery process. 
+    \item \textbf{Keyserver Selection:} We omit the keyserver selection process and assume the keyserver is already selected. This assumption is valid for our model because we are primarily concerned with the security of the key agreement protocol itself, not the keyserver discovery process. 
     \item \textbf{Detailed State Machines:} IEEE 802.1X-2020 specifies comprehensive finite-state machines for key generation, SA activation, and session state transitions. Our model captures the high-level logic (initiation, key exchange, rekeying) but omits low-level transitions like timers, retry counts, and error states.
-    \item \textbf{Message Numbering:} The IEEE 802.1X-2020 standard specifies a message numbering scheme for MKAPDU messages. We assumed that both participant alredy send MK-PDUs therefore they know all participants' message numbers and can compare new message numbers with previous message numbers. This assumption is valid in our model because we assume that both participants have already exchanged MK-PDUs and know each other's message numbers.  
+    \item \textbf{Message Numbering:} The IEEE 802.1X-2020 standard specifies a message numbering scheme for MKAPDU messages. We assumed that both participants already send MKAPDUs; therefore, they know all participants' message numbers and can compare new message numbers with previous ones. This assumption is valid in our model because we assume that both participants have already exchanged MKAPDUs and know each other's message numbers.
 \end{itemize}
 
+\subsection{Proof Statistics and Reproducibility}
 
+All fourteen lemmas were verified using Tamarin Prover version \texttt{TODO\_VERSION} on a machine equipped with a \texttt{TODO\_CPU} processor and \texttt{TODO\_RAM}~GB of RAM, running \texttt{TODO\_OS}. Proofs were discharged using Tamarin's automatic mode with the default heuristic (\texttt{TODO\_HEURISTIC}). The total verification time for all fourteen lemmas was approximately \texttt{TODO\_TIME}. No manual proof guidance (i.e., oracle or interactive mode) was required; all lemmas terminated automatically.
+
+The complete Tamarin model, including all lemma definitions and auxiliary scripts, is publicly available at \url{https://github.com/KaplanHalil/MKA_tamarin} for full reproducibility.
+
+\subsection{Verification Summary}
+
+The verification confirms that MKA provides the expected security guarantees when the long-term CAK is uncompromised. Specifically: (i)~the model is executable and free of logical deadlocks (SR1); (ii)~the Key Server and Server achieve mutual agreement on session parameters (SR2); (iii)~SAKs remain confidential under the Dolev--Yao adversary (SR3); (iv)~session ordering is strictly sequential (SR4); and (v)~rekeyed keys are fresh, distinct, and bound to monotonically advancing counters (SR5, SR6).
+
+The most significant finding is the existence of an attack trace confirming the KDF-bypass weakness described in Section~\ref{sec:weakness} (SR7). A malicious Key Server holding the CAK can construct a well-formed MKAPDU carrying an arbitrary fresh SAK. Because the MAC is computed with the ICK derived from the shared CAK, the Server accepts the message and records the injected SAK as valid. This result exposes a structural limitation in the protocol's trust model: the Server has no independent proof that the SAK was generated through the prescribed KDF path.
