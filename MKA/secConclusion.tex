@@ -7,4 +7,4 @@ We formally specified and verified fourteen security properties under a standard
 
 At the same time, our verification reveals a structural trust limitation in MKA's acceptance logic: a compromised or malicious Key Server possessing the CAK can inject an arbitrary SAK value that the Server accepts. Because non-Key Server participants rely solely on ICV verification using the derived ICK, they cannot independently verify whether an accepted SAK originated from the standard KDF path. This underlines an implicit trust assumption in IEEE 802.1X-2020 and motivates future work on cryptographic binding mechanisms for SAK derivation.
 
-\paragraph{Future Work.} Future directions include extending the model to multi-party MKA topologies, modeling dynamic peer lists and election logic, and combining symbolic verification with computational proofs. Our complete Tamarin model is publicly available at \url{https://github.com/KaplanHalil/MKA_tamarin}.
+\paragraph{Future Work.} Future directions include extending the model to support dynamic peer lists and election logic, and combining symbolic verification with computational proofs.
