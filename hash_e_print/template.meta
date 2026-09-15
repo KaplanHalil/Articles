@@ -1,0 +1,18 @@
+license: CC-by
+author:
+  name: Halil İbrahim Kaplan
+  surname: Kaplan
+  affil: 1
+  email: halil.kaplan@tubitak.gov.tr
+  orcid: 0009-0006-0120-6512
+affiliation:
+  name: TÜBİTAK BİLGEM
+  ror: 031v4g827
+  city: Kocaeli
+  postcode: 3001
+  country: Turkey
+affiliation:
+  name: Cryptanalysis Laboratory
+version: preprint
+title: General Review of Hash-Based Signatures
+keywords: Hash-Based Signatures, Post-Quantum Cryptography, Digital Signatures, Cryptographic Hash Functions

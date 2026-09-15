@@ -1,0 +1,173 @@
+cic2026_2 Paper #90 Reviews and Comments
+===========================================================================
+Paper #90 General Review of Hash-Based Signatures
+
+
+Review #90A
+===========================================================================
+
+Suitability for Communications in Cryptology
+--------------------------------------------
+2. Of interest to the cryptology research community
+
+Paper summary
+-------------
+This paper is a survey of Hash-Based Signature (HBS) schemes. It goes over some of the building blocks of HBS, standardized HBS schemes such as XMSS and SPHINCS+ (SLH-DSA) and some cryptanalytical attacks that may apply to HBS.
+
+Detailed comments for authors
+-----------------------------
+- Line 54 to 55 "The purpose of this study is to bridge theoretical constructs with practical implications, offering a clear understanding of how hash-based signatures works." I do not think this purpose is achieved in the current version of this survey. The paper is also not a SoK as marked on the submission form, it's a survey. 
+- The structure of the paper is a bit strange to me. The part about WOTS and WOTS+ ignores the checksum, which is mentioned later. However in practice no one should use WOTS without the checksum. The same comment sort of holds for the base-w representation.
+
+Editorial comments: 
+- In section 2.2.1 the notations used here and in the figure are not the same (italic math, commas in the subscripts). This could be the case in multiple places in the paper.
+- Figure 2. formatting/notations are not the same and showing which parts are the public keys is missing. 
+- Line 113, sk_{N-1} not N
+- Lines 118 and 119 describe signature generation and should be accordingly in the 2.3.2 section. 
+- Figure 4 is blurry. 
+- Section 2.6 is somewhat useless as it doesn't describe much. (referring to the standards is better and the addresses don't necessarily help explain how the schemes work)
+- Figure 5 is messy. 
+- To describe XMSS/LMS link to the RFC which contains the full description. The same holds for SLH-DSA and the NIST standard. 
+- Figure 9 specify what d and h' are for this example. 
+- Figure 10 seems a bit pointless.
+- FORS is sort of skimmed over, when it's one of the main building blocks of the SLH-DSA PQC standard.
+
+Strengths and novel contributions
+---------------------------------
+- Timely relevant topic. 
+- Could have been useless to students and people planning to get an introduction to HBS.
+- The motivation behind creating such a survey is valid and welcome.
+
+Weaknesses
+----------
+- It is unclear what the paper/survey is trying to achieve. I do not think this survey is necessarily helpful to someone who is looking for an introduction to HBS. 
+
+- Figures are not of good quality and could be vastly improved to actually explain how the schemes work. HBSs are some of the schemes that can be so nicely and so comprehensively explained with figures and even doodles. With 3 or 4 nice figures, one can explain how the whole of SLH-DSA works. So it's a bit unfortunate that the figures in this paper do not offer that. 
+
+- What would have been interesting is a summary comparison e.g., in a table, of WOTS, WOTS+, LOTS, maybe even FORS and HORS to give some insights as to why standards use these specific components. 
+
+- The structure is not a natural one and is confusing to someone who is getting into HBS. A more natural structure would have been to discuss WOTS and other "message signing" OTS/FTS schemes including things like base-w representation, checksum, .... A comparison of these small building blocks to give insights into why some are used for specific purposes. Then, Merkle trees and the motivation behind why we use Merkle trees and not just the previous building blocks alone. Then, move on to full standards like XMSS/LMS (and their multi-tree variants) and SLH-DSA (and link back to the previous sections e.g., to discuss why FORS is used in SLH-DSA for the bottom layer, why WOTS+ still used for the rest of the layers). 
+
+- The section about attacks and all of the subsections about a specific attack contains no conclusion, no discussion of the impact on schemes and the fixes/countermeasures.
+
+- Editorial quality should be significantly improved.
+
+Requested changes
+-----------------
+I think most of recommended changes are described in 'Weaknesses'.
+
+
+
+Review #90B
+===========================================================================
+
+Suitability for Communications in Cryptology
+--------------------------------------------
+2. Of interest to the cryptology research community
+
+Paper summary
+-------------
+This paper is a SoK on hash-based signature schemes, covering Lamport, WOTS, XMSS, XMSS-MT, and SPHINCS+, and known cryptanalytic attacks.
+
+The main contribution appears to be the survey of cryptanalytic attacks; however, this section requires substantial improvement. Also, the survey omits LMS/HSS and lacks a systematic comparison of the advantages and disadvantages of the different algorithms.
+
+Detailed comments for authors
+-----------------------------
+1. Introduction:
+- Line 30: "hash functions remain secure under quantum adversaries"; this statement is very rough and should be refined, i.e., quantum attacks also have an impact on hash functions
+  as highlighted in Table 1
+- Line 36: "selected the stateless scheme SPHINCS+ as a finalist": this is true, however, FIPS 2025 should be mentioned as well.
+- Line 55: "signatures works" should be "work"
+
+2. Basic Structures:
+- Line 64: "very low" should be "negligible"
+- Line 107: "signature size becomes w times smaller": It would be good to have a formula here, note: checksum is not considered here, however, it is needed for
+  the security of WOTS
+- Line 110: "This problem is also addressed": unclear what problem?
+- Line 135: "chaining function" not defined
+- A few sentences regarding domain separation in WOTS+ should be added
+- Line 137: the bitmasking process should be better explained, e..g, with formulas, also it should be clarified why it is needed
+- Line 152: "tree.To" should be "tree. To"
+- There is an important notation clash to solve: in sec. 2.3 $w$ is the width of input chunks, however in section 2.6 becomes base-$w$ hence with a gap of log_2
+- Line 183: unclear to where the 8 in the numerator 8*n comes from, it sounds like a bit vs byte issue
+- Line 224: it would be good to provide an example here
+- Line 225: "existential unforgeability", security properties of signatures have not been introduced, but they should
+- Line 227: similar to the previous section, also sec 2.8 would benefit from formulas to explain the algorithm
+- Line 228: "divided into parts" it should be explained how this happen in case of FORS
+- Figure 4: caption with explaination should be added
+- Line 253:  unclear here what is meant with "masking"
+
+3. XMSS / XMSSMT
+- Line 270: "Arhitecrure" should be "Architecture"
+- Fig. 5 should be better aligned and the caption improved / aligned with the figure, e.g., sk_i and pk_i are not mentioned in the caption
+- Line 273: "WOTS" should be "WOTS+"?
+- Sec 3.1 generally describes Alg. 1, however, no functions are explained, e.g., treeHash(), set SK_PRF(), etc, this is not a problem for the already
+  knowledgeble reader, however, it might be not appropriate for a SoK paper, so the reader may not be able to understand the algorithm without further
+  explaination or reference
+- Line 301: "faster": a reference would be useful here
+  
+4. SPHINCS+
+- Line 320: "same public key size as XMSS", double check this statement because it may depend on the parameter set
+
+5. Attacks
+- Line 366: "distributed , but" should be "distributed, but"
+- Sec. 5.1. notation incosistent with previous sections (osk,sk,x_i) and unclear, what is F?
+
+Strengths and novel contributions
+---------------------------------
+- Relevant topic
+- Section 5 on published attacks is novel to me
+
+Weaknesses
+----------
+- Incomplete: LMS/HSS should be added to the SoK as well as a proper comparison of the algorithms is missing (security, performace, etc)
+- Section 5 on attacks in the most interesting part, however, it lacks rigor, structure, partly oversimplified and inaccurate
+
+Requested changes
+-----------------
+- Notation is incosistent and sometimes unclear, e.g., w is used for bitwidths and base w
+- A section with security definition of signatures should be added, e.g., in sec. 2
+- A section introducing LMS/HSS should be added 
+- A comparison of LMS/XMSS should be addeed, including their security, and multi-tree variants
+- Tree traversal algorithms could be added
+- A description of hypertree structures should be added
+- Section 5 should be better structured (e.g. attack model, construction, applicability/success conditions, complexity, limitations, etc), a proper notation should used, and generally improved to provide added value to the paper
+
+
+
+Review #90C
+===========================================================================
+
+Suitability for Communications in Cryptology
+--------------------------------------------
+2. Of interest to the cryptology research community
+
+Paper summary
+-------------
+The paper presents a general review of hash-based signatures by looking at the schemes that are currently and practically used.
+
+Detailed comments for authors
+-----------------------------
+Thank you for submitting the work to CiC! I find it valuable to have a review of hash-based signatures, and, as far as I can tell, the work correctly describes all schemes. However, I'm unclear on the purpose of the paper, and, hence, its core novelty. See on this below. 
+
+In regards to presentation and structure of the paper, there seems to be some need of more work. Particularly, it is unclear what the paper aims to present: it seems to be an SoK of hash-based signatures, but the text jumps between different schemes without any unifying treatment or a common thread on how one scheme builds on the limitation of another. Further, the overall paper treats the SoK idea very informally and the schemes are presented as they are defined in the literature. Hence, it reads very informally and I'm not sure on the concrete novelty of what is presented. I think that it will be great to have an SoK of hash-based signatures, but then it will be good to: 1. abstract how these schemes looks like, what the core construction is 2. specify how the different schemes approach the abstract one by making it: i. more performant, ii. more secure, iii. have the ability to handle multiple signatures, 3. describe techniques to avoid attacks and which attacks, 4. formally show their practicability. Else, the work seems too informal and more of a recount of what it is in the literature. I didn't find flaws in the descriptions of the algorithms but then again they are taken straight from the literature. 
+
+Certain things are explained in a very informal manner as well. For example, in page 7, it says "to ensure security against certain attacks", but it doesn't specify very formally which attacks and why this is needed. This is repeated in many sections, which makes the paper read less as an in-depth review but more informal note. 
+
+I encourage the authors to keep working on this and make it more like an SoK that reviews hash-based signatures in a formal manner, understand their base and how techniques then are applied to this base. 
+
+Nits: 
+-I'm not sure I understand the Figure 1: it seems like the message is never used?
+
+Strengths and novel contributions
+---------------------------------
+* The descriptions of all hash-based signatures are correct.
+
+Weaknesses
+----------
+* The novelty of the paper is low as it is unclear what it concretely proposes. 
+* The work is very informal and reads more a bit like a note rather than a formal SoK.
+
+Questions for authors’ response
+-------------------------------
+* Is the purpose of the work to be more a general note or an SoK?

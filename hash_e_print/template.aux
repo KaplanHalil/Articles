@@ -1,0 +1,149 @@
+\relax 
+\bibstyle{alphaurl}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Basic Structures}{2}{section.2}\protected@file@percent }
+\newlabel{sec1}{{2}{2}{Basic Structures}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Hash Functions}{2}{subsection.2.1}\protected@file@percent }
+\citation{Brassard_1998}
+\citation{lamport1979constructing}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Attack Complexities on an \(n\)‐bit Hash}}{3}{table.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:hash-complexities}{{1}{3}{Attack Complexities on an \(n\)‐bit Hash}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Security of Digital Signatures}{3}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Lamport One-Time Signature}{3}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Lamport Key Generation}{3}{subsubsection.2.3.1}\protected@file@percent }
+\citation{buchmann2013security}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Lamport signature scheme for bit position $i$. The message $M$ is first hashed to obtain the bit string $(m_1, \ldots  , m_n)$. For each bit $m_i$, the signer selects the corresponding secret key $\mathit  {sk}_{i,m_i}$ as the signature component $\sigma _i$. The verifier checks that $H(\sigma _i)$ equals the public key $\mathit  {pk}_{i,m_i}$.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:lamport}{{1}{4}{Lamport signature scheme for bit position $i$. The message $M$ is first hashed to obtain the bit string $(m_1, \ldots , m_n)$. For each bit $m_i$, the signer selects the corresponding secret key $\mathit {sk}_{i,m_i}$ as the signature component $\sigma _i$. The verifier checks that $H(\sigma _i)$ equals the public key $\mathit {pk}_{i,m_i}$}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Lamport Signature}{4}{subsubsection.2.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.3}Signature Verification}{4}{subsubsection.2.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}WOTS and WOTS+}{4}{subsection.2.4}\protected@file@percent }
+\citation{cryptoeprint:2017/965}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.4.1}WOTS Key generation}{5}{subsubsection.2.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces WOTS key generation. Each secret key $\mathit  {sk}_i$ (red) is iteratively hashed to produce intermediate chain values (yellow) and the final public key component $h^{2^l-1}(\mathit  {sk}_i)$ (blue).}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:WOTS}{{2}{5}{WOTS key generation. Each secret key $\mathit {sk}_i$ (red) is iteratively hashed to produce intermediate chain values (yellow) and the final public key component $h^{2^l-1}(\mathit {sk}_i)$ (blue)}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.4.2}WOTS Signature}{5}{subsubsection.2.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.4.3}WOTS+ Signature Verification}{5}{subsubsection.2.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.4.4}WOTS+ \cite  {cryptoeprint:2017/965}}{6}{subsubsection.2.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Merkle Trees and Multi-Signatures}{6}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}L-tree and Hashing public key}{6}{subsection.2.6}\protected@file@percent }
+\newlabel{sec:L-tree}{{2.6}{6}{L-tree and Hashing public key}{subsection.2.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Merkle tree of height $h=2$ used with WOTS+. Each leaf $L_j$ is the hash of the corresponding WOTS+ public key $\mathit  {pk}^{\text  {W}}_j$. The root serves as the overall public key. When signing with leaf~1, the authentication path (highlighted in red) consists of sibling nodes $L_0$ and $H(L_2 \| L_3)$, which the verifier uses to reconstruct the root.}}{7}{figure.3}\protected@file@percent }
+\newlabel{fig:Merkle}{{3}{7}{Merkle tree of height $h=2$ used with WOTS+. Each leaf $L_j$ is the hash of the corresponding WOTS+ public key $\mathit {pk}^{\text {W}}_j$. The root serves as the overall public key. When signing with leaf~1, the authentication path (highlighted in red) consists of sibling nodes $L_0$ and $H(L_2 \| L_3)$, which the verifier uses to reconstruct the root}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.7}Base-$w$ Representation }{7}{subsection.2.7}\protected@file@percent }
+\citation{bernstein2019sphincs+}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.8}Checksum}{8}{subsection.2.8}\protected@file@percent }
+\newlabel{sec:Checksum}{{2.8}{8}{Checksum}{subsection.2.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.9}FORS}{9}{subsection.2.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.9.1}Why FORS Instead of WOTS+ at the Bottom Layer}{9}{subsubsection.2.9.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.9.2}FORS Construction}{9}{subsubsection.2.9.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.9.3}Example}{9}{subsubsection.2.9.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces FORS signature example with $k = 4$ trees, each of height $a = 3$. Trees~0 and~1 are shown in detail: the message digest chunk selects a leaf index (green), and the authentication path siblings (red) are included in the signature along with the secret key $\mathit  {sk}_{i,\mathit  {idx}}$. All four tree roots $R_0, \ldots  , R_3$ are hashed together to form the FORS public key.}}{10}{figure.4}\protected@file@percent }
+\newlabel{fig:FORS}{{4}{10}{FORS signature example with $k = 4$ trees, each of height $a = 3$. Trees~0 and~1 are shown in detail: the message digest chunk selects a leaf index (green), and the authentication path siblings (red) are included in the signature along with the secret key $\mathit {sk}_{i,\mathit {idx}}$. All four tree roots $R_0, \ldots , R_3$ are hashed together to form the FORS public key}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.10}Comparison of OTS and FTS Building Blocks}{10}{subsection.2.10}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Comparison of one-time and few-time signature building blocks}}{10}{table.2}\protected@file@percent }
+\newlabel{tab:ots_comparison}{{2}{10}{Comparison of one-time and few-time signature building blocks}{table.2}{}}
+\citation{huelsing2018rfc}
+\citation{huelsing2018rfc}
+\citation{bernstein2019sphincs+}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.11}Address Structures in Hash-Based Signature Schemes}{11}{subsection.2.11}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces XMSS OTS Address Format}}{11}{table.3}\protected@file@percent }
+\newlabel{tab: Adress}{{3}{11}{XMSS OTS Address Format}{table.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.12}Stateful and Stateless Hash-Based Signature Schemes}{11}{subsection.2.12}\protected@file@percent }
+\citation{cooper2020recommendation}
+\citation{huelsing2018rfc}
+\@writefile{toc}{\contentsline {section}{\numberline {3}XMSS and $XMSS^{MT}$}{12}{section.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The architecture of XMSS. A WOTS+ secret key $\mathit  {sk}_i$ (consisting of $\ell $ random $n$-byte strings) is used to sign a message digest. The corresponding WOTS+ public key $\mathit  {pk}_i$ (obtained by hashing each chain $w{-}1$ times) is compressed via an L-Tree into a single leaf $L_i$. This leaf is placed in a Merkle tree of height $h$, whose root serves as the overall XMSS public key.}}{12}{figure.5}\protected@file@percent }
+\newlabel{fig:xmss}{{5}{12}{The architecture of XMSS. A WOTS+ secret key $\mathit {sk}_i$ (consisting of $\ell $ random $n$-byte strings) is used to sign a message digest. The corresponding WOTS+ public key $\mathit {pk}_i$ (obtained by hashing each chain $w{-}1$ times) is compressed via an L-Tree into a single leaf $L_i$. This leaf is placed in a Merkle tree of height $h$, whose root serves as the overall XMSS public key}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}XMSS Key Generation}{12}{subsection.3.1}\protected@file@percent }
+\citation{huelsing2018rfc}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces XMSS\_keyGen -- Generate an XMSS key pair}}{13}{algorithm.1}\protected@file@percent }
+\newlabel{alg:XMSS_keygen}{{1}{13}{XMSS\_keyGen -- Generate an XMSS key pair}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}XMSS Sign}{13}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}XMSS Verify}{13}{subsection.3.3}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces XMSS\_sign – Generate an XMSS signature and update the XMSS private key}}{14}{algorithm.2}\protected@file@percent }
+\newlabel{alg:XMSS_sign}{{2}{14}{XMSS\_sign – Generate an XMSS signature and update the XMSS private key}{algorithm.2}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces XMSS\_rootFromSig: Compute a root node from a tree signature}}{14}{algorithm.3}\protected@file@percent }
+\newlabel{alg:xmss_rootfromSign}{{3}{14}{XMSS\_rootFromSig: Compute a root node from a tree signature}{algorithm.3}{}}
+\citation{buchmann2013security}
+\citation{huelsing2018rfc}
+\citation{gaithersburgmdnist_2024_stateless}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {4}{\ignorespaces XMSS\_verify -- Verify an XMSS signature using the corresponding XMSS public key and a message}}{15}{algorithm.4}\protected@file@percent }
+\newlabel{alg:xmss_verify}{{4}{15}{XMSS\_verify -- Verify an XMSS signature using the corresponding XMSS public key and a message}{algorithm.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}$XMSS^{MT}$}{15}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Tree Traversal}{15}{subsection.3.5}\protected@file@percent }
+\newlabel{fig:MTsig}{{6a}{16}{Multi-tree signature}{subfigure.6.1}{}}
+\newlabel{sub@fig:MTsig}{{a}{16}{Multi-tree signature}{subfigure.6.1}{}}
+\newlabel{fig:MTstruc}{{6b}{16}{Multi-tree general structure}{subfigure.6.2}{}}
+\newlabel{sub@fig:MTstruc}{{b}{16}{Multi-tree general structure}{subfigure.6.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces $\text  {XMSS}^{MT}$ multi-tree structure with $d$ layers, each containing subtrees of height $h'$. (a)~The multi-tree signature consists of $d$ XMSS signatures, one per layer. (b)~The overall hypertree: each subtree at layer $j$ signs the root of a subtree at layer $j{-}1$. For example, with $h = 20$ and $d = 4$, each subtree has height $h' = 5$, supporting $2^{20}$ total signatures.}}{16}{figure.6}\protected@file@percent }
+\newlabel{fig:LAT}{{6}{16}{$\text {XMSS}^{MT}$ multi-tree structure with $d$ layers, each containing subtrees of height $h'$. (a)~The multi-tree signature consists of $d$ XMSS signatures, one per layer. (b)~The overall hypertree: each subtree at layer $j$ signs the root of a subtree at layer $j{-}1$. For example, with $h = 20$ and $d = 4$, each subtree has height $h' = 5$, supporting $2^{20}$ total signatures}{figure.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}SPHINCS+}{17}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}SPHINCS+ Parameters}{17}{subsection.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces SPHINCS+ private key}}{18}{figure.7}\protected@file@percent }
+\newlabel{fig:slhdsa_privatekey}{{7}{18}{SPHINCS+ private key}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces SPHINCS+ public key}}{18}{figure.8}\protected@file@percent }
+\newlabel{fig:slhdsa_publickey}{{8}{18}{SPHINCS+ public key}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}SPHINCS+ Key Generation}{18}{subsection.4.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {5}{\ignorespaces SPHINCS\_keyGen -- Generate a SPHINCS+ key pair}}{18}{algorithm.5}\protected@file@percent }
+\newlabel{alg:sphincs_keygen}{{5}{18}{SPHINCS\_keyGen -- Generate a SPHINCS+ key pair}{algorithm.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}SPHINCS+ Sign}{18}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces SPHINCS+ signature data format}}{18}{table.4}\protected@file@percent }
+\newlabel{tab:slh-dsa-format}{{4}{18}{SPHINCS+ signature data format}{table.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}SPHINCS+ Verify}{18}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces SPHINCS+ General structure}}{19}{figure.9}\protected@file@percent }
+\newlabel{fig:SPHINCS}{{9}{19}{SPHINCS+ General structure}{figure.9}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {6}{\ignorespaces spx\_sign -- Generating a SPHINCS+ signature}}{20}{algorithm.6}\protected@file@percent }
+\newlabel{alg:spx_sign}{{6}{20}{spx\_sign -- Generating a SPHINCS+ signature}{algorithm.6}{}}
+\citation{mcgrew2019leighton}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {7}{\ignorespaces spx\_verify -- Verify a SPHINCS+ signature SIG on a message M using a SPHINCS+ public key PK}}{21}{algorithm.7}\protected@file@percent }
+\newlabel{alg:spx_verify}{{7}{21}{spx\_verify -- Verify a SPHINCS+ signature SIG on a message M using a SPHINCS+ public key PK}{algorithm.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}LMS and HSS}{21}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}LMS Construction}{21}{subsection.5.1}\protected@file@percent }
+\citation{booth2021intermediate}
+\citation{huelsing2018rfc}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}HSS: Multi-Tree Extension}{22}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Comparison of Standardized HBS Schemes}{22}{subsection.5.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Comparison of standardized hash-based signature schemes}}{22}{table.5}\protected@file@percent }
+\newlabel{tab:hbs_comparison}{{5}{22}{Comparison of standardized hash-based signature schemes}{table.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Some Attacks on Hash-Based Signatures}{22}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Intermediate Value Guessing Attack}{23}{subsection.6.1}\protected@file@percent }
+\citation{perlner2022breaking}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Intermediate Value Guessing: the adversary recovers OTS seed values from observed signatures and uses them to forge signatures at the corresponding tree layer.}}{24}{figure.10}\protected@file@percent }
+\newlabel{fig:intermediateValueGuessing}{{10}{24}{Intermediate Value Guessing: the adversary recovers OTS seed values from observed signatures and uses them to forge signatures at the corresponding tree layer}{figure.10}{}}
+\@writefile{toc}{\contentsline {paragraph}{Case 1: Seed Belongs to Layer 0}{24}{section*.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Case 2: Seed Belongs to Layer $j > 0$}{24}{section*.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Antonov's Attack}{24}{subsection.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Antonov's Attack}}{25}{figure.11}\protected@file@percent }
+\newlabel{fig:antonov}{{11}{25}{Antonov's Attack}{figure.11}{}}
+\newlabel{fig:collision_steps}{{11}{25}{Antonov's Attack}{figure.11}{}}
+\@writefile{toc}{\contentsline {paragraph}{Step 1:}{25}{section*.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Step 2:}{25}{section*.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Step 3:}{25}{section*.5}\protected@file@percent }
+\citation{wagner2023faulting}
+\citation{wagner2023faulting}
+\@writefile{toc}{\contentsline {paragraph}{Step 4:}{26}{section*.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Fault Injection Attacks}{26}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Multi-Target Attacks}{27}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Summary of Attacks}{27}{subsection.6.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Summary of attacks on hash-based signature schemes}}{27}{table.6}\protected@file@percent }
+\newlabel{tab:attack_summary}{{6}{27}{Summary of attacks on hash-based signature schemes}{table.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{27}{section.7}\protected@file@percent }
+\bibdata{template}
+\bibcite{buchmann2013security}{BDE{$^{+}$}13}
+\bibcite{bernstein2019sphincs+}{BHK{$^{+}$}19}
+\bibcite{Brassard_1998}{BHT98}
+\bibcite{booth2021intermediate}{BXKSN21}
+\bibcite{cooper2020recommendation}{CAD{$^{+}$}20}
+\bibcite{huelsing2018rfc}{HBG{$^{+}$}18}
+\bibcite{cryptoeprint:2017/965}{Hü17}
+\bibcite{lamport1979constructing}{Lam79}
+\bibcite{mcgrew2019leighton}{MCF19}
+\bibcite{gaithersburgmdnist_2024_stateless}{NIS24}
+\bibcite{perlner2022breaking}{PKC22}
+\bibcite{wagner2023faulting}{WWO{$^{+}$}23}
+\@writefile{toc}{\contentsline {section}{References}{28}{references}\protected@file@percent }
+\gdef \@abspage@last{29}
